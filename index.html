@@ -74,6 +74,8 @@
         </div>
     </div>
 
+    <script src="./data.js"></script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -133,7 +135,6 @@
             }
         });
 
-        // 기존 렌더링 로직 (동일)
         window.toggleBookmark = async (e, title) => {
             e.stopPropagation();
             if (!currentUser) return;
@@ -145,7 +146,11 @@
 
         function updateUI() {
             document.getElementById('bookmarkCount').innerText = bookmarks.length;
-            document.getElementById('navArchive').classList.contains('sidebar-active') ? showBookmarked() : renderNews();
+            if (document.getElementById('navArchive').classList.contains('sidebar-active')) {
+                showBookmarked();
+            } else {
+                renderNews();
+            }
         }
 
         window.showLatest = () => {
@@ -164,7 +169,9 @@
         };
 
         window.renderNews = () => {
-            const idx = document.getElementById('weekSelect').value || 0;
+            const select = document.getElementById('weekSelect');
+            if (!select) return;
+            const idx = select.value || 0;
             const selected = newsData[idx];
             if (!selected) return;
             document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold mt-1">${selected.week}</h2><span class="text-sm text-gray-500">${selected.date}</span>`;
@@ -173,7 +180,10 @@
 
         function renderGrid(items) {
             const grid = document.getElementById('newsGrid');
-            if (!items.length) { grid.innerHTML = '<p class="col-span-full text-center py-20 text-gray-400">데이터가 없습니다.</p>'; return; }
+            if (!items || !items.length) { 
+                grid.innerHTML = '<p class="col-span-full text-center py-20 text-gray-400">데이터가 없습니다.</p>'; 
+                return; 
+            }
             grid.innerHTML = items.map(item => {
                 const isSaved = bookmarks.some(b => b.title === item.title);
                 return `
@@ -187,12 +197,21 @@
             }).join('');
         }
 
-        window.onload = () => {
+        // 페이지 로드 완료 시 실행
+        window.addEventListener('load', () => {
             const select = document.getElementById('weekSelect');
-            newsData.forEach((data, i) => { const opt = document.createElement('option'); opt.value = i; opt.innerText = data.week; select.appendChild(opt); });
-            renderNews();
-        };
+            if (typeof newsData !== 'undefined' && newsData.length > 0) {
+                newsData.forEach((data, i) => { 
+                    const opt = document.createElement('option'); 
+                    opt.value = i; 
+                    opt.innerText = data.week; 
+                    select.appendChild(opt); 
+                });
+                renderNews();
+            } else {
+                console.error("데이터를 찾을 수 없습니다. data.js 경로와 대소문자를 확인하세요.");
+            }
+        });
     </script>
-    <script src="data.js"></script>
 </body>
 </html>
