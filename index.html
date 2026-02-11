@@ -3,126 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Weekly Briefing | 뉴스레터 아카이브</title>
+    <title>The Weekly Briefing | 아카이브</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .sidebar-active { border-left: 4px solid #1e3a8a; background-color: #f3f4f6; font-weight: 600; }
-    </style>
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
 <body class="bg-[#F9FAFB] text-gray-900">
-
     <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <h1 class="text-2xl font-black tracking-tighter text-gray-900">THE WEEKLY <span class="text-blue-700">BRIEFING</span></h1>
-            <nav class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#" class="hover:text-blue-700">HOME</a>
-                <a href="#" class="text-blue-700">NEWSLETTERS</a>
-                <a href="#" class="hover:text-blue-700">ABOUT</a>
-            </nav>
-            <button class="bg-black text-white px-4 py-2 text-sm rounded-full font-bold">SUBSCRIBE</button>
         </div>
     </header>
 
     <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
-        
         <aside class="w-full md:w-64 flex-shrink-0">
             <div class="sticky top-24">
-                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Filters</h2>
-                <div class="mb-6">
-                    <label class="block text-sm font-medium mb-2 text-gray-600">Filter by Week</label>
-                    <select class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                        <option>Week 06, 2026 (Current)</option>
-                        <option>Week 05, 2026</option>
-                        <option>Week 04, 2026</option>
-                    </select>
-                </div>
-                
-                <nav class="space-y-1">
-                    <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg sidebar-active">
-                        <span class="mr-3">🕒</span> Latest
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">
-                        <span class="mr-3">📁</span> Archive
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">
-                        <span class="mr-3">📅</span> By Month
-                    </a>
-                </nav>
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Select Week</h2>
+                <select id="weekSelect" onchange="renderNews()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"></select>
             </div>
         </aside>
 
         <main class="flex-grow">
-            <div class="flex justify-between items-end mb-6">
-                <div>
-                    <span class="text-blue-700 text-xs font-bold uppercase tracking-widest">February 2026</span>
-                    <h2 class="text-3xl font-bold mt-1">Week 06</h2>
-                </div>
-                <span class="text-sm text-gray-500">February 10, 2026</span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Politics</span>
-                        </div>
-                        <h3 class="text-xl font-bold leading-tight mb-3">글로벌 AI 안전 협약(Global AI Safety Accord) 비준 확대</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">UN 주도 하에 주요 20개국이 참여한 AI 안전 협약 세부 이행안 발표. 생성형 AI 워터마크 의무화 및 자율 무기 시스템 규제안 포함.</p>
-                        <div class="flex items-center text-blue-700 font-bold text-xs">
-                            READ MORE <span class="ml-1">→</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Robotics</span>
-                        </div>
-                        <h3 class="text-xl font-bold leading-tight mb-3">휴머노이드 로봇, 물류 현장 실전 배치 10만 대 돌파</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">테슬라 옵티머스, 피규어 AI 등 누적 10만 대 이상 배치. 단순 반복을 넘어 복잡 분류 작업 수행 능력 검증.</p>
-                        <div class="flex items-center text-blue-700 font-bold text-xs">
-                            READ MORE <span class="ml-1">→</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Texas</span>
-                        </div>
-                        <h3 class="text-xl font-bold leading-tight mb-3">삼성전자 테일러 파운드리 제2공장 가동률 목표 조기 달성</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">북미 팹리스 고객사들의 3나노 이하 공정 주문 물량 본격 소화 시작. 예상보다 빠른 수율 안정화 성공.</p>
-                        <div class="flex items-center text-blue-700 font-bold text-xs">
-                            READ MORE <span class="ml-1">→</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Tech</span>
-                        </div>
-                        <h3 class="text-xl font-bold leading-tight mb-3">애플, 차세대 '폴더블 아이폰' 및 AR 글래스 출시 루머</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">2026년 하반기 보급형 AR 글래스 '비전 에어' 출시 기대. 스마트폰 시장 정체를 뚫을 새로운 폼팩터 경쟁 재점화.</p>
-                        <div class="flex items-center text-blue-700 font-bold text-xs">
-                            READ MORE <span class="ml-1">→</span>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
+            <div id="weekHeader" class="mb-6"></div>
+            <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
         </main>
     </div>
 
-    <footer class="bg-white border-t border-gray-200 mt-12 py-10 text-center">
-        <p class="text-gray-400 text-sm">© 2026 THE WEEKLY BRIEFING. All rights reserved.</p>
-    </footer>
+    <script src="data.js"></script>
+    <script>
+        function init() {
+            const select = document.getElementById('weekSelect');
+            newsData.forEach((data, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.innerText = data.week;
+                select.appendChild(opt);
+            });
+            renderNews();
+        }
 
+        function renderNews() {
+            const index = document.getElementById('weekSelect').value;
+            const selected = newsData[index];
+            
+            document.getElementById('weekHeader').innerHTML = `
+                <span class="text-blue-700 text-xs font-bold uppercase tracking-widest">Archive</span>
+                <h2 class="text-3xl font-bold mt-1">${selected.week}</h2>
+                <span class="text-sm text-gray-500">${selected.date}</span>
+            `;
+
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = selected.items.map(item => `
+                <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-shadow cursor-pointer">
+                    <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase">${item.category}</span>
+                    <h3 class="text-xl font-bold mt-4 mb-3 leading-tight">${item.title}</h3>
+                    <p class="text-gray-600 text-sm mb-4">${item.desc}</p>
+                    <div class="text-blue-700 font-bold text-xs">READ MORE →</div>
+                </article>
+            `).join('');
+        }
+        window.onload = init;
+    </script>
 </body>
 </html>
