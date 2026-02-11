@@ -9,9 +9,8 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .sidebar-active { border-left: 4px solid #1e3a8a; background-color: #f3f4f6; font-weight: 600; }
-        /* 초기에는 모든 영역을 숨깁니다 */
         #mainContent, #loginPage, #loadingScreen { display: none; }
-        #loadingScreen { display: flex; } /* 로딩 화면만 처음에 보여줌 */
+        #loadingScreen { display: flex; }
     </style>
 </head>
 <body class="bg-[#F9FAFB] text-gray-900">
@@ -24,7 +23,7 @@
         <div class="max-w-md w-full text-center">
             <h1 class="text-4xl font-black tracking-tighter text-gray-900 mb-4">THE WEEKLY <span class="text-blue-700">BRIEFING</span></h1>
             <p class="text-gray-500 mb-8 font-medium">본 서비스는 승인된 사용자 전용 아카이브입니다.<br>계속하려면 구글 계정으로 로그인하세요.</p>
-            <button onclick="login()" class="w-full bg-black text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-gray-800 transition-all shadow-lg active:scale-95">
+            <button onclick="login()" class="w-full bg-black text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-gray-800 transition-all shadow-lg">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="20" alt="Google">
                 Google 계정으로 로그인
             </button>
@@ -41,34 +40,32 @@
 
         <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
             <aside class="w-full md:w-64 flex-shrink-0">
-                <div class="sticky top-24">
-                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 font-bold">Navigation</h2>
+                <div class="sticky top-24 text-sm">
+                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Navigation</h2>
                     <nav class="space-y-1 mb-8">
-                        <button onclick="showLatest()" id="navLatest" class="w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition hover:bg-gray-50">
+                        <button onclick="showLatest()" id="navLatest" class="w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition">
                             <span class="mr-3">🕒</span> Latest News
                         </button>
-                        <button onclick="showBookmarked()" id="navArchive" class="w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition">
+                        <button onclick="showBookmarked()" id="navArchive" class="w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition">
                             <span class="mr-3">📁</span> My Archive <span id="bookmarkCount" class="ml-auto bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
                         </button>
                     </nav>
-                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 font-bold">Select Week</h2>
-                    <select id="weekSelect" onchange="renderNews()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"></select>
+                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Select Week</h2>
+                    <select id="weekSelect" onchange="renderNews()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"></select>
                 </div>
             </aside>
-
             <main class="flex-grow">
                 <div id="contentHeader" class="mb-6"></div>
-                <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm"></div>
             </main>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signInWithRedirect, getRedirectResult, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // 파이어베이스 설정
         const firebaseConfig = {
             apiKey: "AIzaSyBSmPbiAqHEN4MgDw_lnvzqjGp3onPjEN8",
             authDomain: "newsletter-bc7b9.firebaseapp.com",
@@ -86,129 +83,92 @@
         let currentUser = null;
         let bookmarks = [];
 
-        // 전역 함수 등록
-        window.login = () => {
-            signInWithPopup(auth, provider).catch(error => {
-                console.error("Login Error:", error);
-                alert("로그인 중 오류가 발생했습니다. 팝업 차단 여부를 확인해주세요.");
-            });
-        };
+        // 팝업 대신 리다이렉트 방식 사용
+        window.login = () => signInWithRedirect(auth, provider);
         window.logout = () => signOut(auth).then(() => location.reload());
 
-        // 인증 상태 실시간 감시 (핵심 로직 수정)
+        // 페이지 로드 시 리다이렉트 결과 확인
+        getRedirectResult(auth).catch((error) => console.error("Redirect Error:", error));
+
         onAuthStateChanged(auth, (user) => {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const loginPage = document.getElementById('loginPage');
-            const mainContent = document.getElementById('mainContent');
-            const authSection = document.getElementById('authSection');
-
-            loadingScreen.style.display = 'none'; // 로딩 완료 시 숨김
-
+            document.getElementById('loadingScreen').style.display = 'none';
             if (user) {
                 currentUser = user;
-                loginPage.style.display = 'none';
-                mainContent.style.display = 'block';
-                authSection.innerHTML = `
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('authSection').innerHTML = `
                     <div class="flex items-center gap-3">
-                        <span class="text-sm font-semibold text-gray-700">${user.displayName}</span>
-                        <button onclick="logout()" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg transition font-medium">Logout</button>
+                        <span class="text-sm font-semibold">${user.displayName}</span>
+                        <button onclick="logout()" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg">Logout</button>
                     </div>`;
-                
-                // Firestore 실시간 구독
-                onSnapshot(doc(db, "users", user.uid), (docSnapshot) => {
-                    bookmarks = docSnapshot.exists() ? docSnapshot.data().bookmarks : [];
+                onSnapshot(doc(db, "users", user.uid), (snap) => {
+                    bookmarks = snap.exists() ? snap.data().bookmarks : [];
                     updateUI();
                 });
             } else {
-                currentUser = null;
-                loginPage.style.display = 'flex';
-                mainContent.style.display = 'none';
+                document.getElementById('loginPage').style.display = 'flex';
+                document.getElementById('mainContent').style.display = 'none';
             }
         });
 
-        // 데이터 렌더링 로직 (기존과 동일하되 최적화)
-        window.toggleBookmark = async (e, itemTitle) => {
+        window.toggleBookmark = async (e, title) => {
             e.stopPropagation();
             if (!currentUser) return;
-            const allItems = newsData.flatMap(d => d.items);
-            const item = allItems.find(i => i.title === itemTitle);
-            const idx = bookmarks.findIndex(b => b.title === itemTitle);
-            
-            if (idx > -1) bookmarks.splice(idx, 1);
-            else bookmarks.push(item);
-            
+            const item = newsData.flatMap(d => d.items).find(i => i.title === title);
+            const idx = bookmarks.findIndex(b => b.title === title);
+            idx > -1 ? bookmarks.splice(idx, 1) : bookmarks.push(item);
             await setDoc(doc(db, "users", currentUser.uid), { bookmarks });
         };
 
         function updateUI() {
-            const countBadge = document.getElementById('bookmarkCount');
-            if(countBadge) countBadge.innerText = bookmarks.length;
-            
-            if (document.getElementById('navArchive').classList.contains('sidebar-active')) {
-                showBookmarked();
-            } else {
-                renderNews();
-            }
+            document.getElementById('bookmarkCount').innerText = bookmarks.length;
+            document.getElementById('navArchive').classList.contains('sidebar-active') ? showBookmarked() : renderNews();
         }
 
         window.showLatest = () => {
-            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition";
-            document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
+            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition";
+            document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition";
             document.getElementById('weekSelect').disabled = false;
             renderNews();
         };
 
         window.showBookmarked = () => {
-            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
-            document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition";
+            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition";
+            document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition";
             document.getElementById('weekSelect').disabled = true;
-            document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold mt-1">My Archive</h2>`;
+            document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2>`;
             renderGrid(bookmarks);
         };
 
         window.renderNews = () => {
-            const select = document.getElementById('weekSelect');
-            const weekIdx = select.value || 0;
-            const selected = newsData[weekIdx];
-            if(!selected) return;
-            document.getElementById('contentHeader').innerHTML = `
-                <h2 class="text-3xl font-bold mt-1">${selected.week}</h2>
-                <span class="text-sm text-gray-500">${selected.date}</span>
-            `;
+            const idx = document.getElementById('weekSelect').value || 0;
+            const selected = newsData[idx];
+            if (!selected) return;
+            document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold">${selected.week}</h2><span class="text-sm text-gray-500">${selected.date}</span>`;
             renderGrid(selected.items);
         };
 
         function renderGrid(items) {
             const grid = document.getElementById('newsGrid');
-            if (!items || items.length === 0) {
-                grid.innerHTML = '<p class="col-span-full text-center py-20 text-gray-400 font-medium">저장된 항목이 없습니다.</p>';
-                return;
-            }
+            if (!items.length) { grid.innerHTML = '<p class="col-span-full text-center py-20 text-gray-400">데이터가 없습니다.</p>'; return; }
             grid.innerHTML = items.map(item => {
                 const isSaved = bookmarks.some(b => b.title === item.title);
                 return `
-                <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all cursor-pointer relative group border-b-4 border-b-transparent hover:border-b-blue-600">
-                    <button onclick="toggleBookmark(event, '${item.title}')" class="absolute top-4 right-4 p-2 rounded-full transition-all z-10 ${isSaved ? 'bg-blue-700 text-white shadow-md' : 'bg-gray-50 text-gray-300 hover:bg-gray-100'}">
-                        ${isSaved ? '★' : '☆'}
-                    </button>
-                    <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">${item.category}</span>
-                    <h3 class="text-xl font-bold mt-4 mb-3 leading-tight pr-8 line-clamp-2 group-hover:text-blue-700 transition-colors">${item.title}</h3>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">${item.desc}</p>
-                    <div class="text-blue-700 font-bold text-xs flex items-center">READ MORE <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span></div>
+                <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all cursor-pointer relative group">
+                    <button onclick="toggleBookmark(event, '${item.title}')" class="absolute top-4 right-4 p-2 rounded-full transition-all ${isSaved ? 'bg-blue-700 text-white' : 'bg-gray-50 text-gray-300'}">${isSaved ? '★' : '☆'}</button>
+                    <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase">${item.category}</span>
+                    <h3 class="text-xl font-bold mt-4 mb-3 leading-tight pr-8 line-clamp-2">${item.title}</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-2">${item.desc}</p>
+                    <div class="text-blue-700 font-bold text-xs flex items-center">READ MORE →</div>
                 </article>`;
             }).join('');
         }
 
-        // 초기 셀렉트 박스 설정
-        const select = document.getElementById('weekSelect');
-        if (select) {
-            newsData.forEach((data, index) => {
-                const opt = document.createElement('option');
-                opt.value = index;
-                opt.innerText = data.week;
-                select.appendChild(opt);
-            });
-        }
+        window.onload = () => {
+            const select = document.getElementById('weekSelect');
+            newsData.forEach((data, i) => { const opt = document.createElement('option'); opt.value = i; opt.innerText = data.week; select.appendChild(opt); });
+            renderNews();
+        };
     </script>
     <script src="data.js"></script>
 </body>
