@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Weekly Briefing | 전용 아카이브</title>
+    <title>The Weekly Briefing | 로그인</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -19,14 +19,27 @@
         <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-700"></div>
     </div>
 
-    <div id="loginPage" class="min-h-screen flex-col items-center justify-center px-4 bg-white">
-        <div class="max-w-md w-full text-center">
-            <h1 class="text-4xl font-black tracking-tighter text-gray-900 mb-4">THE WEEKLY <span class="text-blue-700">BRIEFING</span></h1>
-            <p class="text-gray-500 mb-8 font-medium">본 서비스는 승인된 사용자 전용 아카이브입니다.<br>계속하려면 구글 계정으로 로그인하세요.</p>
-            <button onclick="login()" class="w-full bg-black text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-gray-800 transition-all shadow-lg">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="20" alt="Google">
-                Google 계정으로 로그인
-            </button>
+    <div id="loginPage" class="min-h-screen flex flex-col items-center justify-center px-4 bg-gray-50">
+        <div class="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+            <div class="text-center mb-10">
+                <h1 class="text-3xl font-black tracking-tighter text-gray-900 mb-2">THE WEEKLY <span class="text-blue-700">BRIEFING</span></h1>
+                <p class="text-gray-400 text-sm">전용 아카이브 접속을 위해 로그인하세요.</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1 ml-1">Email Address</label>
+                    <input type="email" id="loginEmail" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1 ml-1">Password</label>
+                    <input type="password" id="loginPassword" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                </div>
+                <button type="submit" class="w-full bg-blue-700 text-white py-4 rounded-xl font-bold hover:bg-blue-800 transition-all shadow-lg active:scale-95 mt-4">
+                    Sign In
+                </button>
+            </form>
+            <p id="loginError" class="text-red-500 text-xs mt-4 text-center hidden"></p>
         </div>
     </div>
 
@@ -40,30 +53,30 @@
 
         <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
             <aside class="w-full md:w-64 flex-shrink-0">
-                <div class="sticky top-24 text-sm">
+                <div class="sticky top-24">
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Navigation</h2>
                     <nav class="space-y-1 mb-8">
-                        <button onclick="showLatest()" id="navLatest" class="w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition">
-                            <span class="mr-3">🕒</span> Latest News
+                        <button onclick="showLatest()" id="navLatest" class="w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition">
+                            <span class="mr-3 text-lg">🕒</span> Latest News
                         </button>
-                        <button onclick="showBookmarked()" id="navArchive" class="w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition">
-                            <span class="mr-3">📁</span> My Archive <span id="bookmarkCount" class="ml-auto bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
+                        <button onclick="showBookmarked()" id="navArchive" class="w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition">
+                            <span class="mr-3 text-lg">📁</span> My Archive <span id="bookmarkCount" class="ml-auto bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
                         </button>
                     </nav>
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Select Week</h2>
-                    <select id="weekSelect" onchange="renderNews()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500"></select>
+                    <select id="weekSelect" onchange="renderNews()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"></select>
                 </div>
             </aside>
             <main class="flex-grow">
                 <div id="contentHeader" class="mb-6"></div>
-                <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm"></div>
+                <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
             </main>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInWithRedirect, getRedirectResult, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -78,17 +91,26 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const provider = new GoogleAuthProvider();
 
         let currentUser = null;
         let bookmarks = [];
 
-        // 팝업 대신 리다이렉트 방식 사용
-        window.login = () => signInWithRedirect(auth, provider);
-        window.logout = () => signOut(auth).then(() => location.reload());
+        // 로그인 처리
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorMsg = document.getElementById('loginError');
 
-        // 페이지 로드 시 리다이렉트 결과 확인
-        getRedirectResult(auth).catch((error) => console.error("Redirect Error:", error));
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                errorMsg.innerText = "이메일 또는 비밀번호가 올바르지 않습니다.";
+                errorMsg.classList.remove('hidden');
+            }
+        };
+
+        window.logout = () => signOut(auth).then(() => location.reload());
 
         onAuthStateChanged(auth, (user) => {
             document.getElementById('loadingScreen').style.display = 'none';
@@ -98,8 +120,8 @@
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('authSection').innerHTML = `
                     <div class="flex items-center gap-3">
-                        <span class="text-sm font-semibold">${user.displayName}</span>
-                        <button onclick="logout()" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg">Logout</button>
+                        <span class="text-sm font-semibold">${user.email}</span>
+                        <button onclick="logout()" class="text-xs text-gray-500 underline">Logout</button>
                     </div>`;
                 onSnapshot(doc(db, "users", user.uid), (snap) => {
                     bookmarks = snap.exists() ? snap.data().bookmarks : [];
@@ -111,6 +133,7 @@
             }
         });
 
+        // 기존 렌더링 로직 (동일)
         window.toggleBookmark = async (e, title) => {
             e.stopPropagation();
             if (!currentUser) return;
@@ -126,14 +149,14 @@
         }
 
         window.showLatest = () => {
-            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition";
-            document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition";
+            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition";
+            document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
             document.getElementById('weekSelect').disabled = false;
             renderNews();
         };
 
         window.showBookmarked = () => {
-            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition";
+            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
             document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition";
             document.getElementById('weekSelect').disabled = true;
             document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2>`;
@@ -144,7 +167,7 @@
             const idx = document.getElementById('weekSelect').value || 0;
             const selected = newsData[idx];
             if (!selected) return;
-            document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold">${selected.week}</h2><span class="text-sm text-gray-500">${selected.date}</span>`;
+            document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold mt-1">${selected.week}</h2><span class="text-sm text-gray-500">${selected.date}</span>`;
             renderGrid(selected.items);
         };
 
@@ -158,8 +181,8 @@
                     <button onclick="toggleBookmark(event, '${item.title}')" class="absolute top-4 right-4 p-2 rounded-full transition-all ${isSaved ? 'bg-blue-700 text-white' : 'bg-gray-50 text-gray-300'}">${isSaved ? '★' : '☆'}</button>
                     <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase">${item.category}</span>
                     <h3 class="text-xl font-bold mt-4 mb-3 leading-tight pr-8 line-clamp-2">${item.title}</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-2">${item.desc}</p>
-                    <div class="text-blue-700 font-bold text-xs flex items-center">READ MORE →</div>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">${item.desc}</p>
+                    <div class="text-blue-700 font-bold text-xs">READ MORE →</div>
                 </article>`;
             }).join('');
         }
