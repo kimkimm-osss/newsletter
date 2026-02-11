@@ -6,31 +6,46 @@
     <title>The Weekly Briefing | 아카이브</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-active { border-left: 4px solid #1e3a8a; background-color: #f3f4f6; font-weight: 600; }
+    </style>
 </head>
 <body class="bg-[#F9FAFB] text-gray-900">
     <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <h1 class="text-2xl font-black tracking-tighter text-gray-900">THE WEEKLY <span class="text-blue-700">BRIEFING</span></h1>
+            <h1 class="text-2xl font-black tracking-tighter text-gray-900" onclick="location.reload()" style="cursor:pointer">THE WEEKLY <span class="text-blue-700">BRIEFING</span></h1>
         </div>
     </header>
 
     <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
         <aside class="w-full md:w-64 flex-shrink-0">
             <div class="sticky top-24">
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Navigation</h2>
+                <nav class="space-y-1 mb-8">
+                    <button onclick="showLatest()" id="navLatest" class="w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active">
+                        <span class="mr-3">🕒</span> Latest
+                    </button>
+                    <button onclick="showBookmarked()" id="navArchive" class="w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <span class="mr-3">📁</span> My Archive <span id="bookmarkCount" class="ml-auto bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                </nav>
+
                 <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Select Week</h2>
                 <select id="weekSelect" onchange="renderNews()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"></select>
             </div>
         </aside>
 
         <main class="flex-grow">
-            <div id="weekHeader" class="mb-6"></div>
+            <div id="contentHeader" class="mb-6"></div>
             <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
         </main>
     </div>
 
     <script src="data.js"></script>
     <script>
+        let bookmarks = JSON.parse(localStorage.getItem('newsBookmarks')) || [];
+
         function init() {
             const select = document.getElementById('weekSelect');
             newsData.forEach((data, index) => {
@@ -39,29 +54,91 @@
                 opt.innerText = data.week;
                 select.appendChild(opt);
             });
+            updateBookmarkCount();
             renderNews();
         }
 
-        function renderNews() {
-            const index = document.getElementById('weekSelect').value;
-            const selected = newsData[index];
+        function updateBookmarkCount() {
+            document.getElementById('bookmarkCount').innerText = bookmarks.length;
+        }
+
+        function toggleBookmark(e, title) {
+            e.stopPropagation();
+            const allItems = newsData.flatMap(d => d.items);
+            const item = allItems.find(i => i.title === title);
             
-            document.getElementById('weekHeader').innerHTML = `
+            const index = bookmarks.findIndex(b => b.title === title);
+            if (index > -1) {
+                bookmarks.splice(index, 1);
+            } else {
+                bookmarks.push(item);
+            }
+            
+            localStorage.setItem('newsBookmarks', JSON.stringify(bookmarks));
+            updateBookmarkCount();
+            
+            // 만약 현재 아카이브 탭을 보고 있다면 즉시 리렌더링
+            if(document.getElementById('navArchive').classList.contains('sidebar-active')) {
+                showBookmarked();
+            } else {
+                renderNews();
+            }
+        }
+
+        function showLatest() {
+            document.getElementById('navLatest').classList.add('sidebar-active');
+            document.getElementById('navArchive').classList.remove('sidebar-active');
+            document.getElementById('weekSelect').disabled = false;
+            renderNews();
+        }
+
+        function showBookmarked() {
+            document.getElementById('navLatest').classList.remove('sidebar-active');
+            document.getElementById('navArchive').classList.add('sidebar-active');
+            document.getElementById('weekSelect').disabled = true;
+
+            document.getElementById('contentHeader').innerHTML = `
+                <span class="text-blue-700 text-xs font-bold uppercase tracking-widest">Personal Collection</span>
+                <h2 class="text-3xl font-bold mt-1">My Archive</h2>
+            `;
+
+            if (bookmarks.length === 0) {
+                document.getElementById('newsGrid').innerHTML = '<p class="col-span-2 text-gray-400 text-center py-20">저장된 기사가 없습니다.</p>';
+                return;
+            }
+            renderGrid(bookmarks);
+        }
+
+        function renderNews() {
+            const weekIdx = document.getElementById('weekSelect').value;
+            const selected = newsData[weekIdx];
+            
+            document.getElementById('contentHeader').innerHTML = `
                 <span class="text-blue-700 text-xs font-bold uppercase tracking-widest">Archive</span>
                 <h2 class="text-3xl font-bold mt-1">${selected.week}</h2>
                 <span class="text-sm text-gray-500">${selected.date}</span>
             `;
+            renderGrid(selected.items);
+        }
 
+        function renderGrid(items) {
             const grid = document.getElementById('newsGrid');
-            grid.innerHTML = selected.items.map(item => `
-                <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-shadow cursor-pointer">
+            grid.innerHTML = items.map(item => {
+                const isBookmarked = bookmarks.some(b => b.title === item.title);
+                return `
+                <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-shadow cursor-pointer relative group">
+                    <button onclick="toggleBookmark(event, '${item.title}')" class="absolute top-4 right-4 p-2 rounded-full ${isBookmarked ? 'bg-blue-700 text-white' : 'bg-gray-100 text-gray-400'} hover:scale-110 transition-transform">
+                        ${isBookmarked ? '★' : '☆'}
+                    </button>
                     <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase">${item.category}</span>
-                    <h3 class="text-xl font-bold mt-4 mb-3 leading-tight">${item.title}</h3>
-                    <p class="text-gray-600 text-sm mb-4">${item.desc}</p>
+                    <h3 class="text-xl font-bold mt-4 mb-3 leading-tight pr-8">${item.title}</h3>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">${item.desc}</p>
                     <div class="text-blue-700 font-bold text-xs">READ MORE →</div>
                 </article>
-            `).join('');
+                `;
+            }).join('');
         }
+
         window.onload = init;
     </script>
 </body>
