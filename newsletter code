@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Market Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <header class="bg-blue-900 text-white py-10 px-6 text-center">
+        <h1 class="text-3xl font-bold">주간 뉴스레터 아카이브</h1>
+        <p class="mt-2 text-blue-200">글로벌 및 미국 시장 주요 동향 리포트</p>
+    </header>
+
+    <main class="max-w-5xl mx-auto my-10 px-4">
+        <div id="tabs" class="flex space-x-2 border-b mb-8 overflow-x-auto">
+            <button class="px-4 py-2 bg-white border-t border-l border-r rounded-t font-bold">2월 2주차</button>
+            <button class="px-4 py-2 text-gray-500 hover:text-blue-600">2월 1주차</button>
+        </div>
+
+        <section id="content" class="grid gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="mr-2">🌐</span> 글로벌 뉴스
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100 text-left">
+                                <th class="p-3 border">카테고리</th>
+                                <th class="p-3 border">내용 요약</th>
+                                <th class="p-3 border">링크</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-3 border font-semibold">정치/정책</td>
+                                <td class="p-3 border text-sm text-gray-600">글로벌 AI 안전 협약 비준 확대: 생성형 AI 워터마크 의무화...</td>
+                                <td class="p-3 border"><a href="#" class="text-blue-500">Link</a></td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-orange-500">
+                    <h3 class="text-lg font-bold mb-3 underline">Texas</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
+                        <li>삼성전자 테일러 파운드리 제2공장 가동률 목표 조기 달성</li>
+                        <li>텍사스 전력망(ERCOT) 분산형 에너지 시스템 가동</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-blue-500">
+                    <h3 class="text-lg font-bold mb-3 underline">California</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
+                        <li>샌프란시스코 'AI 특화 구역' 세제 혜택 통과</li>
+                        <li>바이오-AI 융합 스타트업 투자 유치 붐</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-10 text-gray-400 text-sm">
+        © 2026 뉴스레터 리포트. All rights reserved.
+    </footer>
+
+</body>
+</html>
