@@ -3,68 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Market Insights</title>
+    <title>The Weekly Briefing | 뉴스레터 아카이브</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-active { border-left: 4px solid #1e3a8a; background-color: #f3f4f6; font-weight: 600; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-[#F9FAFB] text-gray-900">
 
-    <header class="bg-blue-900 text-white py-10 px-6 text-center">
-        <h1 class="text-3xl font-bold">주간 뉴스레터 아카이브</h1>
-        <p class="mt-2 text-blue-200">글로벌 및 미국 시장 주요 동향 리포트</p>
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <h1 class="text-2xl font-black tracking-tighter text-gray-900">THE WEEKLY <span class="text-blue-700">BRIEFING</span></h1>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#" class="hover:text-blue-700">HOME</a>
+                <a href="#" class="text-blue-700">NEWSLETTERS</a>
+                <a href="#" class="hover:text-blue-700">ABOUT</a>
+            </nav>
+            <button class="bg-black text-white px-4 py-2 text-sm rounded-full font-bold">SUBSCRIBE</button>
+        </div>
     </header>
 
-    <main class="max-w-5xl mx-auto my-10 px-4">
-        <div id="tabs" class="flex space-x-2 border-b mb-8 overflow-x-auto">
-            <button class="px-4 py-2 bg-white border-t border-l border-r rounded-t font-bold">2월 2주차</button>
-            <button class="px-4 py-2 text-gray-500 hover:text-blue-600">2월 1주차</button>
-        </div>
-
-        <section id="content" class="grid gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h2 class="text-xl font-bold mb-4 flex items-center">
-                    <span class="mr-2">🌐</span> 글로벌 뉴스
-                </h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full border-collapse">
-                        <thead>
-                            <tr class="bg-gray-100 text-left">
-                                <th class="p-3 border">카테고리</th>
-                                <th class="p-3 border">내용 요약</th>
-                                <th class="p-3 border">링크</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="p-3 border font-semibold">정치/정책</td>
-                                <td class="p-3 border text-sm text-gray-600">글로벌 AI 안전 협약 비준 확대: 생성형 AI 워터마크 의무화...</td>
-                                <td class="p-3 border"><a href="#" class="text-blue-500">Link</a></td>
-                            </tr>
-                            </tbody>
-                    </table>
+    <div class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+        
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div class="sticky top-24">
+                <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Filters</h2>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2 text-gray-600">Filter by Week</label>
+                    <select class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <option>Week 06, 2026 (Current)</option>
+                        <option>Week 05, 2026</option>
+                        <option>Week 04, 2026</option>
+                    </select>
                 </div>
+                
+                <nav class="space-y-1">
+                    <a href="#" class="flex items-center px-4 py-3 text-sm rounded-lg sidebar-active">
+                        <span class="mr-3">🕒</span> Latest
+                    </a>
+                    <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <span class="mr-3">📁</span> Archive
+                    </a>
+                    <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <span class="mr-3">📅</span> By Month
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="flex-grow">
+            <div class="flex justify-between items-end mb-6">
+                <div>
+                    <span class="text-blue-700 text-xs font-bold uppercase tracking-widest">February 2026</span>
+                    <h2 class="text-3xl font-bold mt-1">Week 06</h2>
+                </div>
+                <span class="text-sm text-gray-500">February 10, 2026</span>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-orange-500">
-                    <h3 class="text-lg font-bold mb-3 underline">Texas</h3>
-                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
-                        <li>삼성전자 테일러 파운드리 제2공장 가동률 목표 조기 달성</li>
-                        <li>텍사스 전력망(ERCOT) 분산형 에너지 시스템 가동</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-blue-500">
-                    <h3 class="text-lg font-bold mb-3 underline">California</h3>
-                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
-                        <li>샌프란시스코 'AI 특화 구역' 세제 혜택 통과</li>
-                        <li>바이오-AI 융합 스타트업 투자 유치 붐</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Politics</span>
+                        </div>
+                        <h3 class="text-xl font-bold leading-tight mb-3">글로벌 AI 안전 협약(Global AI Safety Accord) 비준 확대</h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">UN 주도 하에 주요 20개국이 참여한 AI 안전 협약 세부 이행안 발표. 생성형 AI 워터마크 의무화 및 자율 무기 시스템 규제안 포함.</p>
+                        <div class="flex items-center text-blue-700 font-bold text-xs">
+                            READ MORE <span class="ml-1">→</span>
+                        </div>
+                    </div>
+                </article>
 
-    <footer class="text-center py-10 text-gray-400 text-sm">
-        © 2026 뉴스레터 리포트. All rights reserved.
+                <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Robotics</span>
+                        </div>
+                        <h3 class="text-xl font-bold leading-tight mb-3">휴머노이드 로봇, 물류 현장 실전 배치 10만 대 돌파</h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">테슬라 옵티머스, 피규어 AI 등 누적 10만 대 이상 배치. 단순 반복을 넘어 복잡 분류 작업 수행 능력 검증.</p>
+                        <div class="flex items-center text-blue-700 font-bold text-xs">
+                            READ MORE <span class="ml-1">→</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Texas</span>
+                        </div>
+                        <h3 class="text-xl font-bold leading-tight mb-3">삼성전자 테일러 파운드리 제2공장 가동률 목표 조기 달성</h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">북미 팹리스 고객사들의 3나노 이하 공정 주문 물량 본격 소화 시작. 예상보다 빠른 수율 안정화 성공.</p>
+                        <div class="flex items-center text-blue-700 font-bold text-xs">
+                            READ MORE <span class="ml-1">→</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Tech</span>
+                        </div>
+                        <h3 class="text-xl font-bold leading-tight mb-3">애플, 차세대 '폴더블 아이폰' 및 AR 글래스 출시 루머</h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">2026년 하반기 보급형 AR 글래스 '비전 에어' 출시 기대. 스마트폰 시장 정체를 뚫을 새로운 폼팩터 경쟁 재점화.</p>
+                        <div class="flex items-center text-blue-700 font-bold text-xs">
+                            READ MORE <span class="ml-1">→</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-10 text-center">
+        <p class="text-gray-400 text-sm">© 2026 THE WEEKLY BRIEFING. All rights reserved.</p>
     </footer>
 
 </body>
