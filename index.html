@@ -11,7 +11,6 @@
         .sidebar-active { border-left: 4px solid #1e3a8a; background-color: #f3f4f6; font-weight: 600; }
         #mainContent, #loginPage, #loadingScreen { display: none; }
         #loadingScreen { display: flex; }
-        /* 카테고리 버튼 트랜지션 */
         .cat-btn { transition: all 0.2s ease; }
     </style>
 </head>
@@ -91,7 +90,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBSmPbiAqHEN4MgDw_lnvzqjGp3onPjEN8",
@@ -112,7 +111,6 @@
         let selectedCategories = new Set(); 
         let allCategories = [];
 
-        // 로그인 처리
         document.getElementById('loginForm').onsubmit = async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
@@ -140,6 +138,7 @@
                         <span class="text-sm font-semibold">${user.email}</span>
                         <button onclick="logout()" class="text-xs text-gray-500 underline">Logout</button>
                     </div>`;
+                
                 onSnapshot(doc(db, "users", user.uid), (snap) => {
                     bookmarks = snap.exists() ? snap.data().bookmarks : [];
                     document.getElementById('bookmarkCount').innerText = bookmarks.length;
@@ -157,8 +156,8 @@
                 week.items.forEach(item => categories.add(item.category));
             });
             allCategories = Array.from(categories).sort();
-            
             const filterContainer = document.getElementById('categoryFilters');
+            filterContainer.innerHTML = '';
             
             const allBtn = document.createElement('button');
             allBtn.className = `cat-btn px-3 py-1.5 rounded-full text-xs font-bold border ${selectedCategories.size === 0 ? 'bg-gray-800 text-white border-gray-800' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400'}`;
@@ -200,10 +199,12 @@
 
             allCategories.forEach(cat => {
                 const btn = document.getElementById(`cat-btn-${cat}`);
-                if (selectedCategories.has(cat)) {
-                    btn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-blue-100 text-blue-700 border-blue-200";
-                } else {
-                    btn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400";
+                if (btn) {
+                    if (selectedCategories.has(cat)) {
+                        btn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-blue-100 text-blue-700 border-blue-200";
+                    } else {
+                        btn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400";
+                    }
                 }
             });
         }
@@ -232,7 +233,6 @@
             
             if (currentMode === 'latest') {
                 const weekVal = document.getElementById('weekSelect').value;
-                
                 if (weekVal === 'all') {
                     itemsToRender = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week})));
                     header.innerHTML = `<h2 class="text-3xl font-bold">All News</h2><span class="text-sm text-gray-500">전체 발행된 뉴스레터입니다.</span>`;
@@ -284,7 +284,7 @@
                         </div>
                     </div>
 
-                    <button onclick="toggleBookmark(event, '${item.title}')" class="absolute bottom-5 right-5 p-2 rounded-full transition-all z-10 bg-white shadow-sm border border-gray-100 hover:bg-blue-50 ${isSaved ? 'text-blue-600' : 'text-gray-300'}">
+                    <button onclick="toggleBookmark(event, '${item.title.replace(/'/g, "\\'")}')" class="absolute bottom-5 right-5 p-2 rounded-full transition-all z-10 bg-white shadow-sm border border-gray-100 hover:bg-blue-50 ${isSaved ? 'text-blue-600' : 'text-gray-300'}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="${isSaved ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                         </svg>
@@ -294,9 +294,17 @@
         }
 
         window.toggleBookmark = async (e, title) => {
-            e.stopPropagation();
+            // 이벤트 전파 중단 (기사 링크 열림 방지)
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
             if (!currentUser) return;
-            const item = newsData.flatMap(d => d.items).find(i => i.title === title);
+
+            // 전체 데이터와 현재 북마크에서 아이템 찾기
+            const allItems = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week})));
+            const item = allItems.find(i => i.title === title);
             if (!item) return;
 
             const idx = bookmarks.findIndex(b => b.title === title);
@@ -308,11 +316,17 @@
                 newBookmarks.push(item);
             }
             
+            // 데이터 업데이트 및 UI 즉시 반영
             bookmarks = newBookmarks;
             document.getElementById('bookmarkCount').innerText = bookmarks.length;
             renderCurrentView();
 
-            await setDoc(doc(db, "users", currentUser.uid), { bookmarks: newBookmarks });
+            // 서버 저장
+            try {
+                await setDoc(doc(db, "users", currentUser.uid), { bookmarks: newBookmarks });
+            } catch (err) {
+                console.error("북마크 저장 실패:", err);
+            }
         };
 
         window.onload = () => {
