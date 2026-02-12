@@ -4,67 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Weekly Briefing</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* 기본 리셋 및 폰트 설정 */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        /* === Reset & Base Styles === */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #F3F4F6;
-            color: #1F2937;
-            padding: 40px;
-        }
-
-        /* 레이아웃 컨테이너 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 2rem;
-            color: #111827;
-            font-weight: 800;
-        }
-
-        /* 그리드 시스템: 반응형으로 카드 배치 */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 24px;
-        }
-
-        @media (min-width: 768px) {
-            .news-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* 뉴스 카드 스타일 */
-        .card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background-color: #F8F9FA;
+            color: #333;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s ease;
+        }
+
+        /* === Layout === */
+        .app-container {
+            display: flex;
+            flex: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* === Sidebar === */
+        .sidebar {
+            width: 280px;
+            background-color: #F8F9FA;
+            padding: 40px 30px;
+            border-right: 1px solid #E5E7EB;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            color: #111827;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: #2563EB; }
+
+        .nav-section { margin-bottom: 40px; }
+        .nav-title {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #4B5563;
+            transition: all 0.2s;
+        }
+
+        .nav-item.active {
+            background-color: #F3F4F6;
+            color: #111827;
+            font-weight: 600;
+            border-left: 4px solid #1E40AF;
+        }
+
+        .nav-item i { width: 24px; margin-right: 10px; }
+
+        .badge-count {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: auto;
+            font-weight: 700;
+        }
+
+        .week-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 0.95rem;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        /* === Main Content === */
+        .main-content {
+            flex: 1;
+            padding: 40px 60px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 40px;
+            font-size: 0.9rem;
+            color: #4B5563;
+        }
+        .top-bar .user-email { font-weight: 600; margin-right: 15px; }
+        .top-bar .logout { color: #6B7280; text-decoration: underline; cursor: pointer; }
+
+        /* === Grid System === */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        /* === Card Style === */
+        .card {
+            background-color: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
         }
 
-        /* 카드 상단: 카테고리 뱃지 및 날짜 */
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -72,204 +148,101 @@
             margin-bottom: 16px;
         }
 
-        .badge {
-            padding: 4px 10px;
+        .category-badge {
+            padding: 6px 12px;
             border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
+        
+        .bg-blue { background: #EBF5FF; color: #1E40AF; }
+        .bg-gray { background: #F3F4F6; color: #1F2937; }
+        .bg-green { background: #DEF7EC; color: #03543F; }
+        .bg-orange { background: #FEECDC; color: #8A2C0D; }
+        .bg-purple { background: #EDEBFE; color: #5521B5; }
+        .bg-indigo { background: #E0E7FF; color: #3730A3; }
 
-        /* 카테고리별 색상 (자바스크립트로 제어됨) */
-        .badge.blue { background-color: #DBEAFE; color: #1E40AF; }
-        .badge.gray { background-color: #F3F4F6; color: #374151; }
-        .badge.green { background-color: #D1FAE5; color: #065F46; }
-        .badge.orange { background-color: #FFEDD5; color: #9A3412; }
-        .badge.purple { background-color: #EDE9FE; color: #5B21B6; }
-        .badge.indigo { background-color: #E0E7FF; color: #3730A3; }
+        .card-date { font-size: 0.85rem; color: #9CA3AF; }
 
-        .date {
-            font-size: 0.875rem;
-            color: #9CA3AF;
-        }
-
-        /* 카드 제목 */
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            line-height: 1.4;
             color: #111827;
             margin-bottom: 12px;
-            
-            /* 제목도 너무 길면 2줄로 자르기 */
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            line-height: 1.3;
         }
 
-        /* === [핵심 수정 부분] 카드 설명 (3줄 요약) === */
+        /* [핵심 수정] 3줄 요약 스타일 */
         .card-desc {
-            font-size: 0.95rem; /* 글자 크기 약간 축소 */
+            font-size: 0.95rem;
             color: #4B5563;
-            
-            /* 줄 간격(Line Height)을 좁혀서 3줄이 들어갈 공간 확보 */
-            line-height: 1.5; 
-            
-            /* 3줄까지만 표시하고 나머지는 ... 처리 */
-            display: -webkit-box;
-            -webkit-line-clamp: 3; 
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            
-            /* 하단 여백 확보 */
             margin-bottom: 24px;
             
-            /* 높이가 줄어들더라도 레이아웃이 깨지지 않게 flex-grow 사용 */
-            flex-grow: 1;
+            /* 줄 간격을 1.6으로 설정하여 가독성 확보 */
+            line-height: 1.6; 
+            
+            /* 3줄까지만 표시하고 넘치면 ... 처리 */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            
+            /* 내용이 적어도 레이아웃 유지를 위해 최소 높이 확보 */
+            min-height: 4.8em; 
         }
 
-        /* 카드 하단: Read More 링크 */
         .card-footer {
+            margin-top: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: auto; /* 푸터를 항상 바닥에 고정 */
         }
 
         .read-more {
-            font-size: 0.875rem;
-            font-weight: 600;
             color: #2563EB;
+            font-weight: 600;
+            font-size: 0.9rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
         }
-
-        .read-more:hover {
-            text-decoration: underline;
-        }
-
-        .bookmark-icon {
-            color: #D1D5DB;
-            cursor: pointer;
-        }
         
-        .bookmark-icon:hover {
-            color: #2563EB;
-        }
+        .read-more:hover { text-decoration: underline; }
 
+        .bookmark-btn { color: #D1D5DB; font-size: 1.2rem; cursor: pointer; }
+        .bookmark-btn:hover { color: #2563EB; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>THE WEEKLY BRIEFING</h1>
-        </header>
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="logo">THE WEEKLY <span>BRIEFING</span></div>
+        <div class="nav-section">
+            <div class="nav-title">NAVIGATION</div>
+            <div class="nav-item active"><i class="fas fa-clock"></i> Latest News</div>
+            <div class="nav-item"><i class="fas fa-folder"></i> My Archive <span class="badge-count">4</span></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">SELECT WEEK</div>
+            <select class="week-select">
+                <option>2026년 2월 1주차</option>
+                <option>2026년 1월 4주차</option>
+            </select>
+        </div>
+    </aside>
 
-        <div id="news-grid" class="news-grid">
-            </div>
-    </div>
+    <main class="main-content">
+        <div class="top-bar">
+            <span class="user-email">sound410@bsco.co.kr</span>
+            <span class="logout">Logout</span>
+        </div>
+        <div id="news-grid" class="news-grid"></div>
+    </main>
+</div>
 
-    <script>
-        // 뉴스 데이터 (수정된 3줄 요약 버전)
-        const newsData = [
-            {
-                week: "2026년 2월 1주차",
-                date: "February 4, 2026",
-                items: [
-                    { 
-                        category: "Politics", 
-                        title: "미국, 파리 협정 탈퇴 및 60여 국제기구 자원 중단", 
-                        desc: "1월 27일부 파리 기후 협정 탈퇴 공식 발효.<br/>UNFCCC 및 GCF 등 주요 국제기구 자원 중단.<br/>트럼프 행정부의 '에너지 우선' 고립 노선 심화.", 
-                        color: "blue", 
-                        link: "https://www.chosun.com/international/international_general/2026/01/08/6JGZMLZS3FFBHISBRY4JN5253E/" 
-                    },
-                    { 
-                        category: "Economy", 
-                        title: "IMF, 2026년 세계 성장률 3.3% 상향 전망", 
-                        desc: "무역 갈등 속 AI 투자와 민간 적응력 주목.<br/>기존 전망치 대비 성장률 상향 조정 발표.<br/>글로벌 경기 회복세에 대한 긍정적 신호.", 
-                        color: "gray", 
-                        link: "https://www.imf.org/en/publications/weo/issues/2026/01/19/world-economic-outlook-update-january-2026" 
-                    },
-                    { 
-                        category: "Tech", 
-                        title: "다보스 포럼, '2026년 AI 수익 창출의 해' 선언", 
-                        desc: "시스코·IBM 등 빅테크 기업 수익 모델 공개.<br/>대규모 AI 투자에 대한 실질적 회수 구간 진입.<br/>단순 기술 경쟁 넘어선 비즈니스 효율화 집중.", 
-                        color: "green", 
-                        link: "https://www.bloomberg.com/news/articles/2026-01-22/davos-crowd-focuses-on-ai-returns-after-year-of-heavy-investments" 
-                    },
-                    { 
-                        category: "Energy", 
-                        title: "트럼프 행정부, 테크 기업 전력망 분담금 요구", 
-                        desc: "데이터센터 전력 수요 급증 해결책 모색.<br/>빅테크 대상 신규 발전소 건설 비용 경매제 추진.<br/>전력망 부하에 대한 기업의 직접 책임 강화.", 
-                        color: "orange", 
-                        link: "https://www.ft.com/content/9b3d179e-129c-4aa1-a5c0-1cc1703b0234" 
-                    },
-                    { 
-                        category: "Texas", 
-                        title: "텍사스, 주거비 급등으로 인한 '성장의 역설' 직면", 
-                        desc: "소득 및 교육 수준 향상에도 주거비 상승폭 초과.<br/>과거 '저비용 고효율' 거주지로서의 매력 감소.<br/>인구 유입 지속에 따른 인프라 부족 문제 대두.", 
-                        color: "orange", 
-                        link: "https://www.texastribune.org/2026/01/29/texas-census-housing-incomes/" 
-                    },
-                    { 
-                        category: "California", 
-                        title: "캘리포니아, 억만장자 타겟 '부유세' 법안 논란", 
-                        desc: "자산 10억 달러 이상 부유층 대상 순자산 1% 과세.<br/>주 이탈 시에도 향후 수년간 세금 징수 조항 포함.<br/>부유층 엑소더스 우려 및 조세 저항 심화.", 
-                        color: "blue", 
-                        link: "https://www.cnbc.com/2026/01/08/california-wealth-tax-proposal-leaves-billionaires-with-little-way-out.html" 
-                    },
-                    { 
-                        category: "Robotics", 
-                        title: "현대차, 로봇 산업의 'End-to-End 플랫폼' 도약", 
-                        desc: "로봇 판매 대신 구독형 'RaaS' 모델로 전환.<br/>세계 최초 위탁 생산 '로봇 파운드리' 사업 개시.<br/>구글 제미나이 결합 지능형 로봇 생태계 구축.", 
-                        color: "purple", 
-                        link: "https://www.hyundai.com/worldwide/ko/brand-journal/mobility-solution/ces-2026-robotics-mediaday" 
-                    },
-                    { 
-                        category: "Business", 
-                        title: "시장 동향: 금리 인하 기대와 AI M&A 확대", 
-                        desc: "미 연준 3월 금리 인하 기대감에 변동성 확대.<br/>AI 인프라 확보 목적 대규모 M&A 증가 전망.<br/>기술 기업 중심의 자본 시장 재편 가속화.", 
-                        color: "indigo", 
-                        link: "https://www.pwc.com/gx/en/services/deals/trends.html" 
-                    }
-                ]
-            }
-        ];
+<script src="data.js"></script>
 
-        // 렌더링 함수
-        function renderNews() {
-            const grid = document.getElementById('news-grid');
-            const currentWeekData = newsData[0]; // 첫 번째 주차 데이터 사용
-
-            currentWeekData.items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card';
-
-                // <br/> 태그를 인식하기 위해 innerHTML 사용
-                card.innerHTML = `
-                    <div class="card-header">
-                        <span class="badge ${item.color}">${item.category}</span>
-                        <span class="date">${currentWeekData.week}</span>
-                    </div>
-                    <h2 class="card-title">${item.title}</h2>
-                    <p class="card-desc">${item.desc}</p>
-                    <div class="card-footer">
-                        <a href="${item.link}" target="_blank" class="read-more">READ MORE →</a>
-                        <span class="bookmark-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                        </span>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // 페이지 로드 시 실행
-        renderNews();
-    </script>
 </body>
 </html>
