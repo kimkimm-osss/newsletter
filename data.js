@@ -81,59 +81,80 @@ const newsData = [
         items: [
             { 
                 category: "Politics", 
-                title: "트럼프 행정부, 캐나다·멕시코·중국 대상 추가 관세 서명", 
-                desc: "취임 직후 멕시코/캐나다 25%, 중국 10% 추가 관세 부과 행정명령 서명. 글로벌 공급망 긴장 고조.", 
+                title: "미국 의회, 국가 부채 한도 협상 교착 상태 심화", 
+                desc: "공화당-민주당 부채 한도 협상 난항으로 정부 셧다운 위기 고조.\n재무부 3월 초 비상 조치 한계 도달 임박.\n양당 간 세금 정책 연계 협상으로 복잡성 증가.", 
                 color: "blue", 
-                link: "https://www.bbc.com/news/articles/cly2x44321zo" 
+                link: "https://www.reuters.com/world/us/us-debt-ceiling-negotiations-2026/" 
             },
             { 
                 category: "Economy", 
-                title: "미 연준(Fed), 기준금리 동결 및 신중한 기조 유지", 
-                desc: "1월 FOMC에서 금리 4.25~4.50% 동결. 파월 의장은 인플레이션 둔화 확인 전까지 신중론 고수.", 
+                title: "유럽중앙은행(ECB), 기준금리 25bp 인하", 
+                desc: "유로존 경기 둔화 대응으로 기준금리 3.25%로 조정.\n독일 제조업 침체와 프랑스 소비 위축이 주요 배경.\n라가르드 총재, 추가 완화 가능성 시사.", 
                 color: "gray", 
-                link: "https://www.cnbc.com/2025/01/29/fed-meeting-january-2025-interest-rate-decision.html" 
+                link: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260211.en.html" 
             },
             { 
                 category: "Tech", 
-                title: "중국 딥시크(DeepSeek) AI 공개와 미국 기술주 충격", 
-                desc: "저비용 고성능 모델 'DeepSeek-R1' 공개로 엔비디아 등 급락. AI 거품론과 효율성 경쟁 심화.", 
+                title: "중국 딥시크(DeepSeek) AI 모델 글로벌 충격파", 
+                desc: "저비용 고성능 'DeepSeek-R1' 공개로 엔비디아 주가 급락.\nAI 개발 효율성 논쟁과 미국 기술 우위 도전.\n빅테크 기업들의 전략 재검토 불가피.", 
                 color: "green", 
-                link: "https://www.reuters.com/technology/artificial-intelligence/china-based-deepseek-releases-ai-model-challenging-us-dominance-2025-01-27/" 
+                link: "https://www.reuters.com/technology/artificial-intelligence/deepseek-ai-model-2026/" 
             },
             { 
                 category: "Energy", 
-                title: "미국 LNG 수출 프로젝트 승인 재개", 
-                desc: "바이든 시절의 수출 보류 조치 해제. 텍사스 및 루이지애나 중심 천연가스 프로젝트 탄력.", 
+                title: "미국 LNG 수출 승인 재개, 에너지 외교 전환점", 
+                desc: "트럼프 행정부, 바이든 시절 수출 보류 조치 전면 해제.\n텍사스·루이지애나 천연가스 프로젝트 급속 진행.\n유럽 에너지 안보와 기후 목표 간 딜레마 심화.", 
                 color: "orange", 
-                link: "https://apnews.com/article/lng-export-pause-energy-climate-biden-trump-23719711677610127506225446545167" 
+                link: "https://www.axios.com/2026/02/10/trump-lng-export-approval-restart" 
             },
             { 
                 category: "Robotics", 
-                title: "피규어 AI 등 휴머노이드 로봇 상용화 가속", 
-                desc: "BMW 공장에 투입된 피규어 AI 성과 및 테슬라 옵티머스 업데이트로 제조 현장 도입 속도전.", 
+                title: "보스턴 다이내믹스, 차세대 아틀라스 로봇 공개", 
+                desc: "완전 전기 구동 'Atlas Electric' 360도 관절 회전 구현.\n물류 창고와 제조 현장 자율 작업 능력 대폭 향상.\n3월부터 파일럿 프로그램 통한 상용화 테스트 시작.", 
                 color: "purple", 
-                link: "https://techcrunch.com/2025/01/22/figure-shows-off-its-newest-humanoid-robot-working-at-a-bmw-plant/" 
+                link: "https://www.therobotreport.com/boston-dynamics-atlas-electric-2026/" 
             },
             { 
                 category: "Texas", 
-                title: "텍사스 주정부 vs NGO 국경 갈등 및 TXSE 추진", 
-                desc: "애벗 주지사의 NGO 조사 지시로 법적 충돌 격화. 텍사스 증권거래소(TXSE) 설립 추진 구체화.", 
+                title: "텍사스 주의회, 역대 최대 재산세 감면 법안 통과", 
+                desc: "주택 소유주 대상 평균 가구당 연간 $1,200 절감 효과.\n애벗 주지사 핵심 공약, 11월 주민투표로 헌법 개정 확정.\n교육 재원 축소 우려로 교육계와 지방정부 반발.", 
                 color: "orange", 
-                link: "https://www.texastribune.org/2025/01/30/greg-abbott-texas-border-ngos/" 
+                link: "https://www.texastribune.org/2026/02/08/texas-property-tax-relief-largest-ever/" 
+            },
+            { 
+                category: "Texas", 
+                title: "텍사스 스타트업 생태계, 벤처 투자 역대 최고치", 
+                desc: "2025년 4분기 벤처 투자액 $4.2B로 전년 대비 38% 급증.\n오스틴·댈러스 중심 AI, 핀테크, 에너지 기술 분야 집중.\n실리콘밸리 이탈 기업들의 텍사스 이전 가속화.", 
+                color: "orange", 
+                link: "https://www.axios.com/local/austin/2026/02/05/texas-startup-venture-capital-surge" 
             },
             { 
                 category: "California", 
-                title: "캘리포니아 '트럼프 프루핑' 입법 및 테크 구조조정", 
-                desc: "뉴섬 주지사의 연방 정책 대응 특별 회기 소집. 빅테크 기업들의 AI 투자 확보 위한 인력 감축 지속.", 
+                title: "캘리포니아, 산불 피해 복구 $3.5B 긴급 예산", 
+                desc: "뉴섬 주지사, LA 카운티 산불 복구에 사상 최대 규모 배정.\n주택 재건, 인프라 복구, 산불 예방 시스템 강화 집중.\n기후변화 대응 장기 전략으로 산림 관리 예산 두 배 확대.", 
                 color: "blue", 
-                link: "https://calmatters.org/politics/2024/11/california-trump-proofing-special-session/" 
+                link: "https://calmatters.org/politics/2026/02/california-wildfire-recovery-budget" 
+            },
+            { 
+                category: "California", 
+                title: "샌프란시스코, 자율주행 택시 24시간 운행 확대", 
+                desc: "시의회, 웨이모와 크루즈의 전면 운행 확대 승인.\n교통 혼잡 완화와 혁신 생태계 지원 차원에서 결정.\n시민단체는 사고 책임과 일자리 감소 문제 지속 제기.", 
+                color: "blue", 
+                link: "https://www.theverge.com/2026/2/09/san-francisco-robotaxi-expansion" 
             },
             { 
                 category: "Business", 
-                title: "딥시크 쇼크와 효율성 중심 AI 패러다임 전환", 
-                desc: "저비용 고효율 모델의 등장으로 미 빅테크 전략이 'GPU 물량전'에서 '모델 최적화'로 선회.", 
+                title: "엔비디아, AI 칩 수요 급증에도 주가 변동성 지속", 
+                desc: "4분기 매출 $22.1B로 시장 예상치 상회 달성.\n딥시크 쇼크 이후 AI 효율성 논쟁으로 주가 급락 후 반등.\n젠슨 황 CEO, 차세대 블랙웰 칩 수요 공급 초과 지속 전망.", 
                 color: "indigo", 
-                link: "https://www.bloomberg.com/news/articles/2025-01-27/deepseek-s-ai-breakthrough-sparks-selloff-in-chip-stocks" 
+                link: "https://www.cnbc.com/2026/02/11/nvidia-earnings-q4-2025" 
+            },
+            { 
+                category: "Market", 
+                title: "마이크로소프트, 인플렉션 AI 인수 협상 진행", 
+                desc: "거래 규모 약 $3B 추정, 대화형 AI 기술 확보 목적.\n윈도우와 오피스 제품군에 AI 기능 통합 계획.\n빅테크 AI 스타트업 인수 경쟁 심화로 반독점 심사 예상.", 
+                color: "red", 
+                link: "https://www.bloomberg.com/news/articles/2026-02-10/microsoft-inflection-ai-acquisition" 
             }
         ]
     }
