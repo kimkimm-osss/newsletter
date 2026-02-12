@@ -232,7 +232,6 @@
                 navLatest.className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
                 navArchive.className = "w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition";
             }
-            // 이제 아카이브에서도 주차 필터가 동작하도록 weekSelect.disabled 설정을 제거함
             renderCurrentView();
         };
 
@@ -253,15 +252,12 @@
                     }
                 }
             } else {
-                // 아카이브 모드: 북마크와 원본 데이터를 대조하여 필터링
                 const allWithWeeks = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week, weekIdx: newsData.indexOf(d)})));
                 itemsToRender = bookmarks.map(b => allWithWeeks.find(i => i.title === b.title)).filter(Boolean);
                 
-                // 아카이브 내 주차 필터 적용
                 if (weekVal !== 'all') {
                     itemsToRender = itemsToRender.filter(item => item.weekIdx == weekVal);
                 }
-                
                 header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${itemsToRender.length})</span>`;
             }
 
@@ -281,11 +277,8 @@
             grid.innerHTML = items.map(item => {
                 const isSaved = bookmarks.some(b => b.title === item.title);
                 
-                // 문장별로 줄바꿈 처리 (마침표 기준)
-                const descLines = item.desc.split('. ').map((line, idx, arr) => {
-                    const content = idx === arr.length - 1 ? line : line + '.';
-                    return `<p class="mb-2 last:mb-0">${content}</p>`;
-                }).join('');
+                // 마침표 뒤에 한 줄 띄우기를 위해 <br><br> 적용
+                const descWithBr = item.desc.split('. ').join('.<br><br>');
 
                 return `
                 <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all cursor-pointer relative group flex flex-col h-full">
@@ -297,7 +290,7 @@
                         <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase">${item.category}</span>
                         <h3 class="text-xl font-bold mt-4 mb-4 leading-tight pr-8 line-clamp-2 group-hover:text-blue-700 transition-colors">${item.title}</h3>
                         <div class="text-gray-600 text-sm mb-6 leading-relaxed">
-                            ${descLines}
+                            ${descWithBr}
                         </div>
                     </div>
 
