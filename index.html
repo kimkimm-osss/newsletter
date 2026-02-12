@@ -90,7 +90,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBSmPbiAqHEN4MgDw_lnvzqjGp3onPjEN8",
@@ -141,14 +141,31 @@
                 
                 onSnapshot(doc(db, "users", user.uid), (snap) => {
                     bookmarks = snap.exists() ? snap.data().bookmarks : [];
-                    document.getElementById('bookmarkCount').innerText = bookmarks.length;
-                    renderCurrentView(); 
+                    // 데이터 정합성 검사: data.js에 없는 기사는 bookmarks에서도 제거
+                    syncBookmarksWithData();
                 });
             } else {
                 document.getElementById('loginPage').style.display = 'flex';
                 document.getElementById('mainContent').style.display = 'none';
             }
         });
+
+        // 원본 데이터(newsData)와 북마크 동기화 함수
+        async function syncBookmarksWithData() {
+            if (!currentUser || typeof newsData === 'undefined') return;
+
+            const allValidTitles = new Set(newsData.flatMap(d => d.items.map(i => i.title)));
+            const filteredBookmarks = bookmarks.filter(b => allValidTitles.has(b.title));
+
+            // 만약 사라진 기사가 있다면 DB 업데이트
+            if (filteredBookmarks.length !== bookmarks.length) {
+                bookmarks = filteredBookmarks;
+                await setDoc(doc(db, "users", currentUser.uid), { bookmarks: filteredBookmarks });
+            }
+            
+            document.getElementById('bookmarkCount').innerText = bookmarks.length;
+            renderCurrentView(); 
+        }
 
         function initCategories() {
             const categories = new Set();
@@ -244,7 +261,12 @@
                     }
                 }
             } else {
-                itemsToRender = bookmarks.map(item => ({...item, weekName: item.weekName || 'Archived'}));
+                // 아카이브 모드: 이미 syncBookmarksWithData에서 필터링된 bookmarks 사용
+                // 혹시 모를 누락 방지를 위해 다시 한 번 원본 데이터의 week 정보를 매칭
+                itemsToRender = bookmarks.map(b => {
+                    const original = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week}))).find(i => i.title === b.title);
+                    return original ? original : b;
+                });
                 header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${bookmarks.length})</span>`;
             }
 
@@ -266,7 +288,7 @@
                 return `
                 <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all cursor-pointer relative group flex flex-col h-full">
                     <div class="absolute top-6 right-6 text-[11px] font-medium text-gray-400">
-                        ${item.weekName}
+                        ${item.weekName || ''}
                     </div>
 
                     <div class="flex-grow">
@@ -294,7 +316,6 @@
         }
 
         window.toggleBookmark = async (e, title) => {
-            // 이벤트 전파 중단 (기사 링크 열림 방지)
             if (e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -302,10 +323,22 @@
 
             if (!currentUser) return;
 
-            // 전체 데이터와 현재 북마크에서 아이템 찾기
             const allItems = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week})));
             const item = allItems.find(i => i.title === title);
-            if (!item) return;
+            
+            // 데이터에 없는 기사라면 북마크 추가/유지 불가
+            if (!item) {
+                // 이미 북마크에 있다면 제거만 가능
+                const idx = bookmarks.findIndex(b => b.title === title);
+                if (idx > -1) {
+                    let newBookmarks = [...bookmarks];
+                    newBookmarks.splice(idx, 1);
+                    bookmarks = newBookmarks;
+                    await setDoc(doc(db, "users", currentUser.uid), { bookmarks: newBookmarks });
+                    renderCurrentView();
+                }
+                return;
+            };
 
             const idx = bookmarks.findIndex(b => b.title === title);
             let newBookmarks = [...bookmarks];
@@ -316,12 +349,10 @@
                 newBookmarks.push(item);
             }
             
-            // 데이터 업데이트 및 UI 즉시 반영
             bookmarks = newBookmarks;
             document.getElementById('bookmarkCount').innerText = bookmarks.length;
             renderCurrentView();
 
-            // 서버 저장
             try {
                 await setDoc(doc(db, "users", currentUser.uid), { bookmarks: newBookmarks });
             } catch (err) {
