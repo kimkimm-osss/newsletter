@@ -11,6 +11,8 @@
         .sidebar-active { border-left: 4px solid #1e3a8a; background-color: #f3f4f6; font-weight: 600; }
         #mainContent, #loginPage, #loadingScreen { display: none; }
         #loadingScreen { display: flex; }
+        /* 카테고리 버튼 트랜지션 */
+        .cat-btn { transition: all 0.2s ease; }
     </style>
 </head>
 <body class="bg-[#F9FAFB] text-gray-900">
@@ -56,19 +58,29 @@
                 <div class="sticky top-24">
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Navigation</h2>
                     <nav class="space-y-1 mb-8">
-                        <button onclick="showLatest()" id="navLatest" class="w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition">
+                        <button onclick="setMode('latest')" id="navLatest" class="w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition">
                             <span class="mr-3 text-lg">🕒</span> Latest News
                         </button>
-                        <button onclick="showBookmarked()" id="navArchive" class="w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition">
+                        <button onclick="setMode('archive')" id="navArchive" class="w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition">
                             <span class="mr-3 text-lg">📁</span> My Archive <span id="bookmarkCount" class="ml-auto bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold">0</span>
                         </button>
                     </nav>
-                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Select Week</h2>
-                    <select id="weekSelect" onchange="renderNews()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"></select>
+                    
+                    <div id="weekSelectContainer">
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Select Week</h2>
+                        <select id="weekSelect" onchange="renderCurrentView()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="all">전체 기사 보기 (All Weeks)</option>
+                        </select>
+                    </div>
                 </div>
             </aside>
             <main class="flex-grow">
-                <div id="contentHeader" class="mb-6"></div>
+                <div class="mb-6">
+                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Filter by Category</h2>
+                    <div id="categoryFilters" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <div id="contentHeader" class="mb-6 border-b pb-4 border-gray-100"></div>
                 <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
             </main>
         </div>
@@ -96,6 +108,9 @@
 
         let currentUser = null;
         let bookmarks = [];
+        let currentMode = 'latest'; // 'latest' or 'archive'
+        let selectedCategories = new Set(); // 선택된 카테고리들
+        let allCategories = [];
 
         // 로그인 처리
         document.getElementById('loginForm').onsubmit = async (e) => {
@@ -127,7 +142,8 @@
                     </div>`;
                 onSnapshot(doc(db, "users", user.uid), (snap) => {
                     bookmarks = snap.exists() ? snap.data().bookmarks : [];
-                    updateUI();
+                    document.getElementById('bookmarkCount').innerText = bookmarks.length;
+                    renderCurrentView(); // 데이터 변경 시 화면 갱신
                 });
             } else {
                 document.getElementById('loginPage').style.display = 'flex';
@@ -135,83 +151,196 @@
             }
         });
 
-        window.toggleBookmark = async (e, title) => {
-            e.stopPropagation();
-            if (!currentUser) return;
-            const item = newsData.flatMap(d => d.items).find(i => i.title === title);
-            const idx = bookmarks.findIndex(b => b.title === title);
-            idx > -1 ? bookmarks.splice(idx, 1) : bookmarks.push(item);
-            await setDoc(doc(db, "users", currentUser.uid), { bookmarks });
-        };
+        // 초기 카테고리 추출 및 필터 버튼 생성
+        function initCategories() {
+            const categories = new Set();
+            newsData.forEach(week => {
+                week.items.forEach(item => categories.add(item.category));
+            });
+            allCategories = Array.from(categories).sort();
+            // 기본적으로 모든 카테고리 선택 상태로 시작하려면 아래 주석 해제
+            // allCategories.forEach(c => selectedCategories.add(c));
+            
+            const filterContainer = document.getElementById('categoryFilters');
+            
+            // "All" 버튼 추가 (모든 필터 해제/선택 기능)
+            const allBtn = document.createElement('button');
+            allBtn.className = `cat-btn px-3 py-1.5 rounded-full text-xs font-bold border ${selectedCategories.size === 0 ? 'bg-gray-800 text-white border-gray-800' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400'}`;
+            allBtn.innerText = "ALL";
+            allBtn.onclick = () => {
+                selectedCategories.clear();
+                updateCategoryButtons();
+                renderCurrentView();
+            };
+            filterContainer.appendChild(allBtn);
 
-        function updateUI() {
-            document.getElementById('bookmarkCount').innerText = bookmarks.length;
-            if (document.getElementById('navArchive').classList.contains('sidebar-active')) {
-                showBookmarked();
-            } else {
-                renderNews();
-            }
+            allCategories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.id = `cat-btn-${cat}`;
+                btn.className = `cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400`;
+                btn.innerText = cat;
+                btn.onclick = () => toggleCategory(cat);
+                filterContainer.appendChild(btn);
+            });
         }
 
-        window.showLatest = () => {
-            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition";
-            document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
-            document.getElementById('weekSelect').disabled = false;
-            renderNews();
+        // 카테고리 토글 로직
+        window.toggleCategory = (category) => {
+            if (selectedCategories.has(category)) {
+                selectedCategories.delete(category);
+            } else {
+                selectedCategories.add(category);
+            }
+            updateCategoryButtons();
+            renderCurrentView();
         };
 
-        window.showBookmarked = () => {
-            document.getElementById('navLatest').className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
-            document.getElementById('navArchive').className = "w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition";
-            document.getElementById('weekSelect').disabled = true;
-            document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2>`;
-            renderGrid(bookmarks);
+        function updateCategoryButtons() {
+            // ALL 버튼 상태
+            const allBtn = document.querySelector('#categoryFilters button:first-child');
+            if (selectedCategories.size === 0) {
+                allBtn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-gray-800 text-white border-gray-800";
+            } else {
+                allBtn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400";
+            }
+
+            // 개별 버튼 상태
+            allCategories.forEach(cat => {
+                const btn = document.getElementById(`cat-btn-${cat}`);
+                if (selectedCategories.has(cat)) {
+                    // 선택됨 (파란색)
+                    btn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-blue-100 text-blue-700 border-blue-200";
+                } else {
+                    // 선택 안됨 (회색)
+                    btn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400";
+                }
+            });
+        }
+
+        // 네비게이션 모드 변경
+        window.setMode = (mode) => {
+            currentMode = mode;
+            const navLatest = document.getElementById('navLatest');
+            const navArchive = document.getElementById('navArchive');
+            const weekSelect = document.getElementById('weekSelect');
+
+            if (mode === 'latest') {
+                navLatest.className = "w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-active transition";
+                navArchive.className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
+                weekSelect.disabled = false;
+            } else {
+                navLatest.className = "w-full flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded-lg transition";
+                navArchive.className = "w-full flex items-center px-4 py-3 rounded-lg sidebar-active transition";
+                weekSelect.disabled = true;
+            }
+            renderCurrentView();
         };
 
-        window.renderNews = () => {
-            const select = document.getElementById('weekSelect');
-            if (!select) return;
-            const idx = select.value || 0;
-            const selected = newsData[idx];
-            if (!selected) return;
-            document.getElementById('contentHeader').innerHTML = `<h2 class="text-3xl font-bold mt-1">${selected.week}</h2><span class="text-sm text-gray-500">${selected.date}</span>`;
-            renderGrid(selected.items);
+        // 통합 렌더링 함수
+        window.renderCurrentView = () => {
+            let itemsToRender = [];
+            const header = document.getElementById('contentHeader');
+            
+            if (currentMode === 'latest') {
+                const weekVal = document.getElementById('weekSelect').value;
+                
+                if (weekVal === 'all') {
+                    // 전체 기사 플래트닝
+                    itemsToRender = newsData.flatMap(d => d.items);
+                    header.innerHTML = `<h2 class="text-3xl font-bold">All News</h2><span class="text-sm text-gray-500">전체 발행된 뉴스레터입니다.</span>`;
+                } else {
+                    // 특정 주차
+                    const selectedData = newsData[weekVal];
+                    if (selectedData) {
+                        itemsToRender = selectedData.items;
+                        header.innerHTML = `<h2 class="text-3xl font-bold mt-1">${selectedData.week}</h2><span class="text-sm text-gray-500">${selectedData.date}</span>`;
+                    }
+                }
+            } else {
+                // 아카이브 모드
+                itemsToRender = bookmarks;
+                header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${bookmarks.length})</span>`;
+            }
+
+            // 카테고리 필터링 적용 (선택된 카테고리가 있을 때만 필터)
+            if (selectedCategories.size > 0) {
+                itemsToRender = itemsToRender.filter(item => selectedCategories.has(item.category));
+            }
+
+            renderGrid(itemsToRender);
         };
 
         function renderGrid(items) {
             const grid = document.getElementById('newsGrid');
             if (!items || !items.length) { 
-                grid.innerHTML = '<p class="col-span-full text-center py-20 text-gray-400">데이터가 없습니다.</p>'; 
+                grid.innerHTML = '<p class="col-span-full text-center py-20 text-gray-400">조건에 맞는 기사가 없습니다.</p>'; 
                 return; 
             }
             grid.innerHTML = items.map(item => {
                 const isSaved = bookmarks.some(b => b.title === item.title);
                 return `
                 <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all cursor-pointer relative group">
-                    <button onclick="toggleBookmark(event, '${item.title}')" class="absolute top-4 right-4 p-2 rounded-full transition-all ${isSaved ? 'bg-blue-700 text-white' : 'bg-gray-50 text-gray-300'}">${isSaved ? '★' : '☆'}</button>
+                    <button onclick="toggleBookmark(event, '${item.title}')" class="absolute top-4 right-4 p-2 rounded-full transition-all z-10 hover:bg-blue-50 ${isSaved ? 'text-blue-600' : 'text-gray-300'}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="${isSaved ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                        </svg>
+                    </button>
                     <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase">${item.category}</span>
-                    <h3 class="text-xl font-bold mt-4 mb-3 leading-tight pr-8 line-clamp-2">${item.title}</h3>
+                    <h3 class="text-xl font-bold mt-4 mb-3 leading-tight pr-8 line-clamp-2 group-hover:text-blue-700 transition-colors">${item.title}</h3>
                     <p class="text-gray-600 text-sm mb-4 line-clamp-2">${item.desc}</p>
-                    <div class="text-blue-700 font-bold text-xs">READ MORE →</div>
+                    <div class="text-blue-700 font-bold text-xs flex items-center">
+                        READ MORE 
+                        <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
                 </article>`;
             }).join('');
         }
 
-        // 페이지 로드 완료 시 실행
-        window.addEventListener('load', () => {
+        window.toggleBookmark = async (e, title) => {
+            e.stopPropagation();
+            if (!currentUser) return;
+            // 전체 데이터에서 해당 아이템 찾기
+            const item = newsData.flatMap(d => d.items).find(i => i.title === title);
+            if (!item) return;
+
+            const idx = bookmarks.findIndex(b => b.title === title);
+            let newBookmarks = [...bookmarks];
+            
+            if (idx > -1) {
+                newBookmarks.splice(idx, 1);
+            } else {
+                newBookmarks.push(item);
+            }
+            
+            // UI 즉시 반영 (Optimistic update)
+            bookmarks = newBookmarks;
+            document.getElementById('bookmarkCount').innerText = bookmarks.length;
+            renderCurrentView();
+
+            // 서버 저장
+            await setDoc(doc(db, "users", currentUser.uid), { bookmarks: newBookmarks });
+        };
+
+        window.onload = () => {
             const select = document.getElementById('weekSelect');
-            if (typeof newsData !== 'undefined' && newsData.length > 0) {
+            if (typeof newsData !== 'undefined') {
+                // 주차 옵션 추가
                 newsData.forEach((data, i) => { 
                     const opt = document.createElement('option'); 
                     opt.value = i; 
                     opt.innerText = data.week; 
                     select.appendChild(opt); 
                 });
-                renderNews();
+                
+                // 카테고리 버튼 초기화
+                initCategories();
+                
+                // 첫 화면 렌더링
+                renderCurrentView();
             } else {
-                console.error("데이터를 찾을 수 없습니다. data.js 경로와 대소문자를 확인하세요.");
+                console.error("data.js 로드 실패");
             }
-        });
+        };
     </script>
 </body>
 </html>
