@@ -129,7 +129,6 @@
 
         window.logout = () => signOut(auth).then(() => location.reload());
 
-        // 인증 상태 변경 감지
         onAuthStateChanged(auth, (user) => {
             document.getElementById('loadingScreen').style.display = 'none';
             if (unsubscribe) { unsubscribe(); unsubscribe = null; }
@@ -146,17 +145,12 @@
                 
                 const userDocRef = doc(db, "users", user.uid);
                 unsubscribe = onSnapshot(userDocRef, (snap) => {
-                    if (snap.exists()) {
-                        bookmarks = snap.data().bookmarks || [];
-                    } else {
-                        bookmarks = [];
-                    }
+                    bookmarks = snap.exists() ? snap.data().bookmarks || [] : [];
                     document.getElementById('bookmarkCount').innerText = bookmarks.length;
                     renderCurrentView();
                 }, (error) => {
                     console.error("데이터 로드 실패:", error);
                 });
-
             } else {
                 currentUser = null;
                 bookmarks = [];
@@ -165,7 +159,6 @@
             }
         });
 
-        // 초기화 및 카테고리 설정
         function initCategories() {
             if (typeof newsData === 'undefined') return;
             const categories = new Set();
@@ -234,32 +227,29 @@
             renderCurrentView();
         };
 
-        // 데이터 가공 및 렌더링 (날짜 정보 주입)
         window.renderCurrentView = () => {
             let itemsToRender = [];
             const header = document.getElementById('contentHeader');
             
             if (currentMode === 'latest') {
                 const weekVal = document.getElementById('weekSelect').value;
-                // weekVal이 'all'이거나 값이 없으면 전체보기지만, 초기 로드 시 0(최신)으로 설정됨.
-                
                 if (weekVal === 'all') {
                     if (typeof newsData !== 'undefined') {
-                        // 모든 주차의 아이템에 날짜 정보를 주입해서 합침
-                        itemsToRender = newsData.flatMap(d => d.items.map(item => ({...item, weekLabel: d.week})));
+                        // 최신순 정렬을 위해 reverse()된 newsData를 기반으로 함
+                        // data.js 배열의 뒤쪽이 최신이라면 reverse 필요, 앞쪽이 최신이라면 그대로.
+                        // 보통 data.js에 append하므로 뒤쪽이 최신일 확률 높음 -> 역순 정렬
+                        const sortedData = [...newsData].reverse(); 
+                        itemsToRender = sortedData.flatMap(d => d.items.map(item => ({...item, weekLabel: d.week})));
                     }
                     header.innerHTML = `<h2 class="text-3xl font-bold">All News</h2><span class="text-sm text-gray-500">전체 발행된 뉴스레터입니다.</span>`;
                 } else {
                     const selectedData = newsData[weekVal];
                     if (selectedData) {
-                        // 선택된 주차 아이템에 날짜 정보 주입
                         itemsToRender = selectedData.items.map(item => ({...item, weekLabel: selectedData.week}));
                         header.innerHTML = `<h2 class="text-3xl font-bold mt-1">${selectedData.week}</h2><span class="text-sm text-gray-500">${selectedData.date}</span>`;
                     }
                 }
             } else {
-                // 아카이브 모드 (이미 weekLabel이 저장되어 있다면 사용, 없다면 표시 안됨)
-                // 저장 시점에 weekLabel을 같이 저장했어야 하지만, 기존 데이터 호환성을 위해 체크
                 itemsToRender = bookmarks;
                 header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${bookmarks.length})</span>`;
             }
@@ -274,17 +264,25 @@
             grid.innerHTML = items.map(item => {
                 const isSaved = bookmarks.some(b => b.title === item.title);
                 return `
-                <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all cursor-pointer relative group">
-                    <button onclick="toggleBookmark(event, '${item.title}')" class="absolute top-4 right-4 p-2 rounded-full transition-all z-10 hover:bg-blue-50 ${isSaved ? 'text-blue-600' : 'text-gray-300'}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="${isSaved ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
-                    </button>
-                    <div class="text-[10px] text-gray-400 font-medium mb-2 uppercase tracking-wide flex items-center justify-between">
-                        <span class="bg-${item.color}-100 text-${item.color}-700 font-bold px-2 py-1 rounded">${item.category}</span>
-                        ${item.weekLabel ? `<span>${item.weekLabel}</span>` : ''}
+                <article onclick="window.open('${item.link}')" class="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all cursor-pointer group flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase">${item.category}</span>
+                            ${item.weekLabel ? `<span class="text-[10px] text-gray-400 font-medium uppercase tracking-wide">${item.weekLabel}</span>` : ''}
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 leading-tight group-hover:text-blue-700 transition-colors">${item.title}</h3>
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-2">${item.desc}</p>
                     </div>
-                    <h3 class="text-xl font-bold mt-2 mb-3 leading-tight pr-8 line-clamp-2 group-hover:text-blue-700 transition-colors">${item.title}</h3>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">${item.desc}</p>
-                    <div class="text-blue-700 font-bold text-xs flex items-center">READ MORE →</div>
+                    
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
+                        <div class="text-blue-700 font-bold text-xs flex items-center">
+                            READ MORE 
+                            <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                        <button onclick="toggleBookmark(event, '${item.title}')" class="p-2 -mr-2 rounded-full hover:bg-gray-100 transition-colors ${isSaved ? 'text-blue-600' : 'text-gray-300'}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="${isSaved ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+                        </button>
+                    </div>
                 </article>`;
             }).join('');
         }
@@ -293,7 +291,6 @@
             e.stopPropagation();
             if (!currentUser) { alert("로그인이 필요합니다."); return; }
 
-            // 전체 데이터에서 해당 아이템 찾기 (weekLabel 포함하여 저장)
             const item = newsData.flatMap(d => d.items.map(i => ({...i, weekLabel: d.week}))).find(i => i.title === title);
             if (!item) return;
 
@@ -321,16 +318,21 @@
         window.onload = () => {
             const select = document.getElementById('weekSelect');
             if (typeof newsData !== 'undefined') {
-                newsData.forEach((data, i) => { 
-                    const opt = document.createElement('option'); 
-                    opt.value = i; 
-                    opt.innerText = data.week; 
-                    select.appendChild(opt); 
+                // 필터: 최신 주차가 위로 오도록 역순 정렬 생성
+                // (배열의 마지막 요소가 최신이라고 가정)
+                const indices = newsData.map((_, i) => i).reverse();
+                
+                indices.forEach(i => {
+                    const data = newsData[i];
+                    const opt = document.createElement('option');
+                    opt.value = i; // value는 원래 인덱스 유지
+                    opt.innerText = data.week;
+                    select.appendChild(opt);
                 });
 
-                // [중요] 기본값을 '0' (최신 주차)으로 설정
-                if (newsData.length > 0) {
-                    select.value = "0"; 
+                // 기본값: 최신 주차 (역순 정렬의 첫 번째 요소의 인덱스)
+                if (indices.length > 0) {
+                    select.value = indices[0];
                 }
 
                 initCategories();
