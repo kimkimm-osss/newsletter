@@ -12,8 +12,6 @@
         #mainContent, #loginPage, #loadingScreen { display: none; }
         #loadingScreen { display: flex; }
         .cat-btn { transition: all 0.2s ease; }
-        /* 라인 클램프 해제 (Case Study 전용) */
-        .no-clamp { -webkit-line-clamp: unset !important; }
     </style>
 </head>
 <body class="bg-[#F9FAFB] text-gray-900">
@@ -119,11 +117,7 @@
                 currentUser = user;
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
-                document.getElementById('authSection').innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <span class="text-sm font-semibold">${user.email}</span>
-                        <button onclick="logout()" class="text-xs text-gray-500 underline">Logout</button>
-                    </div>`;
+                document.getElementById('authSection').innerHTML = `<div class="flex items-center gap-3"><span class="text-sm font-semibold">${user.email}</span><button onclick="logout()" class="text-xs text-gray-500 underline">Logout</button></div>`;
                 onSnapshot(doc(db, "users", user.uid), (snap) => {
                     bookmarks = snap.exists() ? snap.data().bookmarks : [];
                     syncBookmarksWithData();
@@ -148,26 +142,22 @@
 
         function initCategories() {
             const categories = new Set();
-            newsData.forEach(week => {
-                week.items.forEach(item => categories.add(item.category));
+            newsData.forEach(week => { week.items.forEach(item => categories.add(item.category)); });
+            allCategories = Array.from(categories).sort((a, b) => {
+                if (a.toLowerCase() === 'case study') return -1;
+                if (b.toLowerCase() === 'case study') return 1;
+                return a.localeCompare(b);
             });
-            allCategories = Array.from(categories).sort();
             const filterContainer = document.getElementById('categoryFilters');
             filterContainer.innerHTML = '';
-            
             const allBtn = document.createElement('button');
             allBtn.className = `cat-btn px-3 py-1.5 rounded-full text-xs font-bold border ${selectedCategories.size === 0 ? 'bg-gray-800 text-white border-gray-800' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400'}`;
             allBtn.innerText = "ALL";
-            allBtn.onclick = () => {
-                selectedCategories.clear();
-                updateCategoryButtons();
-                renderCurrentView();
-            };
+            allBtn.onclick = () => { selectedCategories.clear(); updateCategoryButtons(); renderCurrentView(); };
             filterContainer.appendChild(allBtn);
-
             allCategories.forEach(cat => {
                 const btn = document.createElement('button');
-                btn.id = `cat-btn-${cat}`;
+                btn.id = `cat-btn-${cat.replace(/\s+/g, '-')}`;
                 btn.className = `cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400`;
                 btn.innerText = cat.toUpperCase();
                 btn.onclick = () => toggleCategory(cat);
@@ -176,31 +166,18 @@
         }
 
         window.toggleCategory = (category) => {
-            if (selectedCategories.has(category)) {
-                selectedCategories.delete(category);
-            } else {
-                selectedCategories.add(category);
-            }
+            if (selectedCategories.has(category)) selectedCategories.delete(category);
+            else selectedCategories.add(category);
             updateCategoryButtons();
             renderCurrentView();
         };
 
         function updateCategoryButtons() {
             const allBtn = document.querySelector('#categoryFilters button:first-child');
-            if (selectedCategories.size === 0) {
-                allBtn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-gray-800 text-white border-gray-800";
-            } else {
-                allBtn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400";
-            }
+            allBtn.className = selectedCategories.size === 0 ? "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-gray-800 text-white border-gray-800" : "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400";
             allCategories.forEach(cat => {
-                const btn = document.getElementById(`cat-btn-${cat}`);
-                if (btn) {
-                    if (selectedCategories.has(cat)) {
-                        btn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-blue-100 text-blue-700 border-blue-200";
-                    } else {
-                        btn.className = "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400";
-                    }
-                }
+                const btn = document.getElementById(`cat-btn-${cat.replace(/\s+/g, '-')}`);
+                if (btn) btn.className = selectedCategories.has(cat) ? "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-blue-100 text-blue-700 border-blue-200" : "cat-btn px-3 py-1.5 rounded-full text-xs font-bold border bg-white text-gray-500 border-gray-200 hover:border-gray-400";
             });
         }
 
@@ -215,78 +192,36 @@
             let itemsToRender = [];
             const header = document.getElementById('contentHeader');
             const weekVal = document.getElementById('weekSelect').value;
-            
             if (currentMode === 'latest') {
-                if (weekVal === 'all') {
-                    itemsToRender = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week})));
-                    header.innerHTML = `<h2 class="text-3xl font-bold">All News</h2><span class="text-sm text-gray-500">전체 발행된 뉴스레터입니다.</span>`;
-                } else {
-                    const selectedData = newsData[weekVal];
-                    if (selectedData) {
-                        itemsToRender = selectedData.items.map(item => ({...item, weekName: selectedData.week}));
-                        header.innerHTML = `<h2 class="text-3xl font-bold mt-1">${selectedData.week}</h2><span class="text-sm text-gray-500">${selectedData.date}</span>`;
-                    }
-                }
+                if (weekVal === 'all') { itemsToRender = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week}))); header.innerHTML = `<h2 class="text-3xl font-bold">All News</h2><span class="text-sm text-gray-500">전체 발행된 뉴스레터입니다.</span>`; }
+                else { const selectedData = newsData[weekVal]; if (selectedData) { itemsToRender = selectedData.items.map(item => ({...item, weekName: selectedData.week})); header.innerHTML = `<h2 class="text-3xl font-bold mt-1">${selectedData.week}</h2><span class="text-sm text-gray-500">${selectedData.date}</span>`; } }
             } else {
                 const allWithWeeks = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week, weekIdx: newsData.indexOf(d)})));
                 itemsToRender = bookmarks.map(b => allWithWeeks.find(i => i.title === b.title)).filter(Boolean);
-                if (weekVal !== 'all') {
-                    itemsToRender = itemsToRender.filter(item => item.weekIdx == weekVal);
-                }
+                if (weekVal !== 'all') itemsToRender = itemsToRender.filter(item => item.weekIdx == weekVal);
                 header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${itemsToRender.length})</span>`;
             }
-
-            if (selectedCategories.size > 0) {
-                itemsToRender = itemsToRender.filter(item => selectedCategories.has(item.category));
-            }
-
+            if (selectedCategories.size > 0) itemsToRender = itemsToRender.filter(item => selectedCategories.has(item.category));
             renderGrid(itemsToRender);
         };
 
         function renderGrid(items) {
             const grid = document.getElementById('newsGrid');
-            if (!items || !items.length) { 
-                grid.innerHTML = '<p class="col-span-full text-center py-20 text-gray-400">조건에 맞는 기사가 없습니다.</p>'; 
-                return; 
-            }
+            if (!items || !items.length) { grid.innerHTML = '<p class="col-span-full text-center py-20 text-gray-400">조건에 맞는 기사가 없습니다.</p>'; return; }
             grid.innerHTML = items.map(item => {
                 const isSaved = bookmarks.some(b => b.title === item.title);
                 const isCaseStudy = item.category.toLowerCase() === 'case study';
-                
-                // Case Study일 경우 그리드 2칸 차지, 아닐 경우 1칸
-                const gridSpan = isCaseStudy ? 'md:col-span-2' : '';
-                const titleSize = isCaseStudy ? 'text-2xl' : 'text-xl';
-
-                return `
-                <article onclick="window.open('${item.link}')" class="${gridSpan} bg-white rounded-2xl border border-gray-200 p-6 md:p-8 hover:shadow-xl transition-all cursor-pointer relative group flex flex-col h-full overflow-hidden">
-                    <div class="absolute top-6 right-6 text-[11px] font-medium text-gray-400">
-                        ${item.weekName || ''}
-                    </div>
-
+                return `<article onclick="window.open('${item.link}')" class="${isCaseStudy ? 'md:col-span-2' : ''} bg-white rounded-2xl border border-gray-200 p-6 md:p-8 hover:shadow-xl transition-all cursor-pointer relative group flex flex-col h-full overflow-hidden">
+                    <div class="absolute top-6 right-6 text-[11px] font-medium text-gray-400">${item.weekName || ''}</div>
                     <div class="flex-grow">
                         <span class="bg-${item.color}-100 text-${item.color}-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">${item.category}</span>
-                        <h3 class="${titleSize} font-bold mt-4 mb-4 leading-tight pr-8 group-hover:text-blue-700 transition-colors">
-                            ${item.title}
-                        </h3>
-                        <div class="text-gray-600 text-sm mb-6 leading-relaxed ${isCaseStudy ? '' : 'line-clamp-6'}">
-                            ${item.desc}
-                        </div>
+                        <h3 class="${isCaseStudy ? 'text-2xl' : 'text-xl'} font-bold mt-4 mb-4 leading-tight pr-8 group-hover:text-blue-700 transition-colors">${item.title}</h3>
+                        <div class="text-gray-600 text-sm mb-6 leading-relaxed">${item.desc}</div>
                     </div>
-
                     <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
-                        <div class="text-blue-700 font-bold text-xs flex items-center">
-                            READ THE FULL STORY 
-                            <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </div>
+                        <div class="text-blue-700 font-bold text-xs flex items-center">READ THE FULL STORY <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></div>
                     </div>
-
-                    <button onclick="toggleBookmark(event, '${item.title.replace(/'/g, "\\'")}')" class="absolute bottom-5 right-5 p-2 rounded-full transition-all z-10 bg-white shadow-sm border border-gray-100 hover:bg-blue-50 ${isSaved ? 'text-blue-600' : 'text-gray-300'}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="${isSaved ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                        </svg>
-                    </button>
+                    <button onclick="toggleBookmark(event, '${item.title.replace(/'/g, "\\'")}')" class="absolute bottom-5 right-5 p-2 rounded-full transition-all z-10 bg-white shadow-sm border border-gray-100 hover:bg-blue-50 ${isSaved ? 'text-blue-600' : 'text-gray-300'}"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="${isSaved ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg></button>
                 </article>`;
             }).join('');
         }
@@ -296,12 +231,10 @@
             if (!currentUser) return;
             const allItems = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week})));
             const item = allItems.find(i => i.title === title);
-            
             const idx = bookmarks.findIndex(b => b.title === title);
             let newBookmarks = [...bookmarks];
             if (idx > -1) newBookmarks.splice(idx, 1);
             else if (item) newBookmarks.push(item);
-            
             bookmarks = newBookmarks;
             document.getElementById('bookmarkCount').innerText = bookmarks.length;
             renderCurrentView();
@@ -310,17 +243,24 @@
         };
 
         window.logout = () => signOut(auth).then(() => location.reload());
-
         window.onload = () => {
             const select = document.getElementById('weekSelect');
             if (typeof newsData !== 'undefined') {
-                newsData.forEach((data, i) => { 
-                    const opt = document.createElement('option'); 
-                    opt.value = i; opt.innerText = data.week; 
-                    select.appendChild(opt); 
-                });
+                newsData.forEach((data, i) => { const opt = document.createElement('option'); opt.value = i; opt.innerText = data.week; select.appendChild(opt); });
                 initCategories();
                 renderCurrentView();
+            }
+        };
+
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            try { await signInWithEmailAndPassword(auth, email, password); } 
+            catch (error) { 
+                const errorMsg = document.getElementById('loginError');
+                errorMsg.innerText = "이메일 또는 비밀번호가 올바르지 않습니다.";
+                errorMsg.classList.remove('hidden'); 
             }
         };
     </script>
