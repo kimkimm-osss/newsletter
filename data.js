@@ -6,16 +6,43 @@ const newsData = [
             { 
                 category: "Case Study", 
                 title: "현대차그룹 CES 2026: 제조사에서 '로봇 서비스 플랫폼'으로의 대전환", 
-                desc: "2026년 1월 CES에서 '로봇 서비스(RaaS)' 선언 및 전통적 제조 모델 탈피.<br><br>고객사 비용 부담 완화 및 안정적 반복 매출 구조를 확보한 RaaS 구독 모델 도입.<br><br>고객 사양 로봇을 위탁 생산하는 세계 최초 '로봇 파운드리' 비즈니스 모델 구축.<br><br>Google Gemini 결합으로 자연어 명령 추론 및 과업 수행이 가능한 지능형 노동력 제공.", 
+                desc: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="font-bold text-blue-800 mb-2">■ RaaS(Robotics-as-a-Service) 구독 모델</p>
+                            고가의 휴머노이드 로봇 판매 대신 소프트웨어 및 유지보수 포함 월 구독 서비스 전환.<br><br>
+                            고객사 초기 비용 부담 제거 및 지속 가능한 점진적 반복 매출(Recurring Revenue) 구조 확보.
+                        </div>
+                        <div>
+                            <p class="font-bold text-blue-800 mb-2">■ 로봇 파운드리 및 Physical AI 생태계</p>
+                            반도체 모델을 이식한 고객 사양 로봇 위탁 생산 비즈니스 도입 및 글로벌 생산 기지화.<br><br>
+                            Google Gemini 결합으로 자연어 명령 추론 및 복잡한 과업 수행이 가능한 지능형 노동력 제공.
+                        </div>
+                    </div>
+                `, 
                 color: "purple", 
                 link: "https://www.hyundai.com/worldwide/ko/brand-journal/mobility-solution/ces-2026-robotics-mediaday" 
             },
             { 
                 category: "California", 
                 title: "인구 유출로 인한 정치적 영향력 축소", 
-                desc: "높은 생활비로 인한 인구 유출로 2030년 연방 하원 의석 4석 상실 전망.<br><br>역사상 최대 규모의 정치적 영향력 축소 및 권력 중심축의 이동.<br><br>반면 텍사스는 4석 추가 확보 등 미국 내 권력의 남부 선벨트 이동 시사.", 
+                desc: "높은 생활비로 인한 인구 유출로 2030년 연방 하원 의석 4석 상실 전망.<br><br>역사상 최대 규모의 정치적 영향력 축소 및 권력 중심축의 남부 이동.<br><br>반면 텍사스는 4석 추가 확보 등 미국 내 권력의 선벨트 지역 집중 시사.", 
                 color: "blue", 
                 link: "https://abc7news.com/post/california-projected-lose-4-congressional-seats-2030-census-population-decline/18500791/" 
+            },
+            { 
+                category: "California", 
+                title: "캘리포니아, 억만장자 타겟 '부유세' 법안 논란", 
+                desc: "자산 10억 달러 이상 부유층 대상 순자산 1% 과세 추진.<br><br>주 이탈 시에도 향후 수년간 세금 징수 조항을 포함한 강력한 조세 정책.<br><br>부유층 엑소더스 가속화 우려 및 조세 저항에 따른 사회적 갈등 심화.", 
+                color: "blue", 
+                link: "https://www.cnbc.com/2026/01/08/california-wealth-tax-proposal-leaves-billionaires-with-little-way-out.html" 
+            },
+            { 
+                category: "Texas", 
+                title: "텍사스, 주거비 급등으로 인한 '성장의 역설' 직면", 
+                desc: "소득 및 교육 수준 향상에도 불구하고 주거비 상승폭의 급격한 초과.<br><br>과거 '저비용 고효율' 거주지로서의 텍사스 경쟁력 감소 우려.<br><br>급격한 인구 유입 지속에 따른 주택 공급 부족 및 인프라 과부하 문제 대두.", 
+                color: "orange", 
+                link: "https://www.texastribune.org/2026/01/29/texas-census-housing-incomes/" 
             },
             { 
                 category: "Texas", 
@@ -55,7 +82,7 @@ const newsData = [
             { 
                 category: "Tech", 
                 title: "다보스 포럼, 'AI 수익 창출의 해' 선언", 
-                desc: "시스코·IBM 등 주요 빅테크 기업들의 AI 수익 모델 전격 공개.<br><br>대규모 AI 투자에 대한 실질적 자본 회수 구간 진입 판단.<br><br>단순 기술 경쟁을 넘어 비즈니스 효율화 및 수익 극대화 집중.", 
+                desc: "시스코·IBM 등 주요 빅테크 기업들의 AI 수익 모델 전격 공개.<br><br>대규모 AI 투자에 대한 실질적 자본 회수 구간 진입 판단.<br><br>단순 기술 경쟁 넘어선 비즈니스 효율화 및 수익 극대화 집중.", 
                 color: "green", 
                 link: "https://www.bloomberg.com/news/articles/2026-01-22/davos-crowd-focuses-on-ai-returns-after-year-of-heavy-investments" 
             }
