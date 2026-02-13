@@ -46,7 +46,7 @@ const newsData = [
                 link: "https://www.cnbc.com/2026/01/08/california-wealth-tax-proposal-leaves-billionaires-with-little-way-out.html" 
             },
             { 
-                category: "Robotics", 
+                category: "Case study", 
                 title: "현대차, 로봇 산업의 'End-to-End 플랫폼' 도약", 
                 desc: "로봇 판매 대신 구독형 'RaaS' 모델로 전환.<br>세계 최초 위탁 생산 '로봇 파운드리' 사업 개시.<br>구글 제미나이 결합 지능형 로봇 생태계 구축.", 
                 color: "purple", 
