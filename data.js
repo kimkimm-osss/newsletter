@@ -105,8 +105,8 @@ const newsData = [
         ]
     },
     {
-        week: "2026년 2월 1주차",
-        date: "February 4, 2026",
+        week: "2026년 1월 4주차",
+        date: "January 30, 2026",
         items: [
             { 
                 category: "Case Study", 
