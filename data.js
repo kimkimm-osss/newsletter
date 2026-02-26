@@ -1,5 +1,117 @@
-const newsData = [
+const newsData = 
+   [
     {
+    week: "2026년 2월 3~4째주",
+    date: "February 27, 2026",
+    items: [
+        {
+            category: "Case Study",
+            title: "Mitie: 노동 집약적 시설관리 산업을 'AI 기술 플랫폼'으로 전환한 전략",
+            desc: `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="font-bold text-blue-800 mb-1">■ 에이전틱 AI 기반 자율 시설관리</p>
+                        드론 점검·자율 보안 로봇·에너지 최적화 에이전트를 통합 운영하는 자율적 시설관리 모델 구축.<br>
+                        AI가 일상적 의사결정의 90%를 수행하고 인간 관리자는 예외 사항만 승인하는 '예외 기반 관리' 체계 도입.
+                    </div>
+                    <div>
+                        <p class="font-bold text-blue-800 mb-1">■ 성과 기반 수익 모델 피벗</p>
+                        인건비 청구 방식에서 '건물 에너지 15% 절감' 등 성과 기반 계약(Outcome-based Contract)으로의 수익 모델 전환.<br>
+                        플랫폼 비종속적 로봇 플릿 관리로 청소 코봇·점검 드론·보안 로봇·잔디깎이 등 다양한 로봇을 단일 체계에서 통합 운영.
+                    </div>
+                </div>
+            `,
+            color: "purple",
+            link: "https://www.mitie.com/insights-news/insight/a-new-era-of-agentic-ai-and-robotics-will-transform-fm/"
+        },
+        {
+            category: "Politics",
+            title: "Wharton: 대법원 IEEPA 관세 위헌 판결 — 잠재적 환급금 최대 $1,750억",
+            desc: "연방 대법원 6:3 판결로 IEEPA 기반 관세의 대통령 단독 부과 권한 부정 및 전면 무효화 결정.<br>IEEPA 관세가 전체 관세 수입의 약 50%를 차지, 일일 약 $5억 규모의 징수액 발생 추정.<br>수입업자의 180일 이내 환급 청구 가능성에 따른 최대 $1,750억 재정 충격 전망.",
+            color: "blue",
+            link: "https://budgetmodel.wharton.upenn.edu/issues/2026/2/20/supreme-court-tariff-ruling-ieepa-revenue-and-potential-refunds"
+        },
+        {
+            category: "Politics",
+            title: "스위스, '인구 1,000만 명 상한' 국민투표 6월 확정",
+            desc: "최대 정당 SVP 주도, 인구 950만 도달 시 이민 자동 제한 및 1,000만 돌파 시 EU 자유이동 협정 파기 조항 포함.<br>현재 인구 910만 명으로 상한 근접, EU와의 120여 개 양자 협정 폐기 가능성에 따른 유럽 내 긴장 고조.<br>여론조사에서 높은 지지율 확인, 6월 14일 국민투표 결과에 따른 유럽 이민 정책 전반의 파급 효과 주목.",
+            color: "blue",
+            link: "https://edition.cnn.com/2026/02/12/europe/switzerland-referendum-population-cap-10-million-intl"
+        },
+        {
+            category: "Economy",
+            title: "위안화, 달러 대비 3년 만에 최고치 경신",
+            desc: "미 대법원 IEEPA 관세 위헌 판결로 중국 수출 수혜 기대감 확대에 따른 위안화 강세 전환.<br>중국 무역 지표 개선 및 글로벌 투자 자금 유입과 맞물린 아시아 통화 시장 변동성 확대.<br>달러 약세 전환 가능성에 따른 신흥국 자산 재평가 및 글로벌 자금 흐름 변화 신호.",
+            color: "gray",
+            link: "https://www.thestandard.com.hk/market/article/325100/Chinas-yuan-hits-near-3-year-high-on-bets-US-tariff-ruling-will-aid-Chinese-exports"
+        },
+        {
+            category: "Economy",
+            title: "Nvidia, Q4 FY2026 매출 $681억 — AI 인프라 수요 폭증에 따른 역대 최대 실적",
+            desc: "분기 매출 $681억(YoY +73%), 연간 매출 $2,159억, 순이익 $1,200억 기록 및 시장 예상치 대폭 상회.<br>데이터센터 매출이 전체의 91%($623억) 차지, Blackwell 아키텍처의 본격 양산에 따른 마진 개선(75%).<br>Q1 FY2027 가이던스 $780억 제시, 차세대 Vera Rubin 플랫폼 샘플 출하 개시에 따른 성장 지속 전망.",
+            color: "gray",
+            link: "https://sahi.com/blogs/nvidia-q4-fy2026-earnings-results-ai-industry-analysis"
+        },
+        {
+            category: "Tech",
+            title: "미 국방부, Anthropic에 AI 모델 무제한 접근권 요구 — 윤리 갈등 격화",
+            desc: "국방장관 Hegseth의 Anthropic CEO 면담 및 2/27 시한부 최후통첩 전달.<br>AI 모델 Claude의 군사적 '합법적 전 용도' 사용 요구 vs Anthropic의 대규모 시민 감시·완전 자율 무기 사용 거부.<br>거부 시 '공급망 리스크' 업체 지정 또는 국방물자생산법(DPA) 적용 경고, xAI의 Grok 대체 계약 체결 배경.",
+            color: "green",
+            link: "https://www.chosun.com/english/industry-en/2026/02/25/LSB75RQ6RBHDDAWFB3KIOFN5QA/"
+        },
+        {
+            category: "Energy",
+            title: "짐바브웨, 미가공 리튬 정광 수출 전면 금지 — 국제 리튬 가격 급등",
+            desc: "아프리카 최대 리튬 생산국 짐바브웨의 리튬 정광 및 원광 수출 즉각 중단 조치 발표.<br>자국 내 가공 산업 육성 및 불법 선적 차단 목적, 중국 리튬 가격 즉시 급등 반응.<br>글로벌 리튬 공급망 차질 우려 및 중국 광산 기업의 현지 가공 전환 가속 전망.",
+            color: "orange",
+            link: "https://www.bloomberg.com/news/articles/2026-02-26/lithium-prices-jump-after-zimbabwe-bans-concentrate-exports"
+        },
+        {
+            category: "Energy",
+            title: "트럼프, 테크기업에 데이터센터 전력 비용 자체 부담 요구",
+            desc: "국정연설(SOTU)에서 테크 기업의 자체 발전소 건설 및 전력 비용 자부담 '요금 보호 서약' 발표.<br>AI 데이터센터의 소도시급 전력 소비에 따른 일반 가구 전기요금 상승 우려 대응 목적.<br>구체적 이행 방안 미공개 상태, 다음 주 백악관에서 테크 기업 대표와 공식 서약 서명 예정.",
+            color: "orange",
+            link: "https://www.nytimes.com/2026/02/25/climate/ai-data-centers-trump-energy-costs.html"
+        },
+        {
+            category: "Texas",
+            title: "2026 예비선거 조기투표, 역대 중간선거 기록 경신 — 민주당 투표율 압도",
+            desc: "조기투표 7일간 민주당 66.6만 표 vs 공화당 59.4만 표, 총 126만 표로 2024·2020 동기 대비 초과 달성.<br>Harris County(민주당 최대 거점)·Tarrant County(스윙 카운티) 중심의 기록적 투표율 확인.<br>민주당 상원 경선(Crockett vs Talarico) 열기 및 트럼프 행정부에 대한 반발 투표 동력 분석.",
+            color: "orange",
+            link: "https://www.texastribune.org/2026/02/25/texas-early-voting-turnout-democrats-midterm-election/"
+        },
+        {
+            category: "California",
+            title: "'부유세' 저지 연방 법안 발의 — 캘리포니아 자본 유출 갈등 심화",
+            desc: "캘리포니아 '2026 억만장자 과세법'(순자산 $10억+ 대상, 자산의 5% 과징금) 11월 주민투표 추진.<br>연방 하원의원 Kiley, 주를 떠난 후에도 소급 과세하는 조항을 금지하는 연방법(Keep Jobs in California Act) 발의.<br>Zuckerberg·Larry Page·Sergey Brin·Larry Ellison·Peter Thiel 등 빅테크 창업자의 캘리포니아 이탈 선언 배경.",
+            color: "blue",
+            link: "https://kiley.house.gov/posts/rep-kevin-kiley-introduces-bill-to-fight-californias-wealth-tax"
+        },
+        {
+            category: "Etc",
+            title: "WEF 글로벌 리스크 보고서 2026: '새로운 경쟁의 시대' 도래",
+            desc: "1,300명 이상의 글로벌 전문가 서베이 기반, 지정학적 대립과 경제적 경쟁 심화가 최대 글로벌 위협으로 부상.<br>2년·10년 시계열 분석을 통한 국가 간 갈등·인프라 회복 탄력성·기술 리스크 관리의 핵심 과제 제시.<br>단기(2026)·중기(2028)·장기(2036) 리스크 전망 프레임워크를 활용한 의사결정자용 전략적 가이드 제공.",
+            color: "gray",
+            link: "https://www.weforum.org/publications/global-risks-report-2026/"
+        },
+        {
+            category: "Etc",
+            title: "한국은행, 기준금리 2.5% 6연속 동결 + 성장률 전망 2.0% 상향",
+            desc: "2/26 금통위에서 기준금리 연 2.50% 만장일치 동결 결정(2025년 7월 이후 6회 연속).<br>반도체 수출 호조(1월 수출 102.5% 증가)를 근거로 올해 경제성장률 전망 1.8→2.0% 상향 조정.<br>성장률·물가 동시 상향에 따른 '인하 사이클' 사실상 종료 및 연내 동결 기조 강화 전망.",
+            color: "gray",
+            link: "https://www.chosun.com/economy/economy_general/2026/02/26/RP3JACDJT5GEHKPWXQY2IFJVNI/"
+        },
+        {
+            category: "M&A",
+            title: "PwC 글로벌 M&A 트렌드 2026: AI 메가딜이 주도하는 'K자형' 인수합병 시장",
+            desc: "2025년 $50억 이상 메가딜 111건(전년 63건 대비 76% 증가), 글로벌 딜 금액 36% 성장 vs 건수 정체의 양극화 구조 심화.<br>AI 인프라 투자 슈퍼사이클이 단기적으로 M&A 자금을 흡수하나, 중기적으로 혁신 슈퍼사이클을 촉발할 딜메이킹 재점화 전망.<br>CEO 41%가 3년 내 대형 인수 계획, 투자자 92%가 기술 전환 자본 확대를 요구하는 AI 중심 전략적 M&A 시대 본격 개막.",
+            color: "indigo",
+            link: "https://www.pwc.ie/services/deals-advisory/insights/global-ma-industry-trends-outlook-2026.html"
+        }
+    ]
+},
+       
+     {
         week: "2026년 2월 2주차",
         date: "February 13, 2026",
         items: [
