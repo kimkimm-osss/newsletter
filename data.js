@@ -1,7 +1,7 @@
 const newsData = 
    [
     {
-    week: "2026년 2월 3~4째주",
+    week: "2026년 2월 4주차차",
     date: "February 27, 2026",
     items: [
         {
