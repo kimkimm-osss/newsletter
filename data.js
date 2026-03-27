@@ -4,13 +4,28 @@ const newsData = [
         date: "March 27, 2026",
         items: [
             // ── Case Study ──
-            {
-                category: "Case Study",
-                title: "TransDigm: 논란의 항공우주 거인 — 독점 부품 전략과 윤리 논쟁",
-                desc: "1993년 설립 후 90건+ 인수로 항공기 핵심 부품 시장 장악, IPO 이후 S&P 500 대비 26배 초과수익 · 독점(sole-source) 부품 인수 → 원가 절감·가격 인상으로 영업이익률 40~50% 달성 → 애프터마켓 매출로 안정적 수익 확보(매출·EBIT 17% CAGR) · 2019년 국방부 '과도 이익' 판정·$16.1M 환급, Munger '비도덕적' 비판 등 독점 가격 책정 윤리 논쟁 지속",
-                color: "red",
-                link: "https://quartr.com/insights/company-research/transdigm-the-story-of-the-controversial-aerospace-giant"
-            },
+{
+    category: "Case Study",
+    title: "TransDigm: 논란의 항공우주 거인 — 독점 부품 전략과 윤리 논쟁",
+    desc: `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <p class="font-bold text-blue-800 mb-1">■ 독점 부품 인수를 통한 시장 장악</p>
+                1993년 설립 이후 90건 이상의 인수로 펌프·밸브·안전장치 등 항공기 핵심 부품 시장 장악 — 현재 운항 중인 거의 모든 항공기에 TransDigm 부품 탑재.<br>
+                인수 기준: ①독점적(sole-source) 제품, ②높은 애프터마켓 매출 비중, ③운영 개선 여지 — 인수 후 원가 절감·가격 인상으로 영업이익률 40~50% 달성.<br>
+                2006년 IPO 이후 S&P 500 대비 26배, 동종 업계 대비 12배 초과수익 기록, 매출·EBIT 모두 17% CAGR 성장.
+            </div>
+            <div>
+                <p class="font-bold text-blue-800 mb-1">■ 수익성과 윤리 논쟁의 경계</p>
+                항공기 운항 후 대체 불가한 독점 부품의 애프터마켓 매출이 핵심 수익원 — 항공사·정비사에 프리미엄 가격 부과가 가능한 구조적 해자(Moat) 보유.<br>
+                2019년 미 국방부 조사에서 '과도한 이익(excessive profits)' 판정, $16.1M 환급 명령.<br>
+                Charlie Munger: "국방부 규제를 이용해 가격을 10배 올리는 것은 비도덕적" — 합법적이나 윤리적 정당성에 대한 업계 논쟁 지속.
+            </div>
+        </div>
+    `,
+    color: "red",
+    link: "https://quartr.com/insights/company-research/transdigm-the-story-of-the-controversial-aerospace-giant"
+},
             // ── Politics ──
             {
                 category: "Politics",
