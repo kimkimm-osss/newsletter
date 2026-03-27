@@ -8,7 +8,7 @@ const newsData = [
             {
               category: "Case Study",
               title: "TransDigm: 논란의 항공우주 거인 — 독점 부품 전략과 윤리 논쟁",
-              desc: "1993년 설립 후 90건+ 인수로 항공기 핵심 부품 시장 장악, IPO 이후 S&P 500 대비 26배 초과수익 · 독점(sole-source) 부품 인수 → 원가 절감·가격 인상으로 영업이익률 40~50% 달성 → 애프터마켓 매출로 안정적 수익 확보(매출·EBIT 17% CAGR) · 2019년 국방부 '과도 이익' 판정·$16.1M 환급, Munger "비도덕적" 비판 등 독점 가격 책정 윤리 논쟁 지속",
+              desc: "1993년 설립 후 90건+ 인수로 항공기 핵심 부품 시장 장악, IPO 이후 S&P 500 대비 26배 초과수익 · 독점(sole-source) 부품 인수 → 원가 절감·가격 인상으로 영업이익률 40~50% 달성 → 애프터마켓 매출로 안정적 수익 확보(매출·EBIT 17% CAGR) · 2019년 국방부 '과도 이익' 판정·$16.1M 환급, Munger 비도덕적 비판 등 독점 가격 책정 윤리 논쟁 지속",
               color: "red",
               link: "https://quartr.com/insights/company-research/transdigm-the-story-of-the-controversial-aerospace-giant"
             },
