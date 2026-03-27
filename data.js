@@ -1,4 +1,153 @@
+```javascript
 const newsData = [
+    {
+        week: "2026년 3월 4주차",
+        date: "March 27, 2026",
+        items: [
+            // ── Case Study ──
+            {
+              category: "Case Study",
+              title: "TransDigm: 논란의 항공우주 거인 — 독점 부품 전략과 윤리 논쟁",
+              desc: "1993년 설립 후 90건+ 인수로 항공기 핵심 부품 시장 장악, IPO 이후 S&P 500 대비 26배 초과수익 · 독점(sole-source) 부품 인수 → 원가 절감·가격 인상으로 영업이익률 40~50% 달성 → 애프터마켓 매출로 안정적 수익 확보(매출·EBIT 17% CAGR) · 2019년 국방부 '과도 이익' 판정·$16.1M 환급, Munger "비도덕적" 비판 등 독점 가격 책정 윤리 논쟁 지속",
+              color: "red",
+              link: "https://quartr.com/insights/company-research/transdigm-the-story-of-the-controversial-aerospace-giant"
+            },
+            // ── Politics ──
+            {
+                category: "Politics",
+                title: "AP-NORC 여론조사: 미국인 과반 '이란 군사 행동 과도' — 유가·전쟁 비용 우려 급증",
+                desc: "전쟁 4주차 여론조사에서 미국인 과반이 군사 행동이 '지나쳤다'고 응답.<br>가스비 부담 '매우 우려' 응답 45%(2월 30% 대비 급등).<br>트럼프 전반 지지율은 유지되나, 전쟁 장기화와 유가 상승이 공화당 지지층 이탈의 잠재적 변수로 부상.",
+                color: "blue",
+                link: "https://apnews.com/article/poll-iran-trump-war-oil-gas-prices-2abd1ea4a81f3339cebadd5480fb863b"
+            },
+            {
+                category: "Politics",
+                title: "WTO 사무총장, '지난 80년간 최악의 무역 교란' 경고",
+                desc: "WTO 사무총장 Ngozi Okonjo-Iweala가 3/26 각료회의 개회사에서 미국 관세 확대와 중동 전쟁의 이중 충격으로 세계 무역 체계가 80년 만에 최악의 교란을 겪고 있다고 경고.<br>2026년 상품·서비스 무역 성장률 2.7%, GDP 성장률 2.8%로 하향 전망 제시.",
+                color: "blue",
+                link: "https://www.aljazeera.com/news/2026/3/26/wto-holds-crunch-meeting-amid-collapsing-multilateral-system"
+            },
+
+            // ── Economy ──
+            {
+                category: "Economy",
+                title: "연준, 금리 3.5–3.75% 동결 — Powell 퇴임 전 마지막 결정에서 '호키시 홀드'",
+                desc: "3/18 FOMC 11:1로 금리 동결 결정.<br>2026년 GDP 전망 2.4%로 상향, PCE 물가 전망 2.7%로 상향.<br>올해 1회 인하 시그널 유지하나, 유가 급등·물가 상방 압력으로 시장은 인하 기대 후퇴. Powell 의장 5월 퇴임 예정이나 Kevin Warsh 인준 전까지 잔류 선언.",
+                color: "gray",
+                link: "https://www.cnbc.com/2026/03/18/fed-interest-rate-decision-march-2026.html"
+            },
+            {
+                category: "Economy",
+                title: "WTO, 중동 분쟁 장기화 시 세계 무역·성장 둔화 전망 보고서 발표",
+                desc: "3/19 WTO 보고서에서 호르무즈 해협 봉쇄 장기화 시 2026년 세계 상품 무역 성장률이 기존 2.7%에서 추가 하락 가능성 경고.<br>미국 관세 정책(Section 122)과 중동 전쟁이 '이중 충격'으로 작용하며, 1940년대 이후 최악의 무역 체계 교란 진행 중.",
+                color: "gray",
+                link: "https://www.nytimes.com/2026/03/19/business/economy/mideast-conflict-trade-wto.html"
+            },
+
+            // ── Tech ──
+            {
+                category: "Tech",
+                title: "Meta·Google, 아동 소셜미디어 중독 소송에서 패소 — $600만 배심 평결",
+                desc: "LA 배심원단이 인스타그램의 '무한 스크롤' 등 설계 결함을 과실로 인정.<br>Meta CEO 저커버그가 직접 증인석에 출석해 뷰티 필터 재허용 결정을 변호. Snap·TikTok은 재판 전 합의.<br>연방법(Section 230) 우회 판례로서 수천 건 후속 소송에 영향 전망.",
+                color: "green",
+                link: "https://www.reuters.com/legal/litigation/jury-reaches-verdict-meta-google-trial-social-media-addiction-2026-03-25/"
+            },
+            {
+                category: "Tech",
+                title: "Anthropic, '공급망 리스크' 지정 차단 승소 — 연방 판사 \"수정헌법 제1조 보복\"",
+                desc: "3/26 캘리포니아 연방지법이 국방부의 Anthropic '공급망 리스크' 지정을 무기한 차단, \"정부 이견을 이유로 적국 협력자로 낙인찍는 것은 오웰적 발상\"이라고 판시.<br>Claude AI의 자율무기·시민감시 사용 거부에 대한 보복성 지정으로 판단, 수정헌법 제1조 위반 인정.<br>정부에 1주 항소 유예 부여, DC 별도 소송은 계속 진행 중.",
+                color: "green",
+                link: "https://www.cnn.com/2026/03/26/business/anthropic-pentagon-injunction-supply-chain-risk"
+            },
+
+            // ── Energy ──
+            {
+                category: "Energy",
+                title: "IEA, 사상 최대 4억 배럴 전략비축유 방출 — 호르무즈 해협 봉쇄로 일 800만 배럴 공급 차질",
+                desc: "2/28 미국·이스라엘의 이란 공습 이후 호르무즈 해협 봉쇄로 중동 걸프국 원유 생산 일 1,000만 배럴 감소.<br>IEA 회원국이 3/11 4억 배럴 비축유 방출 합의(2022년 러시아 침공 시 1.82억 배럴의 2배 이상).<br>공급 정상화에 수주~수개월 소요 전망.",
+                color: "orange",
+                link: "https://www.reuters.com/business/energy/iea-proposes-largest-ever-oil-release-strategic-reserves-wsj-reports-2026-03-11/"
+            },
+            {
+                category: "Energy",
+                title: "미 EIA, AI 수요 급증으로 2026-27년 미국 전력 사용량 사상 최고치 전망",
+                desc: "EIA 보고서에서 2025년 4,195TWh → 2026년 4,260TWh → 2027년 4,388TWh로 전력 수요 연속 최고치 경신 전망.<br>AI 데이터센터가 주요 수요 동력으로, 총 데이터센터 지출 $6,500억 이상(전년 대비 31.7% 증가) 예상.",
+                color: "orange",
+                link: "https://www.reuters.com/business/energy/us-power-use-beat-record-highs-2026-2027-ai-use-surges-eia-says-2026-03-10/"
+            },
+
+            // ── Robotics ──
+            {
+                category: "Robotics",
+                title: "Figure 03 휴머노이드, 백악관 글로벌 교육 서밋에 등장",
+                desc: "$20,000 가정용 로봇 Figure 03가 멜라니아 트럼프와 함께 40개국 대표 앞에서 시연.<br>2026년 하반기 소비자 출시 예정, 가사·교육 보조 기능 탑재.",
+                color: "red",
+                link: "https://www.theguardian.com/technology/video/2026/mar/26/melania-trump-and-ai-powered-robot-named-figure-3-open-white-house-summit-video"
+            },
+            {
+                category: "Robotics",
+                title: "Boston Dynamics Atlas, 2026년 3월 정식 생산 돌입 — 현대·Google DeepMind 배치 예정",
+                desc: "CES 2026에서 공개된 기업용 Atlas 휴머노이드가 조지아 공장에서 정식 양산 개시.<br>현대자동차 공장 및 Google DeepMind 연구소에 2026년 내 배치 예정.<br>무거운 반복 작업(중량물 운반·조립)에 특화된 산업용 설계.",
+                color: "red",
+                link: "https://apnews.com/article/ces-humanoid-robots-atlas-hyundai-boston-dynamics-8de7b2470c23f5f22441ad1ad7555136"
+            },
+            {
+                category: "Robotics",
+                title: "IFR, 2026년 글로벌 로보틱스 5대 트렌드 발표 — 산업용 로봇 설치 $167억 사상 최대",
+                desc: "국제로봇연맹(IFR)이 AI 기반 적응형 모션·음성 제어·협동로봇 등 5대 트렌드 발표.<br>산업용 로봇 글로벌 설치 금액 $167억으로 역대 최고치 경신.",
+                color: "red",
+                link: "https://ifr.org/ifr-press-releases/news/top-5-global-robotics-trends-2026"
+            },
+
+            // ── Texas ──
+            {
+                category: "Texas",
+                title: "Valero Port Arthur 정유소 폭발 — 미국 10대 정유소 가동 중단",
+                desc: "3/23 폭발로 디젤 생산 라인 장기 중단 전망, 도매 가솔린·디젤 즉시 급등.<br>일 43.5만 배럴 처리 시설로 770명 근무, 인명 피해는 보고되지 않음.<br>주변 지역 대피 후 해제.",
+                color: "orange",
+                link: "https://www.cnn.com/2026/03/24/business/oil-prices-rise-trump-iran-intl"
+            },
+            {
+                category: "Texas",
+                title: "텍사스, 2025년 태양광 발전량 미국 1위 — 58,634 GWh 시장 규모 $5,000억",
+                desc: "유틸리티 규모 태양광에서 텍사스가 캘리포니아를 추월하여 미국 1위 달성.<br>풍력 발전도 포함 시 재생에너지 비중 지속 확대.<br>데이터센터 전력 수요와 맞물려 텍사스 에너지 시장 변동성 증가.",
+                color: "orange",
+                link: "https://insideclimatenews.org/news/05032026/inside-clean-energy-texas-utility-scale-solar/"
+            },
+
+            // ── California ──
+            {
+                category: "California",
+                title: "LA 카운티, Paramount-WBD 합병의 지역 경제 영향 분석 착수",
+                desc: "3/25 LA County 감독위원회가 Paramount Skydance와 Warner Bros Discovery 합병이 할리우드 고용·지역 경제에 미칠 영향을 분석하도록 명령.<br>합병 시 대규모 인력 구조조정·스튜디오 통합 우려.",
+                color: "blue",
+                link: "https://deadline.com/story-arc/paramount-wb/"
+            },
+
+            // ── M&A ──
+            {
+                category: "M&A",
+                title: "Paramount Skydance-WBD 합병전 격화 — WBD 주주총회 3/20 예정, Netflix 합병안 추천",
+                desc: "WBD 이사회가 3/20 주주총회에서 Netflix 합병안 찬성 투표를 만장일치 권고, 동시에 Paramount Skydance에 '최종 제안' 협상 개시 요청.<br>Paramount의 $30/주 전액현금 제안 vs Netflix의 기존 합의 사이에서 주주 선택 구도.",
+                color: "indigo",
+                link: "https://www.prnewswire.com/news-releases/warner-bros-discovery-sets-special-meeting-date-of-march-20-2026-and-unanimously-recommends-shareholders-vote-for-netflix-merger-warner-bros-discovery-to-initiate-discussions-with-paramount-skydance-for-their-best-and-final-o-302689237.html"
+            },
+            {
+                category: "M&A",
+                title: "Paul Weiss: 2월 글로벌 M&A 메가딜 급증, 딜 금액 대폭 상승 vs 건수 감소",
+                desc: "전략적·스폰서 딜 모두 1월 대비 금액 큰 폭 증가.<br>미국 및 글로벌 모두 대형 거래가 시장 주도.<br>미국 내 스폰서(PE) 딜 금액은 감소세로, 양극화 구조 심화.",
+                color: "indigo",
+                link: "https://www.paulweiss.com/insights/client-memos/ma-at-a-glance-march-2026"
+            },
+            {
+                category: "M&A",
+                title: "Eli Lilly, Ventyx Biosciences $12억 인수 — 면역학 파이프라인 강화",
+                desc: "1월 발표된 $12억 전액현금 인수(주당 $14)가 2026년 상반기 완료 예정.<br>Ventyx의 경구용 면역 치료제 파이프라인을 통한 자가면역 질환 포트폴리오 확대 목적.",
+                color: "indigo",
+                link: "https://ir.ventyxbio.com/news-releases/news-release-details/lilly-acquire-ventyx-biosciences-advance-oral-therapies/"
+            }
+        ]
+    },
     {
         week: "2026년 3월 2주차",
         date: "March 13, 2026",
@@ -442,3 +591,4 @@ const newsData = [
         ]
     }
 ];
+```
