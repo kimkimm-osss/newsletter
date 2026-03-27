@@ -195,12 +195,13 @@
             if (currentMode === 'latest') {
                 if (weekVal === 'all') { itemsToRender = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week}))); header.innerHTML = `<h2 class="text-3xl font-bold">All News</h2><span class="text-sm text-gray-500">전체 발행된 뉴스레터입니다.</span>`; }
                 else { const selectedData = newsData[weekVal]; if (selectedData) { itemsToRender = selectedData.items.map(item => ({...item, weekName: selectedData.week})); header.innerHTML = `<h2 class="text-3xl font-bold mt-1">${selectedData.week}</h2><span class="text-sm text-gray-500">${selectedData.date}</span>`; } }
-            } else {
-                const allWithWeeks = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week, weekIdx: newsData.indexOf(d)})));
-                itemsToRender = bookmarks.map(b => allWithWeeks.find(i => i.title === b.title)).filter(Boolean);
-                if (weekVal !== 'all') itemsToRender = itemsToRender.filter(item => item.weekIdx == weekVal);
-                header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${itemsToRender.length})</span>`;
-            }
+           } else {
+    const allWithWeeks = newsData.flatMap((d, idx) => d.items.map(item => ({...item, weekName: d.week, weekIdx: idx})));
+    itemsToRender = bookmarks.map(b => allWithWeeks.find(i => i.title === b.title)).filter(Boolean);
+    if (weekVal !== 'all') itemsToRender = itemsToRender.filter(item => item.weekIdx == weekVal);
+    itemsToRender.sort((a, b) => a.weekIdx - b.weekIdx);
+    header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${itemsToRender.length})</span>`;
+}
             if (selectedCategories.size > 0) itemsToRender = itemsToRender.filter(item => selectedCategories.has(item.category));
             renderGrid(itemsToRender);
         };
