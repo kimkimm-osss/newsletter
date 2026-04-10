@@ -1,31 +1,209 @@
 const newsData = [
     {
+        week: "2026년 4월 2주차",
+        date: "April 10, 2026",
+        items: [
+            // ── Case Study ──
+            {
+                category: "Case Study",
+                title: "Caterpillar: '철강 제조'를 넘어 AI·데이터 서비스 기업으로의 진화",
+                desc: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="font-bold text-blue-800 mb-1">■ 자율 주행 광산 트럭 및 Helios 플랫폼</p>
+                            전 세계 광산 현장에서 690대의 자율 주행 트럭을 운영하며 건설·광산 산업의 패러다임 전환 주도.<br>
+                            NVIDIA와의 파트너십을 통해 구축된 16 PB 규모의 데이터 플랫폼 'Helios'로 장비의 물리적 상태 실시간 관리.<br>
+                            자율화를 통해 운영 효율 극대화 및 예측 정비(Predictive Maintenance)를 실현하여 가동 중지 시간 최소화.
+                        </div>
+                        <div>
+                            <p class="font-bold text-blue-800 mb-1">■ 디지털 트윈 및 비즈니스 모델 전환 시사점</p>
+                            디지털 트윈과 물리적 AI를 결합, 가상 환경에서의 시뮬레이션을 통해 건설 현장의 완전 자율화 비전 구체화.<br>
+                            단순한 중장비 판매 중심에서 데이터 기반 구독 및 운영 서비스로의 비즈니스 모델 수직 계열화 달성.<br>
+                            '장비 하드웨어 → 데이터 플랫폼 → AI 최적화 서비스'로 이어지는 제조 기업의 성공적인 디지털 트랜스포메이션 경로 제시.
+                        </div>
+                    </div>
+                `,
+                color: "purple",
+                link: "https://www.constellationr.com/insights/news/caterpillars-ai-vision-takes-shape-data-cloud-focus-was-precursor"
+            },
+            // ── Politics ──
+            {
+                category: "Politics",
+                title: "미-이란 2주 휴전 합의 — 양측 '승리' 주장, 이스라엘 행동으로 즉시 위태",
+                desc: "트럼프 '결정적 승리' vs 이란 '자국 승리' — 양측 모두 승리를 주장하는 이례적 구도.<br>이스라엘의 레바논 공격(250명+ 사망)으로 휴전 지속 불투명, 이란의 10개항 제안 공개.<br>호르무즈 해협 통제 문제가 핵심 쟁점으로 에너지 시장 안정화에 직결.",
+                color: "blue",
+                link: "https://www.aljazeera.com/news/2026/4/8/iranians-breathe-a-ceasefire-sigh-of-relief-as-all-sides-claim-victory"
+            },
+            {
+                category: "Politics",
+                title: "트럼프, NATO 비협조에 분노 — 탈퇴 위협까지 등장",
+                desc: "트럼프가 NATO 동맹국들의 이란 전쟁 불참을 '매우 어리석은 실수'라고 비난, NATO 탈퇴 검토 언급.<br>Rutte 사무총장이 긴급 방미하여 '트럼프 설득자' 역할 시도.<br>미-NATO 간 이란 대응 갈등이 표면화되며 대서양 동맹 균열 심화.",
+                color: "blue",
+                link: "https://www.reuters.com/business/aerospace-defense/trumps-anger-over-iran-thrusts-nato-into-fresh-crisis-2026-04-03/"
+            },
+            // ── Economy ──
+            {
+                category: "Economy",
+                title: "연준, 금리 3.50~3.75% 동결 — 이란전쟁·유가 급등에 연내 인상 확률까지 거론",
+                desc: "3월 FOMC에서 금리 동결 결정, 이란 전쟁으로 에너지 비용 상승 → 인플레이션 재점화 우려.<br>시장에서는 연내 금리 인상 확률이 52%까지 치솟는 순간도 발생, Fed 내 비둘기파까지 신중론으로 전환.<br>유가 상승이 소비자물가에 전이되는 경로가 확인되며 금리 인하 전망 급격히 후퇴.",
+                color: "gray",
+                link: "https://www.wsj.com/economy/central-banking/fed-holds-steady-and-maintains-rate-cut-projection-2c378384"
+            },
+            {
+                category: "Economy",
+                title: "미국 3월 고용 178,000명 증가 — 15개월 만에 최대 반등, 예상치의 3배",
+                desc: "의료 파업 종료와 겨울 한파 해소로 2월(-133K)에서 대반전, 예상치 60K를 크게 상회.<br>실업률 4.3%로 소폭 개선, 의료·교육·건설 분야가 고용 증가 주도.<br>다만 전체적으로는 '저고용·저해고(low-hire, low-fire)' 패턴이 지속되는 구조적 변화 진행 중.",
+                color: "gray",
+                link: "https://www.reuters.com/world/us/us-employment-growth-rebounded-march-unemployment-rate-falls-43-2026-04-03/"
+            },
+            // ── Tech ──
+            {
+                category: "Tech",
+                title: "Siemens, CES 2026에서 Digital Twin Composer 공개 — 제조업 AI 가속",
+                desc: "Siemens CEO Roland Busch가 CES 키노트에서 실시간 디지털 트윈 + AI 결합 솔루션 발표.<br>NVIDIA와 협력해 산업용 메타버스 환경을 대규모로 구축, 공장을 가상에서 먼저 설계·시뮬레이션·최적화.<br>2026년 중 Siemens Xcelerator 마켓플레이스에서 출시 예정.",
+                color: "green",
+                link: "https://www.reuters.com/video/watch/idRW470906012026RP1/"
+            },
+            {
+                category: "Tech",
+                title: "Google, 오프라인 AI 딕테이션 앱 출시 — 온디바이스 AI 시대 가속",
+                desc: "Google의 경량 AI 모델 Gemma를 활용해 오프라인에서 작동하는 고품질 음성인식 앱 'AI Edge Eloquent' 출시.<br>클라우드 의존 없는 온디바이스 AI의 실용적 구현 사례로 개인정보 보호 측면에서도 주목.<br>인터넷 없이 음성→텍스트 변환이 가능한 완전 로컬 처리 구조.",
+                color: "green",
+                link: "https://techcrunch.com/2026/04/06/google-quietly-releases-an-offline-first-ai-dictation-app-on-ios/"
+            },
+            // ── Energy ──
+            {
+                category: "Energy",
+                title: "미국 전력 수요, 2026~2027년 사상 최고치 경신 전망 — AI 데이터센터가 핵심",
+                desc: "EIA 전망: 미국 전력 사용량 2026년 4,260B kWh → 2027년 4,388B kWh로 사상 최고치 연속 경신.<br>AI 데이터센터 확산으로 전력 수요 전년 대비 1.9% 증가 전망.<br>데이터센터 전력 소비가 화석연료 발전 확대를 촉발할 수 있다는 분석도 제기.",
+                color: "orange",
+                link: "https://www.reuters.com/business/energy/us-power-use-beat-record-highs-2026-2027-ai-use-surges-eia-says-2026-03-10/"
+            },
+            {
+                category: "Energy",
+                title: "미-이란 2주 휴전 합의 후 유가 급락 — 그러나 호르무즈 해협 불안 지속",
+                desc: "미-이란 휴전 합의 직후 원유·가스 가격 급락, 시장에 일시적 안도감 확산.<br>그러나 이란이 호르무즈 해협 통제력을 유지하고 있어 에너지 시장 안정화에는 시간 필요.<br>이스라엘의 레바논 공격으로 휴전 자체도 위태, 에너지 공급 리스크 상존.",
+                color: "orange",
+                link: "https://www.aljazeera.com/news/2026/3/8/iran-war-threatens-prolonged-impact-on-energy-markets-as-oil-prices-rise"
+            },
+            // ── Robotics ──
+            {
+                category: "Robotics",
+                title: "Unitree Robotics, 상하이 $610M IPO 신청 — 최초의 대형 휴머노이드 상장",
+                desc: "2025년 세계 최다 휴머노이드 판매 기업, 로봇 가격을 $85K→$25K로 3분의 1 수준으로 인하하면서도 매출 335% 성장·순이익 8배 증가.<br>글로벌 휴머노이드 시장이 고급/중급/보급형 3단계로 분화되는 신호.<br>중국 최대 테크 IPO 중 하나로 로봇 산업의 자본시장 진출 본격화.",
+                color: "red",
+                link: "https://www.reuters.com/world/asia-pacific/unitree-plans-shanghai-ipo-testing-interest-humanoid-robots-2026-03-20/"
+            },
+            {
+                category: "Robotics",
+                title: "Boston Dynamics, 양산형 Atlas 공개 — 연 30,000대 생산 체제 구축",
+                desc: "CES 2026에서 발표된 양산형 Atlas가 제조 현장에서 자동차 부품 정렬 등 실제 업무 수행 확인.<br>모회사 Hyundai가 조지아 공장에 '수만 대' 배치 계획 언급, Google DeepMind에도 2026년 배치 확정.<br>전용 생산시설에서 연 30,000대 양산 가능 체제 구축.",
+                color: "red",
+                link: "https://bostondynamics.com/blog/boston-dynamics-unveils-new-atlas-robot-to-revolutionize-industry/"
+            },
+            {
+                category: "Robotics",
+                title: "MIT, 창고 로봇 군집 이동 최적화 AI 시스템 개발",
+                desc: "MIT + Symbotic 공동 연구 — 기존 정적 알고리즘은 로봇 밀도가 높아지면 복잡도가 기하급수적으로 증가.<br>MIT의 새 AI 시스템은 동적 환경에서 실시간 적응하며 물류 창고의 로봇 군집 운영 효율을 획기적으로 개선.<br>로봇 교통 체증 해결로 대규모 자동화 창고의 핵심 병목 해소.",
+                color: "red",
+                link: "https://news.mit.edu/2026/ai-system-keeps-warehouse-robot-traffic-running-smoothly-0326"
+            },
+            {
+                category: "Robotics",
+                title: "휴머노이드 로봇, 제조·물류·소매 현장 시범 도입 본격화",
+                desc: "2026년이 '휴머노이드 상용화 원년' — Boston Dynamics(Hyundai), Figure AI(BMW·물류), Unitree(범용) 등이 각각 제조·물류·가정용 시장에서 시범 운영 중.<br>시범 수준을 넘어 상업적 배치가 시작되는 전환점으로 평가.<br>공장·창고·매장에서 실제 업무를 수행하는 단계에 진입.",
+                color: "red",
+                link: "https://toborlife.ai/latest-news/humanoid-robots-in-manufacturing-why-are-factories-starting-to-adopt-them-in-2026/"
+            },
+            // ── Texas ──
+            {
+                category: "Texas",
+                title: "텍사스, 미국 최대 데이터센터 허브로 부상 — 전력망 한계가 관건",
+                desc: "Google 등 빅테크의 10곳+ 하이퍼스케일 캠퍼스 투자가 텍사스에 집중, 태양광·배터리 저장소도 동반 투자.<br>다만 전력망(ERCOT) 용량이 최대 병목으로 지적.<br>2~3년 내 미국 최대 데이터센터 주 등극 전망.",
+                color: "orange",
+                link: "https://www.realclearenergy.org/articles/2026/02/04/data_centers_are_powering_texas_next_era_of_growth_1162697.html"
+            },
+            {
+                category: "Texas",
+                title: "텍사스 반도체 리더십 강화 — CHIPS Act 17개 프로젝트, $6B 투자",
+                desc: "CHIPS Act 보조금을 통해 17개 반도체 프로젝트 확정, 700개 이상 일자리 창출.<br>GlobalWafers의 $7.5B 실리콘 웨이퍼 공장 6단계 확장 포함.<br>텍사스가 미국 반도체 생태계의 중심축으로 자리매김.",
+                color: "orange",
+                link: "https://www.txbiz.org/2026/01/22/texas-continues-to-lead-in-fortifying-americas-semiconductor-supply-chain/"
+            },
+            {
+                category: "Texas",
+                title: "Abbott, 중국 테크 금지 리스트 확대 — 알리바바·Shein 등 26개 기업 추가",
+                desc: "기존 TikTok, WeChat 등에 이어 알리바바, Shein 등 26개 기업을 금지 리스트에 추가.<br>텍사스 사이버 사령부와 협의, 데이터 보안 우려로 주 기관의 중국 기술 사용 금지 범위 대폭 확대.<br>주 차원의 대중국 기술 디커플링 가속.",
+                color: "orange",
+                link: "https://gov.texas.gov/news/post/governor-abbott-updates-texas-prohibited-technologies-list"
+            },
+            {
+                category: "Texas",
+                title: "텍사스, 소형모듈원자로(SMR) 테스트 선도 주로 부상",
+                desc: "텍사스가 미국 내 SMR 상용화의 핵심 시험장으로 부상, 2030년대 초 가동 목표.<br>산업용 전력 공급을 위한 소형 원자로가 데이터센터·제조시설의 전력 대안으로 주목.<br>EU도 2030년대 초 SMR 온라인화 전략 발표하며 글로벌 트렌드 형성.",
+                color: "orange",
+                link: "https://www.texastribune.org/2026/02/17/texas-small-modular-nuclear-reactors-grid-energy/"
+            },
+            // ── California ──
+            {
+                category: "California",
+                title: "뉴섬 주지사, AI 기업 대상 행정명령 발동 — 주 계약 시 안전·투명성 의무화",
+                desc: "CA 주정부와 계약하는 AI 기업에 안전 장치, AI 생성 콘텐츠 워터마크, 개인정보 보호 등을 의무화하는 행정명령 발동(3/30).<br>트럼프 행정부의 AI 규제 완화 기조와 정반대 방향으로 전국 최초 시행.<br>20개 이상의 CA 주 AI 법률도 2026년부터 발효되어 기업 컴플라이언스 부담 급증.",
+                color: "blue",
+                link: "https://www.reuters.com/sustainability/society-equity/california-ai-order-requires-firms-seeking-state-contracts-have-safeguards-2026-03-31/"
+            },
+            // ── M&A ──
+            {
+                category: "M&A",
+                title: "OpenAI, $852B 밸류에이션으로 $122B 메가 라운드 완료",
+                desc: "SoftBank, Microsoft, Thrive Capital 등 참여, 당초 $110B에서 $122B으로 확대된 역대 최대 단일 펀딩 라운드.<br>기업가치 기준 글로벌 Top 10 진입, 2026년 하반기 IPO 추진 중.<br>AI 기업의 자본 조달 규모가 국가 GDP급에 근접하는 새로운 시대 도래.",
+                color: "indigo",
+                link: "https://www.bloomberg.com/news/articles/2026-03-31/openai-valued-at-852-billion-after-completing-122-billion-round"
+            },
+            // ── Etc ──
+            {
+                category: "Etc",
+                title: "Anthropic, 매출 런레이트 $300억 돌파 — 1년 만에 3배 이상 성장",
+                desc: "2025년 말 $90억이던 매출 런레이트가 $300억 돌파, Google TPU 기반 기가와트급 컴퓨팅 용량 확보 계약 체결.<br>Google·Broadcom과 기가와트급 AI 컴퓨팅 파트너십 체결.<br>OpenAI에 이어 AI 기업 중 두 번째로 큰 매출 규모 달성.",
+                color: "gray",
+                link: "https://www.bloomberg.com/news/articles/2026-04-06/broadcom-confirms-deal-to-ship-google-tpu-chips-to-anthropic"
+            },
+            {
+                category: "Etc",
+                title: "트럼프 관세 1년 — Tax Foundation 종합 분석: 가구당 $700~$1,300 부담 증가",
+                desc: "$3.2조 규모의 사실상 세금 인상 효과, 실업률 0.3%p 상승 및 장기 GDP 축소 전망.<br>무역적자 개선은 미미한 반면 소비자·기업 부담만 가중되는 구조.<br>대법원의 IEEPA 위헌 판결로 향후 관세 구조에 근본적 변화 예상.",
+                color: "gray",
+                link: "https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/"
+            }
+        ]
+    },
+    {
         week: "2026년 3월 4주차",
         date: "March 27, 2026",
         items: [
             // ── Case Study ──
-{
-    category: "Case Study",
-    title: "TransDigm: 논란의 항공우주 거인 — 독점 부품 전략과 윤리 논쟁",
-    desc: `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <p class="font-bold text-blue-800 mb-1">■ 독점 부품 인수를 통한 시장 장악</p>
-                1993년 설립 이후 90건 이상의 인수로 펌프·밸브·안전장치 등 항공기 핵심 부품 시장 장악 — 현재 운항 중인 거의 모든 항공기에 TransDigm 부품 탑재.<br>
-                인수 기준: ①독점적(sole-source) 제품, ②높은 애프터마켓 매출 비중, ③운영 개선 여지 — 인수 후 원가 절감·가격 인상으로 영업이익률 40~50% 달성.<br>
-                2006년 IPO 이후 S&P 500 대비 26배, 동종 업계 대비 12배 초과수익 기록, 매출·EBIT 모두 17% CAGR 성장.
-            </div>
-            <div>
-                <p class="font-bold text-blue-800 mb-1">■ 수익성과 윤리 논쟁의 경계</p>
-                항공기 운항 후 대체 불가한 독점 부품의 애프터마켓 매출이 핵심 수익원 — 항공사·정비사에 프리미엄 가격 부과가 가능한 구조적 해자(Moat) 보유.<br>
-                2019년 미 국방부 조사에서 '과도한 이익(excessive profits)' 판정, $16.1M 환급 명령.<br>
-                Charlie Munger: "국방부 규제를 이용해 가격을 10배 올리는 것은 비도덕적" — 합법적이나 윤리적 정당성에 대한 업계 논쟁 지속.
-            </div>
-        </div>
-    `,
-    color: "red",
-    link: "https://quartr.com/insights/company-research/transdigm-the-story-of-the-controversial-aerospace-giant"
-},
+            {
+                category: "Case Study",
+                title: "TransDigm: 논란의 항공우주 거인 — 독점 부품 전략과 윤리 논쟁",
+                desc: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="font-bold text-blue-800 mb-1">■ 독점 부품 인수를 통한 시장 장악</p>
+                            1993년 설립 이후 90건 이상의 인수로 펌프·밸브·안전장치 등 항공기 핵심 부품 시장 장악 — 현재 운항 중인 거의 모든 항공기에 TransDigm 부품 탑재.<br>
+                            인수 기준: ①독점적(sole-source) 제품, ②높은 애프터마켓 매출 비중, ③운영 개선 여지 — 인수 후 원가 절감·가격 인상으로 영업이익률 40~50% 달성.<br>
+                            2006년 IPO 이후 S&P 500 대비 26배, 동종 업계 대비 12배 초과수익 기록, 매출·EBIT 모두 17% CAGR 성장.
+                        </div>
+                        <div>
+                            <p class="font-bold text-blue-800 mb-1">■ 수익성과 윤리 논쟁의 경계</p>
+                            항공기 운항 후 대체 불가한 독점 부품의 애프터마켓 매출이 핵심 수익원 — 항공사·정비사에 프리미엄 가격 부과가 가능한 구조적 해자(Moat) 보유.<br>
+                            2019년 미 국방부 조사에서 '과도한 이익(excessive profits)' 판정, $16.1M 환급 명령.<br>
+                            Charlie Munger: "국방부 규제를 이용해 가격을 10배 올리는 것은 비도덕적" — 합법적이나 윤리적 정당성에 대한 업계 논쟁 지속.
+                        </div>
+                    </div>
+                `,
+                color: "red",
+                link: "https://quartr.com/insights/company-research/transdigm-the-story-of-the-controversial-aerospace-giant"
+            },
             // ── Politics ──
             {
                 category: "Politics",
@@ -41,7 +219,6 @@ const newsData = [
                 color: "blue",
                 link: "https://www.aljazeera.com/news/2026/3/26/wto-holds-crunch-meeting-amid-collapsing-multilateral-system"
             },
-
             // ── Economy ──
             {
                 category: "Economy",
@@ -57,7 +234,6 @@ const newsData = [
                 color: "gray",
                 link: "https://www.nytimes.com/2026/03/19/business/economy/mideast-conflict-trade-wto.html"
             },
-
             // ── Tech ──
             {
                 category: "Tech",
@@ -73,7 +249,6 @@ const newsData = [
                 color: "green",
                 link: "https://www.cnn.com/2026/03/26/business/anthropic-pentagon-injunction-supply-chain-risk"
             },
-
             // ── Energy ──
             {
                 category: "Energy",
@@ -89,7 +264,6 @@ const newsData = [
                 color: "orange",
                 link: "https://www.reuters.com/business/energy/us-power-use-beat-record-highs-2026-2027-ai-use-surges-eia-says-2026-03-10/"
             },
-
             // ── Robotics ──
             {
                 category: "Robotics",
@@ -112,7 +286,6 @@ const newsData = [
                 color: "red",
                 link: "https://ifr.org/ifr-press-releases/news/top-5-global-robotics-trends-2026"
             },
-
             // ── Texas ──
             {
                 category: "Texas",
@@ -128,7 +301,6 @@ const newsData = [
                 color: "orange",
                 link: "https://insideclimatenews.org/news/05032026/inside-clean-energy-texas-utility-scale-solar/"
             },
-
             // ── California ──
             {
                 category: "California",
@@ -137,7 +309,6 @@ const newsData = [
                 color: "blue",
                 link: "https://deadline.com/story-arc/paramount-wb/"
             },
-
             // ── M&A ──
             {
                 category: "M&A",
