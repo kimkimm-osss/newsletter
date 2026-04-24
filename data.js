@@ -1,5 +1,204 @@
 const newsData = [
     {
+        week: "2026년 4월 4주차",
+        date: "April 23, 2026",
+        items: [
+            // ── Case Study ──
+            {
+                category: "Case Study",
+                title: "Hilti: '건설업의 애플' — 전동공구 제조를 넘어 건설 현장 통합 플랫폼 기업으로의 진화",
+                desc: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="font-bold text-blue-800 mb-1">■ 직접 판매 모델 및 Fleet Management 구독 전환</p>
+                            전 세계 15,000명의 영업 담당자가 매일 건설 현장을 직접 방문하여 하루 20만 건 이상의 고객 접점을 생성하는 100% B2B 직접 판매 모델 운영.<br>
+                            2000년대 초 개별 공구 판매에서 월정액 구독형 Fleet Management(공구 사용 + 수리·도난보상·업그레이드 일체 포함)로 비즈니스 모델을 전환, 현재 100만 대 이상의 장비를 서비스로 운용.<br>
+                            반복 매출(recurring revenue) 구조 덕분에 2008년 금융위기 당시 건설 산업 전반이 정체한 상황에서도 안정적 실적을 유지 (하버드 비즈니스 스쿨 케이스 스터디로 채택).
+                        </div>
+                        <div>
+                            <p class="font-bold text-blue-800 mb-1">■ 디지털 생태계 및 비즈니스 모델 수직 계열화 시사점</p>
+                            Nuron(22V 단일 배터리 무선 플랫폼)으로 70개 이상의 공구를 하나의 배터리 생태계로 통합하고, 모든 장비를 클라우드에 연결하여 사용 데이터를 자동 수집·분석.<br>
+                            Fieldwire(현장관리, $3억 인수) + ON!Track(IoT 자산추적) + 4PS(건설 ERP) + CrewCenter(근무관리)로 구성된 소프트웨어 스택이 생산성을 12% 이상 향상시키며, 하드웨어·소프트웨어·서비스가 하나로 엮인 고객 Lock-in 생태계를 완성.<br>
+                            단순 공구 판매 중심에서 <strong>'장비 하드웨어 → 데이터 플랫폼 → 구독 서비스 → 디지털 건설 관리'</strong>로 이어지는 제조 기업의 성공적인 플랫폼 전환 경로를 제시.
+                        </div>
+                    </div>
+                `,
+                color: "purple",
+                link: ""
+            },
+            // ── California ──
+            {
+                category: "California",
+                title: "캘리포니아, 미국 AI 규제의 '국가적 시험장'으로 부상",
+                desc: "- 캘리포니아 주의회에서 AI 투명성법(SB 1000) 등 복수의 AI 규제 법안이 동시 진행 중. 2026년 8월부터 AI 생성 콘텐츠 출처 공개 의무화.<br>- 1월 발효된 SB 53은 대형 AI 모델 개발자에게 안전 프레임워크 공개와 리스크 보고를 요구.<br>- 연방 AI 규제가 부재한 상황에서 캘리포니아법이 글로벌 AI 기업의 사실상 규범으로 작용.",
+                color: "blue",
+                link: "https://www.axios.com/2026/04/03/california-national-testing-ground-ai-rules"
+            },
+            {
+                category: "California",
+                title: "캘리포니아, 공장 조립식 주택 활성화 위해 주정부 보험 사업 검토",
+                desc: "- 캘리포니아 주정부가 공장 조립식 주택(factory-built housing) 장려를 위해 건설 보험 사업에 직접 참여하는 방안을 검토.<br>- 기존 보험사들이 조립식 주택을 기피해 개발사 참여가 저조했던 문제를 해소하려는 조치.<br>- 산불 피해 복구·만성적 주택 부족 대응으로, 제조업 역량을 주거 인프라에 접목하는 혁신 사례.",
+                color: "blue",
+                link: "https://calmatters.org/housing/2026/03/factory-built-housing-insurance/"
+            },
+            // ── Economy ──
+            {
+                category: "Economy",
+                title: "연준 4월 회의 금리 동결 전망 — 이란전쟁·관세 인플레 이중 압박",
+                desc: "- 기준금리 3.5~3.75% 유지 중이며 4/28-29 FOMC 회의에서도 동결 유력. CPI 전년비 3.3% 상승으로 인하 기대 후퇴.<br>- Polymarket에서 \"2026년 내 금리 인하 없음\" 확률이 34%까지 상승 → 이란전쟁발 유가 급등이 인플레를 자극.<br>- IMF는 관세 효과 소멸과 유가 하락이 전제될 경우 핵심 PCE 인플레이션 2%대 회귀 가능하다고 조건부 전망.",
+                color: "gray",
+                link: "https://fortune.com/2026/04/13/investors-write-off-fed-rate-cut-iran-inflation/"
+            },
+            {
+                category: "Economy",
+                title: "트럼프 관세 1년 — 무역전쟁 장기 영향, 산업별 타격 차별화",
+                desc: "- 트럼프 관세 정책 1주년. 일부 산업은 대체 공급망을 구축했으나 농업·소비재 등은 비용 상승 부담 지속.<br>- Tax Foundation에 따르면 현행 관세 체계로 미국 가구당 연평균 $700의 세금 부담 증가.<br>- CNBC 분석: \"관세가 무역적자를 의미 있게 변화시키지 못했다\"는 평가. 5월 미·중 정상회담이 분수령.",
+                color: "gray",
+                link: "https://www.cnbc.com/2026/04/03/trump-tariffs-trade-war-impact.html"
+            },
+            {
+                category: "Economy",
+                title: "IMF, 2026년 미국 성장률 2.4% 전망",
+                desc: "- IMF 연례 점검(Article IV) 결과, 2026년 미국 GDP 성장률 2.4% 전망 → 관세 효과 소멸·유가 하락 시 물가 안정 가능.<br>- Goldman Sachs는 현행 관세가 하반기까지 인플레이션을 1%p 끌어올릴 것으로 추정.<br>- 이란전쟁으로 인한 에너지 가격 불확실성이 최대 하방 리스크로 지목.",
+                color: "gray",
+                link: "https://www.imf.org/en/news/articles/2026/04/01/pr-26102-usa-imf-executive-board-concludes-2026-article-iv-consult"
+            },
+            {
+                category: "Economy",
+                title: "글로벌 반도체 매출 $1.3조 돌파 전망 — 20년 만에 최대 성장",
+                desc: "- 2026년 글로벌 반도체 매출 $1.3조 초과, 전년비 64% 성장 전망. 20년 내 최고 성장률.<br>- 메모리 가격 125% 상승·스토리지칩 234% 상승하는 '멤플레이션(Memflation)' 현상 발생. 소비자 비용 부담 전이.<br>- AI 훈련·추론칩 수요가 전체 반도체 성장의 핵심 동력. Bank of America도 매출 목표를 $1.3조로 상향.",
+                color: "gray",
+                link: "https://www.gartner.com/en/newsroom/press-releases/2026-04-08-gartner-forecasts-worldwide-semiconductor-revenue-to-exceed-us-dollars-one-point-3-trillion-in-2026"
+            },
+            // ── Energy ──
+            {
+                category: "Energy",
+                title: "원자력 르네상스 — SMR이 AI 인프라의 전력 해법으로 부상",
+                desc: "- IEA 4월 기준 글로벌 데이터센터 전력 소비가 2025년 1,000 TWh 돌파. AI 시설은 기존 대비 2.5배(80MW) 전력 필요.<br>- NuScale·Oklo 등 SMR 기업 주가 4월 3주차 일제히 급등 → Meta와 1.2GW 시스템 계약(2030년 가동) 등 구체 수주 진행.<br>- Siemens Energy가 SMR & Advanced Reactor 2026 행사 주최, 원자력이 AI 시대 핵심 전력원으로 재조명.",
+                color: "orange",
+                link: "https://www.softwareseni.com/what-the-nuclear-power-renaissance-means-for-the-future-of-ai-infrastructure/"
+            },
+            {
+                category: "Energy",
+                title: "이란전쟁 에너지 충격, 역대 사태와 비교 분석",
+                desc: "- Reuters 분석: 이란전쟁발 공급 차질은 1973년 석유파동, 1990년 걸프전 이후 최대 규모.<br>- Al Jazeera: \"500만 배럴 이상의 일일 공급 차질은 대체 불가\". 유가 $100 이상 장기화 가능성 제기.<br>- 글로벌 에너지 흐름이 재편되며 아시아·유럽의 대체 공급원 확보 경쟁 심화.",
+                color: "orange",
+                link: "https://www.reuters.com/business/energy/how-iran-war-oil-gas-supply-shock-compares-with-past-disruptions-2026-04-22/"
+            },
+            {
+                category: "Energy",
+                title: "미 정부, 데이터센터 전력 사용량 공개 의무화 추진",
+                desc: "- EIA가 데이터센터 사업자에게 전력 사용량 의무 보고 조사를 추진 (기존 발전소·정유사만 대상이던 것을 확대).<br>- AI 데이터센터의 전력 소비가 국가 에너지 안보 이슈로 부상한 것이 배경.<br>- 데이터센터 전력 소비의 실체적 규모가 처음으로 공식 집계될 전망 (에너지·테크 기업 간 전력 배분 갈등 예상).",
+                color: "orange",
+                link: "https://www.wired.com/story/the-us-government-to-ask-data-centers-how-much-power-they-use/"
+            },
+            {
+                category: "Energy",
+                title: "텍사스 전력망 예비율, 2028년까지 마이너스 전망 — AI 부하 급증",
+                desc: "- ERCOT(텍사스 전력망) 여름·겨울 예비율이 2026~2030년 감소하며, 2028년에는 마이너스 수준에 도달 전망.<br>- ERCOT의 대형 부하 접속 대기 큐가 233GW 이상으로 전년비 269% 급증 (대부분 AI 데이터센터 관련).<br>- 텍사스 전력 당국(PUC)은 4/17 공개 회의에서 2032년 피크 수요가 현재의 4배 이상이 될 수 있다는 예측 논의.",
+                color: "orange",
+                link: "https://www.reuters.com/business/energy/texas-power-supply-margins-squeezed-until-grid-expansions-kick--reeii-2026-04-21/"
+            },
+            // ── Etc ──
+            {
+                category: "Etc",
+                title: "글로벌 AI 군비 경쟁 심화 — 미·중·러, AI 무기 개발 가속",
+                desc: "- NYT 심층 보도. 미국·중국·러시아가 AI 기반 무기·군사 시스템 개발을 전면적으로 가속화.<br>- 자율 드론, AI 지휘통제 시스템, 사이버전 AI 등이 핵심 경쟁 영역. 윤리적·법적 프레임워크 마련은 후행.<br>- 이란전쟁에서 AI 자율 무기의 실전 사용이 확인되며 향후 분쟁에서 AI의 결정적 역할 전망 확산.",
+                color: "gray",
+                link: "https://www.nytimes.com/2026/04/12/technology/china-russia-us-ai-weapons.html"
+            },
+            {
+                category: "Etc",
+                title: "SpaceX, 2026년 1,000번째 Starlink 위성 발사 달성",
+                desc: "- SpaceX가 4월 14일 Falcon 9 로켓으로 2026년 기준 1,000번째 Starlink 위성 발사. 4개월도 안 되어 달성.<br>- 같은 주에 Falcon 9 누적 600번째 착륙 성공 기록도 수립 → 재사용 로켓의 신뢰성 입증.<br>- Blue Origin New Glenn 로켓도 4월 19일 발사 (상업 우주 시장 경쟁 본격화).",
+                color: "gray",
+                link: "https://spaceflightnow.com/2026/04/14/live-coverage-spacex-to-launch-1000th-starlink-satellite-of-2026-on-falcon-9-rocket-from-cape-canaveral/"
+            },
+            // ── M&A ──
+            {
+                category: "M&A",
+                title: "IBM, Confluent $11B 인수 완료 — 실시간 데이터를 AI 에이전트 엔진으로",
+                desc: "- IBM이 데이터 스트리밍 플랫폼 Confluent 인수 3월 17일 완료 (주당 $31, 기업가치 $11B).<br>- 실시간 데이터 처리를 AI 에이전트 핵심 인프라로 통합 → \"에이전틱 AI 시대의 데이터 엔진\" 구축.<br>- 2026년 대형 테크 M&A 키워드가 '에이전틱 AI 인프라'로 수렴하는 추세.",
+                color: "indigo",
+                link: "https://www.wsj.com/cio-journal/ibm-closes-11-billion-deal-for-confluent-13fcbea0"
+            },
+            // ── Politics ──
+            {
+                category: "Politics",
+                title: "트럼프 $1.5조 국방예산 — AI·자율무기 중심 군사 패러다임 전환",
+                desc: "- 역대 최대 $1.5조 국방예산 요구안에 '대통령 우선순위 기금' 신설. 미사일·드론·AI에 집중 배분.<br>- Guardian: \"AI 기반 전쟁으로의 피봇\". 전통 군사 하드웨어에서 AI 자율 시스템으로 구조적 전환.<br>- 공화당 상하원 장악으로 통과 가능성 높으나, 재정적자 우려로 일부 의원 반발 가능성.",
+                color: "blue",
+                link: "https://www.theguardian.com/us-news/2026/apr/22/pentagon-asks-for-54bn-in-pivot-towards-ai-powered-war"
+            },
+            {
+                category: "Politics",
+                title: "미·중 무역전쟁, 5월 정상회담이 분수령",
+                desc: "- Reuters: \"관세가 교착된 채 트럼프의 대중 정책이 표류 중\". 중국은 합의 위반 주장, 미국은 핵심 광물 수출 제한 문제 제기.<br>- 5월 미·중 정상회담이 무역 갈등의 돌파구가 될지 주목. 양측 입장 차이 여전.<br>- 관세 불확실성이 미국 제조업체의 투자 결정을 지연시키는 핵심 요인.",
+                color: "blue",
+                link: "https://www.reuters.com/world/china/trumps-trade-war-with-china-focus-ahead-may-summit-2026-04-06/"
+            },
+            {
+                category: "Politics",
+                title: "기업 해고 러시, AI 투자 전환이 원인 — 정치적 파장 확대",
+                desc: "- Reuters 종합 보도. Snap·Disney·Meta 등 대기업이 연쇄적으로 AI 효율화를 이유로 대규모 감원.<br>- 민주당은 \"AI 시대 노동자 보호법\" 입법을 추진, 공화당은 \"기업 자율에 맡겨야\"로 맞서며 정치적 쟁점화.<br>- AI로 인한 고용 변화가 2026 중간선거의 핵심 유권자 이슈로 부상.",
+                color: "blue",
+                link: "https://www.reuters.com/business/world-at-work/companies-cutting-jobs-investments-shift-toward-ai-2026-04-15/"
+            },
+            // ── Robotics ──
+            {
+                category: "Robotics",
+                title: "Tesla, Optimus 3 로봇 2026년 여름 양산 시작 선언",
+                desc: "- 머스크가 Abundance Summit에서 Optimus 3(Gen 3) 양산을 2026년 여름(7~8월)에 시작한다고 공식 발표.<br>- 초기 소량 생산 후 S-커브 램프업 → 2027년 여름 대량 생산 돌입 목표 (연간 100만 대 생산 능력 확보 계획).<br>- 새 다리 구조로 시속 8마일 보행 달성. 완전 자율 작업 수행에는 아직 한계가 있다는 분석도 존재.",
+                color: "red",
+                link: "https://www.greendrive-accessories.com/blog/language/en/tesla-optimus-3-robot-humanoide-2026-2/"
+            },
+            {
+                category: "Robotics",
+                title: "중국, 2026년 휴머노이드 로봇 2만 대 출하 목표",
+                desc: "- 중국이 2026년 약 20,000대 휴머노이드 로봇 출하를 목표 (Unitree·Agibot 등이 저가 양산 전략으로 시장 공략).<br>- 미국(Tesla, BD, Figure AI)과 기술격차는 있으나 가격 경쟁력에서 우위.<br>- 글로벌 제조 현장 투입을 위한 안전·품질 인증 표준화 논의도 시작.",
+                color: "red",
+                link: "https://unteachablecourses.com/humanoid-robots-2026/"
+            },
+            {
+                category: "Robotics",
+                title: "Amazon 창고 로봇 100만 대 돌파 — AI 실시간 경로 최적화",
+                desc: "- Amazon 창고 로봇 100만 대 돌파. AI 모델이 실시간으로 로봇 경로를 학습·최적화해 이동 시간 10% 단축.<br>- Covariant 인수 후 비정형 물체 인식·처리 능력 크게 향상 → 2033년까지 창고 업무 75% 자동화 목표.<br>- 차세대 루이지애나 풀필먼트 센터는 기존 대비 로봇 밀도 10배 (물류 자동화의 벤치마크).",
+                color: "red",
+                link: "https://www.forbes.com/sites/ronschmelzer/2025/07/07/amazons-millionth-warehouse-robot-is-here-and-its-getting-smarter/"
+            },
+            // ── Tech ──
+            {
+                category: "Tech",
+                title: "Google, AI 에이전트 신규 출시 — OpenAI·Anthropic에 정면 도전",
+                desc: "- Google이 기업용 AI 에이전트 제품군을 대거 출시 (코딩 없이 에이전트를 구축할 수 있는 Workspace Studio 등 제공).<br>- Project Mariner 등을 통해 에이전트 빌딩 도구+배포 인프라를 한꺼번에 제공하는 '원스톱 솔루션' 전략.<br>- 클라우드 인프라+칩+모델 통합이 Google의 차별화 포인트.",
+                color: "green",
+                link: "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/next-2026/"
+            },
+            {
+                category: "Tech",
+                title: "Anthropic, Series G $30B 펀딩 — 밸류에이션 $380B 돌파",
+                desc: "- Claude 개발사 Anthropic이 GIC·Coatue 공동 주도의 Series G에서 $30B 조달 (기업가치 $380B 포스트 머니).<br>- 이전 Series F($13B, $183B 밸류에이션)에서 수개월 만에 두 배 이상 밸류 상승.<br>- Broadcom과 기가와트급 AI 컴퓨팅 계약 체결. 거대 자본이 AI 인프라에 집중 투입되는 추세 반영.",
+                color: "green",
+                link: "https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation"
+            },
+            // ── Texas ──
+            {
+                category: "Texas",
+                title: "텍사스 경제 $2.9조 사상 최대 — 세계 8위 규모",
+                desc: "- 2025년 텍사스 GDP가 사상 최초 $2.9조 달성 (미국 전체 및 세계 주요국 대비 높은 성장률).<br>- 독립 국가 기준 세계 8위 경제 규모 (에너지·테크·방산·제조업이 복합적으로 성장 견인).<br>- AI 데이터센터·반도체 투자가 새로운 성장축으로 부상.",
+                color: "orange",
+                link: "https://gov.texas.gov/news/post/texas-economy-hits-record-2.9-trillion"
+            },
+            {
+                category: "Texas",
+                title: "Samsung, 텍사스 테일러 공장에서 Tesla AI칩 양산 확정",
+                desc: "- Samsung이 텍사스 테일러 공장에서 Tesla AI6 칩을 2nm 공정으로 2027년 하반기부터 양산 확정.<br>- Tesla는 AI6 칩 주문을 기존 대비 2배 이상 확대 계획.<br>- 텍사스가 AI 반도체의 핵심 생산 허브로 부상.",
+                color: "orange",
+                link: "https://www.cxodigitalpulse.com/samsung-nears-launch-of-texas-chip-plant-to-produce-teslas-next-gen-ai-processors/"
+            }
+        ]
+    },
+    {
         week: "2026년 4월 2주차",
         date: "April 10, 2026",
         items: [
