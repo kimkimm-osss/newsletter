@@ -24,7 +24,7 @@ const newsData = [
                     </div>
                 `,
                 color: "purple",
-                link: ""
+                link: "https://profwurzer.com/from-power-tools-to-uptime-hiltis-business-model-transformation-and-the-ip-logic-behind-it/"
             },
             // ── California ──
             {
