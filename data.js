@@ -1,5 +1,167 @@
 const newsData = [
     {
+        week: "2026년 5월 2주차",
+        date: "May 8, 2026",
+        items: [
+            // ── California ──
+            {
+                category: "California",
+                title: "캘리포니아, $100억 저렴 주택 채권 법안 등 주택 공급 정책 6건 동시 추진",
+                desc: "- 주 의회의 저렴 주택 채권, 대중교통 중심 개발(TOD) 법률 재정비 등 다수 법안 발의.<br>- LA 카운티의 새 TOD 법 우선 적용을 통한 고밀도 주거지 개발 가속화 계획.<br>- 캘리포니아 내 약 100만 호에 달하는 저렴 주택 부족 현황.",
+                color: "blue",
+                link: "https://www.multifamilydive.com/news/california-housing-policy-bills-lawsuits-2026/811018/"
+            },
+            // ── Economy ──
+            {
+                category: "Economy",
+                title: "트럼프-시진핑 5/14~15 베이징 정상회담 확정 — 무역 긴장 지속",
+                desc: "- 실질적 관세 해소보다 리스크 관리 중심이 될 것이라는 전문가 전망.<br>- EU 관세 25% 인상 경고 등 다전선 무역 분쟁 동시 진행.<br>- 무역 외 이란전쟁·대만·사이버 안보 등 전략적 의제 병행 논의 필요성에 대한 브루킹스 연구소 지적.",
+                color: "gray",
+                link: "https://www.reuters.com/commentary/breakingviews/trump-xi-summit-augurs-more-risk-than-relief-2026-05-06/"
+            },
+            {
+                category: "Economy",
+                title: "Q1 2026 글로벌 벤처 펀딩 $3,000억 사상 최대 — AI가 절반 차지",
+                desc: "- 6,000개 스타트업 대상 전 분기 대비 150% 이상 증가한 역대 분기 최대 투자.<br>- 전체 투자의 약 50%를 AI가 흡수하며 2025년 연간 AI 투자 $2,023억을 한 분기 만에 초과하는 페이스.<br>- Anthropic·OpenAI 등 초대형 라운드 외에 시드~시리즈A 단계의 활발한 투자 활동.",
+                color: "gray",
+                link: "https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/"
+            },
+            {
+                category: "Economy",
+                title: "반도체 산업, 2026년 매출 $1.3조 — 메모리 부족이 소비자 가격 인상 초래",
+                desc: "- AI 서버용 HBM 수요 폭증에 따른 글로벌 메모리 공급 부족과 소비자 전자제품 가격 상승.<br>- SEMI CEO의 \"멀티 조 달러 성장 사이클 예상보다 빠른 도래\" 발언.<br>- TSMC·삼성의 8인치 웨이퍼 축소 및 첨단 AI 칩 집중으로 인한 레거시 칩 공급 타이트화.",
+                color: "gray",
+                link: "https://finance.yahoo.com/sectors/technology/article/semiconductor-industry-revenue-to-hit-13-trillion-in-2026-as-memory-crunch-hits-consumers-151202545.html"
+            },
+            {
+                category: "Economy",
+                title: "미국 관세 부담 90%, 자국 기업·소비자에 전가 — 뉴욕 연준",
+                desc: "- 관세 경제적 부담 대부분의 미국 국내 흡수를 보여주는 뉴욕 연준 연구 결과.<br>- 트럼프 경제 정책에 대한 여론 지지 하락을 초래한 소비자 불만 고조.<br>- GDP 성장 둔화와 인플레이션 압력 동시 발생에 따른 스태그플레이션 우려 제기.",
+                color: "gray",
+                link: "https://www.ms.now/ali-velshi/trump-economy-inflation-polling-americans-unhappy-gdp"
+            },
+            // ── Energy ──
+            {
+                category: "Energy",
+                title: "미국 데이터센터 전력 수요 64 GW, 2030년 183 GW로 3배 추가 전망",
+                desc: "- 2025년 전년 대비 25% 증가하여 64.4 GW에 도달한 미국 데이터센터 전력 수요.<br>- 2025년 6월 예측(117 GW)을 크게 상회하는 451 Research의 2030년 183 GW 전망.<br>- 텍사스(13.5 GW, +35.9%), 버지니아(16.6 GW, +27.7%), 오하이오·아이오와(각 +50% 이상) 순의 성장 속도.",
+                color: "orange",
+                link: "https://www.spglobal.com/energy/en/news-research/latest-news/electric-power/050626-surging-us-data-center-power-demand-tests-sustainability-targets"
+            },
+            {
+                category: "Energy",
+                title: "미국, 5 GW 원전 출력 증대 위한 저비용 금융 지원 개시",
+                desc: "- 기존 원전 출력 확대(uprate)를 위한 저금리 파이낸싱 제공 및 2029년까지 5 GW 추가 목표.<br>- 데이터센터·AI 수요 대응을 위한 기저 부하 전원으로서의 원자력 재조명.<br>- 신규 건설 대비 빠르고 저렴한 무탄소 전력 확보 수단으로서의 출력 증대 주목.",
+                color: "orange",
+                link: "https://www.reuters.com/business/energy/us-targets-5-gw-more-nuclear-power-through-low-cost-finance--reeii-2026-04-21/"
+            },
+            // ── Etc ──
+            {
+                category: "Etc",
+                title: "SoftBank, Nvidia·Foxconn과 일본 내 AI 서버 자체 생산 협의",
+                desc: "- Nvidia 칩과 Foxconn 제조 역량을 결합한 일본 내 AI 서버 직접 생산 추진.<br>- 서버 제조 전 과정의 자체 통제를 향한 SoftBank의 궁극적 목표.<br>- 미중 기술 갈등 속 AI 인프라 지역화(리쇼어링) 트렌드의 일본 확산.",
+                color: "gray",
+                link: "https://www.reuters.com/business/media-telecom/softbank-talks-with-nvidia-build-homegrown-ai-servers-nikkei-reports-2026-05-07/"
+            },
+            {
+                category: "Etc",
+                title: "SpaceX, 4월까지 올해 50번째 발사 — 사상 최빠른 50회 달성",
+                desc: "- 역대 가장 빠른 속도로 완료된 연간 50회 궤도 발사.<br>- 연 약 160회 발사 페이스로 작년 기록(165회)에 근접하는 전망.<br>- 5월 Starlink 위성 및 한국 위성 발사 등 연이은 미션 예정.",
+                color: "gray",
+                link: "https://www.space.com/space-exploration/launches-spacecraft/spacex-starlink-launch-group-17-14-50th-mission-2026"
+            },
+            {
+                category: "Etc",
+                title: "OpenAI, 2026년 1분기만 6건 인수 — 역대 최다 M&A 페이스",
+                desc: "- TBPN 미디어 인수 포함 올해 1분기 6건 완료로 연간 최다 기록 경신 중.<br>- Io($65억), 오픈소스 도구(Astral, PromptFoo) 등 다양한 영역 투자.<br>- Anthropic·Google 대비 제품 생태계 확장 속도를 높이려는 전략적 인수 가속.",
+                color: "gray",
+                link: "https://news.crunchbase.com/ma/data-openai-2023-2026-acquisitions-open-source-astral-promptfoo/"
+            },
+            // ── M&A ──
+            {
+                category: "M&A",
+                title: "Foxconn, 폴란드 EMP와 EV 제조 허브 합작 설립",
+                desc: "- 폴란드 EMP와 협력을 통한 유럽 내 전기차 제조 허브 건설.<br>- 전자 위탁 제조에서 EV·AI 서버로의 사업 다각화 전략 구체화.<br>- 일본 AI 서버 협의와 함께 가속화되는 Foxconn의 글로벌 제조 확장.",
+                color: "indigo",
+                link: "https://www.reuters.com/world/asia-pacific/polands-emp-teams-up-with-foxconn-build-ev-manufacturing-hub-2026-05-07/"
+            },
+            // ── Politics ──
+            {
+                category: "Politics",
+                title: "펜타곤, 7개 빅테크와 AI 기밀 네트워크 계약 — Anthropic 배제",
+                desc: "- SpaceX·OpenAI·Google·Microsoft·Nvidia·AWS·Oracle·Reflection의 '모든 합법적 작전 사용' 계약 체결.<br>- 무제한 군사 사용 조항 거부 후 공급망 리스크로 분류된 Anthropic의 배제.<br>- DeepMind 직원 수백 명의 군사 협력 심화 반대 서한을 통해 드러난 Google 내부 갈등.",
+                color: "blue",
+                link: "https://www.bbc.com/news/articles/cy02gjq2987o"
+            },
+            {
+                category: "Politics",
+                title: "2026 중간선거 — 상원 9명 은퇴, 11석 오픈시트로 판도 변화 가능",
+                desc: "- 공화당 5명·민주당 4명 은퇴에 따른 사상 최대 규모 오픈시트 발생.<br>- 캔자스·텍사스 등 전통적 공화당 지역에서의 민주당 도전 가시화.<br>- 공화당 5석 차 하원 다수 유지 상황에서 핵심 변수로 부상한 재분구(redistricting).",
+                color: "blue",
+                link: "https://www.nytimes.com/interactive/polls/kansas-us-senate-election-polls-2026.html"
+            },
+            {
+                category: "Politics",
+                title: "DARPA, 자율 드론 군집 전투용 '물리적 AI' 및 분산 조직화 연구 착수",
+                desc: "- 로봇의 재료 수준 지능(화학·물리 기반)과 P2P 자율 팀 편성 능력을 다루는 두 개 프로그램.<br>- \"운용 교리 없이 $550억을 쓰면 낭비\"라는 페트레이어스 전 CIA 국장의 경고.<br>- 자율전투사령부 신설을 통한 남부사령부(SOUTHCOM)의 자율 시스템 현장 투입 가속.",
+                color: "blue",
+                link: "https://www.defenseone.com/technology/2026/05/pentagon-drones-autonomous-warfare/413323/"
+            },
+            // ── Robotics ──
+            {
+                category: "Robotics",
+                title: "Figure AI, 120일 만에 생산 속도 24배 — 시간당 1대, 총 350대 이상 출하",
+                desc: "- 하루 1대에서 시간당 1대로 확대된 Figure 03 생산과 150개 워크스테이션·전용 라인 가동.<br>- 배터리 라인 수율 99.3%, 최종 검사 통과율 80% 이상, 9,000개 이상 액추에이터 생산 실적.<br>- 스테레오 카메라 인식으로 계단·경사로를 별도 프로그래밍 없이 자율 보행하는 새 System 0 AI 모델.",
+                color: "red",
+                link: "https://theaiinsider.tech/2026/05/01/figure-ai-ramps-up-production-to-one-humanoid-robot-per-hour/"
+            },
+            {
+                category: "Robotics",
+                title: "Amazon, 100만 대 이상 산업용 로봇에 AI 파운데이션 모델 탑재",
+                desc: "- 세계 최대 산업용 모바일 로봇 함대에 자체 개발 AI 모델을 적용한 자율 판단력 강화.<br>- 기존 Blue Jay 퇴역 및 모듈형 Orbital 시스템 전환을 통한 당일 배송 역량 강화.<br>- 로봇 확대에도 창고 인력 수 유지를 강조하는 '인간+로봇' 협업 모델.",
+                color: "red",
+                link: "https://www.aboutamazon.com/news/operations/amazon-million-robots-ai-foundation-model"
+            },
+            // ── Tech ──
+            {
+                category: "Tech",
+                title: "Google Cloud Next '26 — 엔터프라이즈 AI '실전 단계' 선언",
+                desc: "- 고객 75% AI 제품 사용, 분당 160억 토큰 처리, 330개 고객의 연간 1조 토큰 이상 소비.<br>- Vertex AI 브랜드 폐지 및 Gemini Enterprise Agent Platform으로의 통합·재편.<br>- Ironwood 대비 2.8배 성능의 8세대 TPU(훈련용 TPU 8 + 추론용 TPU 8i) 출시.",
+                color: "green",
+                link: "https://www.reuters.com/technology/artificial-intelligence/google-finds-its-place-ai-battle-enterprise-2026-04-22/"
+            },
+            {
+                category: "Tech",
+                title: "미국, AI 칩 수출에 글로벌 라이선스 체계 검토 — Nvidia·AMD 영향 불가피",
+                desc: "- 외국 구매자 대상 미국 내 투자를 조건으로 한 수출 라이선스 부여 방안 논의.<br>- 보도 직후 Nvidia 주가 하락으로 확인된 규제 강화에 대한 시장의 민감한 반응.<br>- 칩 수출 라이선스 검토·거부 권한 확보를 위한 의회 초당적 법안 추진.",
+                color: "green",
+                link: "https://www.reuters.com/world/us-mulls-new-rules-ai-chip-exports-including-requiring-investments-by-foreign-2026-03-05/"
+            },
+            // ── Texas ──
+            {
+                category: "Texas",
+                title: "Samsung, Taylor 텍사스 $170억 팹 2026년 개장 — 2nm 전환 시사",
+                desc: "- 1,200에이커 부지, 상시 직원 1,500명 규모의 올해 내 가동 개시 목표.<br>- 오스틴 기존 팹 30년 만의 장비 현대화 및 Apple 등 프리미엄 고객향 고급 칩 생산 대응.<br>- Taylor 2nm 즉시 전환 가능성 보도에 따른 TSMC와의 첨단 공정 경쟁 격화.",
+                color: "orange",
+                link: "https://www.mysanantonio.com/business/article/samsung-chip-factory-taylor-texas-22232085.php"
+            },
+            {
+                category: "Texas",
+                title: "ERCOT, 2028년 계획 예비율 마이너스 전망 — 송전 확충 시급",
+                desc: "- 2026~2030년 여름·겨울 예비율 하락세와 2028년 마이너스 진입 전망.<br>- $330억 규모 765kV 송전선(약 2,400마일) 건설 승인에도 불구한 공사 지연 우려.<br>- 서부 텍사스 풍력·태양광의 도시 전달 병목으로 인한 2025년 커튼먼트 9.2 TWh 기록.",
+                color: "orange",
+                link: "https://www.reuters.com/business/energy/texas-power-supply-margins-squeezed-until-grid-expansions-kick--reeii-2026-04-21/"
+            },
+            {
+                category: "Texas",
+                title: "텍사스, 데이터센터 수요 대응 위해 전력 시장 구조 개편 검토",
+                desc: "- CERAWeek에서 데이터센터 전력 시장 개혁 방안을 공개 논의한 공공사업위원회(PUC) 의장.<br>- 현장 가스발전 병행 건설, 용량 시장 도입 등 다양한 옵션 검토.<br>- 미국 주요 전력 시장 중 유일하게 용량 시장이 없는 텍사스의 구조 변경에 따른 큰 파급력.",
+                color: "orange",
+                link: "https://www.eenews.net/articles/texas-may-overhaul-power-market-to-handle-data-center-boom/"
+            }
+        ]
+    },
+    {
         week: "2026년 4월 4주차",
         date: "April 23, 2026",
         items: [
@@ -11,20 +173,20 @@ const newsData = [
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <p class="font-bold text-blue-800 mb-1">■ 직접 판매 모델 및 Fleet Management 구독 전환</p>
-                            - 전 세계 15,000명의 영업 담당자가 매일 건설 현장을 직접 방문하여 하루 20만 건 이상의 고객 접점을 생성하는 100% B2B 직접 판매 모델 운영.<br>
-                            - 2000년대 초 개별 공구 판매에서 월정액 구독형 Fleet Management(공구 사용 + 수리·도난보상·업그레이드 일체 포함)로 비즈니스 모델을 전환, 현재 100만 대 이상의 장비를 서비스로 운용.<br>
-                            - 반복 매출(recurring revenue) 구조 덕분에 2008년 금융위기 당시 건설 산업 전반이 정체한 상황에서도 안정적 실적을 유지 (하버드 비즈니스 스쿨 케이스 스터디로 채택).
+                            전 세계 15,000명의 영업 담당자가 매일 건설 현장을 직접 방문하여 하루 20만 건 이상의 고객 접점을 생성하는 100% B2B 직접 판매 모델 운영.<br>
+                            2000년대 초 개별 공구 판매에서 월정액 구독형 Fleet Management(공구 사용 + 수리·도난보상·업그레이드 일체 포함)로 비즈니스 모델을 전환, 현재 100만 대 이상의 장비를 서비스로 운용.<br>
+                            반복 매출(recurring revenue) 구조 덕분에 2008년 금융위기 당시 건설 산업 전반이 정체한 상황에서도 안정적 실적을 유지 (하버드 비즈니스 스쿨 케이스 스터디로 채택).
                         </div>
                         <div>
                             <p class="font-bold text-blue-800 mb-1">■ 디지털 생태계 및 비즈니스 모델 수직 계열화 시사점</p>
-                            - Nuron(22V 단일 배터리 무선 플랫폼)으로 70개 이상의 공구를 하나의 배터리 생태계로 통합하고, 모든 장비를 클라우드에 연결하여 사용 데이터를 자동 수집·분석.<br>
-                            - Fieldwire(현장관리, $3억 인수) + ON!Track(IoT 자산추적) + 4PS(건설 ERP) + CrewCenter(근무관리)로 구성된 소프트웨어 스택이 생산성을 12% 이상 향상시키며, 하드웨어·소프트웨어·서비스가 하나로 엮인 고객 Lock-in 생태계를 완성.<br>
-                            - 단순 공구 판매 중심에서 <strong>'장비 하드웨어 → 데이터 플랫폼 → 구독 서비스 → 디지털 건설 관리'</strong>로 이어지는 제조 기업의 성공적인 플랫폼 전환 경로를 제시.
+                            Nuron(22V 단일 배터리 무선 플랫폼)으로 70개 이상의 공구를 하나의 배터리 생태계로 통합하고, 모든 장비를 클라우드에 연결하여 사용 데이터를 자동 수집·분석.<br>
+                            Fieldwire(현장관리, $3억 인수) + ON!Track(IoT 자산추적) + 4PS(건설 ERP) + CrewCenter(근무관리)로 구성된 소프트웨어 스택이 생산성을 12% 이상 향상시키며, 하드웨어·소프트웨어·서비스가 하나로 엮인 고객 Lock-in 생태계를 완성.<br>
+                            단순 공구 판매 중심에서 <strong>'장비 하드웨어 → 데이터 플랫폼 → 구독 서비스 → 디지털 건설 관리'</strong>로 이어지는 제조 기업의 성공적인 플랫폼 전환 경로를 제시.
                         </div>
                     </div>
                 `,
                 color: "purple",
-                link: "https://profwurzer.com/from-power-tools-to-uptime-hiltis-business-model-transformation-and-the-ip-logic-behind-it/"
+                link: ""
             },
             // ── California ──
             {
