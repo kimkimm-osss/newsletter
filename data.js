@@ -23,7 +23,7 @@ const newsData = [
                 link: "https://www.cnbc.com/2026/05/18/us-china-announce-deals-after-trump-xi-summit.html"
             },
             {
-                category: "Economy",
+                category: "Etc",
                 title: "AI 메가 스타트업이 VC 생태계 재편 — Q1 글로벌 펀딩 $3,000억 중 AI가 81%($2,400억) 흡수",
                 desc: "- PitchBook 기준 Q1 2026 AI 기업이 글로벌 벤처 펀딩의 81%를 흡수, 미국 벤처 투자의 3/4이 단 5건의 딜에 집중되는 전례 없는 자본 집중.<br>- OpenAI($852B 밸류)·SpaceX·Anthropic·xAI 투자자들이 Forbes Midas List 상위를 석권하며 역대 최다(Top 10 중 9곳)가 비상장 기업에서 발생.<br>- SpaceX는 $1.75조, OpenAI는 $1조 IPO를 추진 중이며, 공개 시장이 이 가격을 수용할지 여부가 VC 시대의 다음 장을 결정지을 전망.",
                 color: "gray",
