@@ -1,0 +1,42 @@
+{
+  "sortKey": 20260313,
+  "week": "2026년 3월 1~2주차",
+  "date": "March 13, 2026",
+  "items": [
+    {
+      "category": "빅테크",
+      "title": "구글, 제미나이 2.5 프로 출시",
+      "desc": "구글 최신 AI 모델 제미나이 2.5 프로 출시.\n\n200만 토큰 컨텍스트 윈도우 지원, 멀티모달 벤치마크에서 GPT-5 근접 성능.",
+      "color": "#4ECDC4",
+      "link": "https://deepmind.google"
+    },
+    {
+      "category": "AI",
+      "title": "AI 코딩 도구, 주니어 개발자 채용 30% 감소 유발",
+      "desc": "AI 코딩 어시스턴트 보급으로 주니어 개발자 채용 전년 대비 30% 감소.\n\n시니어 개발자 생산성은 오히려 향상, 업계 양극화 심화.",
+      "color": "#FF6B6B",
+      "link": "https://stackoverflow.com"
+    },
+    {
+      "category": "스타트업",
+      "title": "Figure AI, 휴머노이드 로봇 양산 공장 착공",
+      "desc": "Figure AI 사우스캐롤라이나 휴머노이드 로봇 양산 공장 착공.\n\n연간 1만 대 생산 목표, BMW·아마존 등 물류 기업 우선 납품 예정.",
+      "color": "#45B7D1",
+      "link": "https://figure.ai"
+    },
+    {
+      "category": "정책/규제",
+      "title": "일본, AI 저작권 보호 특별법 제정",
+      "desc": "일본 국회 AI 생성 콘텐츠 저작권 보호 특별법 제정.\n\nAI 학습 데이터 내 저작물 보상 청구권 인정, 크리에이터 보호 강화.",
+      "color": "#96CEB4",
+      "link": "https://japantimes.co.jp"
+    },
+    {
+      "category": "빅테크",
+      "title": "애플 비전 프로 2세대, $1,999로 가격 인하",
+      "desc": "애플 비전 프로 2세대 $1,999 출시.\n\n무게 40% 감소, AI 기반 공간 컴퓨팅 기능 대폭 강화로 기업 시장 본격 공략.",
+      "color": "#4ECDC4",
+      "link": "https://apple.com"
+    }
+  ]
+}
