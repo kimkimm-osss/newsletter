@@ -1,0 +1,42 @@
+{
+  "sortKey": 20260327,
+  "week": "2026년 3월 3~4주차",
+  "date": "March 27, 2026",
+  "items": [
+    {
+      "category": "AI",
+      "title": "엔비디아, 블랙웰 울트라 GPU 양산 시작",
+      "desc": "엔비디아 차세대 AI 학습용 GPU '블랙웰 울트라' 양산 개시.\n\n이전 세대 대비 FP4 성능 3배 향상, 주요 클라우드 사업자 대량 선주문.",
+      "color": "#FF6B6B",
+      "link": "https://nvidia.com"
+    },
+    {
+      "category": "빅테크",
+      "title": "아마존, AI 쇼핑 어시스턴트 'Rufus' 글로벌 확대",
+      "desc": "아마존 AI 쇼핑 어시스턴트 Rufus 한국 포함 15개국 추가 출시.\n\n자연어 상품 검색·비교·추천 지원, 구매 전환율 35% 증가 보고.",
+      "color": "#4ECDC4",
+      "link": "https://amazon.com"
+    },
+    {
+      "category": "스타트업",
+      "title": "Perplexity AI, 기업가치 $15B 돌파",
+      "desc": "AI 검색 스타트업 Perplexity AI 최신 투자 라운드에서 기업가치 150억 달러 달성.\n\n월간 활성 사용자 1억 명 돌파, 구글 검색 대안으로 빠른 성장.",
+      "color": "#45B7D1",
+      "link": "https://perplexity.ai"
+    },
+    {
+      "category": "정책/규제",
+      "title": "중국, 생성형 AI 수출 통제 강화",
+      "desc": "중국 상무부 생성형 AI 모델 해외 수출 새 통제 규정 발표.\n\n일정 규모 이상 AI 모델 수출 시 정부 허가 필요, 미·중 기술 갈등 심화 전망.",
+      "color": "#96CEB4",
+      "link": "https://mofcom.gov.cn"
+    },
+    {
+      "category": "AI",
+      "title": "삼성전자, 가우스 3 온디바이스 AI 모델 공개",
+      "desc": "삼성전자 자체 개발 온디바이스 AI 모델 '가우스 3' 공개.\n\n갤럭시 S26 시리즈 탑재 예정, 클라우드 없이 실시간 번역·요약·이미지 생성 가능.",
+      "color": "#FF6B6B",
+      "link": "https://samsung.com"
+    }
+  ]
+}
