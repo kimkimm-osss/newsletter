@@ -1,0 +1,42 @@
+{
+  "sortKey": 20260424,
+  "week": "2026년 4월 3~4주차",
+  "date": "April 24, 2026",
+  "items": [
+    {
+      "category": "AI",
+      "title": "OpenAI, GPT-5 공식 출시",
+      "desc": "OpenAI가 차세대 모델 GPT-5를 공식 출시했습니다. 멀티모달 성능이 대폭 향상되었으며, 복잡한 추론 능력에서 기존 모델 대비 40% 이상 개선된 벤치마크 결과를 보여주고 있습니다.",
+      "color": "#FF6B6B",
+      "link": "https://openai.com"
+    },
+    {
+      "category": "빅테크",
+      "title": "애플, 자체 AI 서버칩 공개",
+      "desc": "애플이 자체 설계한 AI 서버 전용 칩을 공개했습니다. TSMC 2nm 공정으로 제작되며, 데이터센터 내 AI 추론 작업에서 엔비디아 H100 대비 에너지 효율이 2배 높다고 발표했습니다.",
+      "color": "#4ECDC4",
+      "link": "https://apple.com"
+    },
+    {
+      "category": "스타트업",
+      "title": "Anthropic, 시리즈 D $5B 투자 유치",
+      "desc": "Anthropic이 시리즈 D 라운드에서 50억 달러 투자를 유치했습니다. 기업가치는 600억 달러로 평가되며, Google, Spark Capital 등이 참여했습니다.",
+      "color": "#45B7D1",
+      "link": "https://anthropic.com"
+    },
+    {
+      "category": "정책/규제",
+      "title": "EU AI Act 전면 시행 개시",
+      "desc": "EU AI Act가 전면 시행에 들어갔습니다. 고위험 AI 시스템에 대한 의무적 적합성 평가가 시작되며, 위반 시 전 세계 매출의 최대 7%까지 과징금이 부과됩니다.",
+      "color": "#96CEB4",
+      "link": "https://ec.europa.eu"
+    },
+    {
+      "category": "AI",
+      "title": "구글 DeepMind, AlphaFold 4 발표",
+      "desc": "구글 DeepMind가 AlphaFold 4를 발표했습니다. 단백질 구조 예측을 넘어 단백질-약물 상호작용까지 시뮬레이션할 수 있어, 신약 개발 기간을 획기적으로 단축할 것으로 기대됩니다.",
+      "color": "#FF6B6B",
+      "link": "https://deepmind.google"
+    }
+  ]
+}
