@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Weekly Briefing | 로그인</title>
     <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    safelist: [
+      {pattern: /bg-(red|blue|green|orange|gray|purple|yellow|indigo|pink|teal|cyan|emerald|violet|amber|lime|rose|sky|fuchsia|stone|slate|zinc|neutral)-100/},
+      {pattern: /text-(red|blue|green|orange|gray|purple|yellow|indigo|pink|teal|cyan|emerald|violet|amber|lime|rose|sky|fuchsia|stone|slate|zinc|neutral)-700/}
+    ]
+  }
+</script>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
