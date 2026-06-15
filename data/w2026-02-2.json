@@ -1,0 +1,42 @@
+{
+  "sortKey": 20260213,
+  "week": "2026년 2월 1~2주차",
+  "date": "February 13, 2026",
+  "items": [
+    {
+      "category": "빅테크",
+      "title": "구글, AI 검색 전면 전환 'SGE 2.0'",
+      "desc": "구글 검색 결과 AI 생성 요약 전면 전환 SGE 2.0 글로벌 출시.\n\n기존 링크 나열 방식 보조 전환, 웹 생태계 전반 큰 변화 예상.",
+      "color": "#4ECDC4",
+      "link": "https://google.com"
+    },
+    {
+      "category": "AI",
+      "title": "중국 DeepSeek, R2 모델로 수학 올림피아드 금메달 수준 달성",
+      "desc": "중국 AI 스타트업 DeepSeek 최신 추론 모델 R2 공개.\n\n국제 수학 올림피아드 문제 금메달 수준 풀이 능력, 미국 AI 기업 충격.",
+      "color": "#FF6B6B",
+      "link": "https://deepseek.com"
+    },
+    {
+      "category": "스타트업",
+      "title": "국내 AI 헬스케어 스타트업 뷰노, FDA 승인 획득",
+      "desc": "뷰노 AI 기반 흉부 X-ray 판독 시스템 미국 FDA 최종 승인 획득.\n\n국내 AI 의료기기 기업 중 최초 FDA 허가, 미국 시장 진출 발판.",
+      "color": "#45B7D1",
+      "link": "https://vuno.co"
+    },
+    {
+      "category": "정책/규제",
+      "title": "영국, AI 안전 연구소 독립 기관화",
+      "desc": "영국 정부 AI Safety Institute 독립 법정 기관 격상.\n\nAI 모델 위험성 평가·인증 담당, 국제 AI 안전 표준 제정 주도 계획.",
+      "color": "#96CEB4",
+      "link": "https://gov.uk"
+    },
+    {
+      "category": "빅테크",
+      "title": "삼성·SK하이닉스, HBM4 양산 경쟁 본격화",
+      "desc": "삼성전자·SK하이닉스 HBM4 양산 일정 조기 추진.\n\n엔비디아 차세대 GPU 탑재 예정, HBM3e 대비 대역폭 2배 향상으로 AI 학습 속도 획기적 제고.",
+      "color": "#4ECDC4",
+      "link": "https://skhynix.com"
+    }
+  ]
+}
