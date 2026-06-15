@@ -1,0 +1,42 @@
+{
+  "sortKey": 20260227,
+  "week": "2026년 2월 3~4주차",
+  "date": "February 27, 2026",
+  "items": [
+    {
+      "category": "AI",
+      "title": "OpenAI, 동영상 생성 AI 'Sora 2' 출시",
+      "desc": "OpenAI 동영상 생성 AI Sora 2 공식 출시.\n\n최대 5분 길이 고품질 4K 영상 생성 가능, 물리 법칙 시뮬레이션 정확도 대폭 개선.",
+      "color": "#FF6B6B",
+      "link": "https://openai.com"
+    },
+    {
+      "category": "빅테크",
+      "title": "MS, GitHub Copilot X 코드 자동완성률 85% 달성",
+      "desc": "마이크로소프트 GitHub Copilot X 코드 자동완성 수락률 85% 도달 발표.\n\n전체 GitHub 코드의 46%가 AI 지원 작성.",
+      "color": "#4ECDC4",
+      "link": "https://github.com"
+    },
+    {
+      "category": "스타트업",
+      "title": "Mistral AI, 유럽 최대 AI 기업으로 등극",
+      "desc": "프랑스 AI 스타트업 Mistral AI 시리즈 C에서 €2B 유치.\n\n기업가치 €15B, 유럽 자체 AI 생태계 구축 핵심 주자로 부상.",
+      "color": "#45B7D1",
+      "link": "https://mistral.ai"
+    },
+    {
+      "category": "정책/규제",
+      "title": "미국 FTC, AI 허위 광고 첫 제재",
+      "desc": "미 연방거래위원회(FTC) AI 성능 과장 광고 기업 첫 제재.\n\nAI '인간 수준' 근거 없는 주장 3개 기업 대상 총 $50M 과징금 부과.",
+      "color": "#96CEB4",
+      "link": "https://ftc.gov"
+    },
+    {
+      "category": "AI",
+      "title": "AI 에이전트, 기업 업무 자동화 본격 도입",
+      "desc": "McKinsey 보고서 기준 Fortune 500 기업 60%가 AI 에이전트 업무 도입.\n\n고객 서비스·데이터 분석·보고서 작성 등 평균 40% 업무 시간 절감 효과.",
+      "color": "#FF6B6B",
+      "link": "https://mckinsey.com"
+    }
+  ]
+}
