@@ -1,0 +1,98 @@
+{
+  "sortKey": 20260613,
+  "week": "2026년 6월 1~2주차",
+  "date": "June 13, 2026",
+  "items": [
+    {
+      "category": "California",
+      "title": "7월 1일 발효 신법: 자율주행차 교통위반 딱지, 스마트폰 학교 금지",
+      "desc": "AB 1777에 따라 Waymo 등 자율주행차가 7월 1일부터 교통위반 시 경찰 직접 단속 대상, 위반 통지서 DMV 전달 체계 도입.\n\nAB 3216으로 모든 캘리포니아 공립학교 학생 스마트폰 사용 제한·금지 정책 7월 1일까지 의무 도입, 긴급 상황·교사 지시 시만 허용.\n\nSB 79(대중교통 인접 고밀도 주택법) 동시 발효, 주요 버스·철도역 인근 지자체 규제 우선하여 다세대 주택 건설 허용.",
+      "color": "blue",
+      "link": "https://www.pressdemocrat.com/2026/06/11/new-california-laws-taking-effect-july-1-2026/"
+    },
+    {
+      "category": "California",
+      "title": "AI 투명성법(California AI Transparency Act), 8월 2일 발효 예정",
+      "desc": "SB 1000을 통해 보강된 캘리포니아 AI 투명성법 8월 2일 시행 예정, AI 생성 콘텐츠 출처 데이터 공개(latent & manifest disclosure) 의무화.\n\n프런티어 AI 개발사 투명성·안전성 공시 요건과 챗봇 신원 공개 의무 포함, AB 853으로 당초 1월 시행에서 8월로 연기.\n\nCalifornia AI Safety Commission 설립 이니셔티브와 함께 미국 내 가장 포괄적인 AI 규제 체계 구축 핵심 법률.",
+      "color": "blue",
+      "link": "https://calmatters.digitaldemocracy.org/bills/ca_202520260sb1000"
+    },
+    {
+      "category": "California",
+      "title": "캘리포니아 테크 해고 15만 명 돌파: AI 전환에 따른 구조적 감원 가속",
+      "desc": "2026년 기준 미국 테크 업계 해고 인원 15만 명 돌파, 전년 대비 66% 증가, AI 구조조정이 최대 원인.\n\nMeta(8,000명), Cisco(4,000명), Groupon(23%), Wix(20%), ClickUp(22%) 등 잇따라 AI 전환 목적 대규모 인력 축소 단행.\n\n실리콘밸리 해고 테크 종사자들의 \"일자리 없는 기술자 부족(jobless techie tribe)\" 형성, 새로운 사회적 현상으로 대두.",
+      "color": "blue",
+      "link": "https://www.wsj.com/economy/jobs/layoffs-2026-tracker-784ea69f"
+    },
+    {
+      "category": "Economy",
+      "title": "글로벌 반도체 매출 $1.5조 전망: 4월 $110.5B, 14개월 연속 월간 성장",
+      "desc": "SIA·WSTS 공동 발표, 2026년 글로벌 반도체 연간 매출 $1.5조(전년 대비 90% 성장) 전망, 2027년 $1.9조 돌파 예상.\n\n4월 매출 $110.5B는 전년 동월($56.9B) 대비 93.9% 급증, 미주 지역 115.8% YoY 최고 성장률 기록.\n\nAI 인프라·가속 컴퓨팅 플랫폼 수요가 핵심 동력, 아시아태평양(114.9%)·중국(78.6%)·유럽(54.7%) 순 성장 지속.",
+      "color": "green",
+      "link": "https://www.semiconductors.org/global-semiconductor-sales-increase-11-month-to-month-in-april/"
+    },
+    {
+      "category": "Energy",
+      "title": "뉴욕, 1GW 원전 건설 사업자 공모 및 원전 인력 양성 $40M 투자 발표",
+      "desc": "호쿨 주지사 NYPA 통해 2032년 착공 목표 1GW급 원전 건설 사업자 자격심사(RFQ) 공모와 원전 인력 양성 $40M 프로그램 동시 발표.\n\n지난해 RFI 23개 기관 응답 후속 조치, 용접공·배관공·엔지니어·방사선방호기사 등 전 직종 대상 교육 포함.\n\n호쿨 주지사 5GW 원전 추가 목표 핵심 단계, 연방 세액공제 적격 요건 충족 위한 2032년 착공 기한 설정.",
+      "color": "orange",
+      "link": "https://www.nucnet.org/news/new-york-takes-significant-new-steps-towards-governor-s-plans-for-nuclear-deployment-6-3-2026"
+    },
+    {
+      "category": "Energy",
+      "title": "미국 원전 르네상스: Antares 임계·Three Mile Island 재가동·$94M SMR 투자",
+      "desc": "Antares 마이크로원자로 40년 만의 민간 개발 첫 임계 달성, Constellation TMI-1 FERC 면제 승인, DOE $94M SMR 배치 투자 등 3건 이정표 동시 달성.\n\n군사용 마이크로원자로부터 상업용 대형 SMR까지 전 스펙트럼 진전, 핵 에너지 \"실질적 행동 단계\" 진입 시사.\n\n뉴욕 5GW 원전 확충, 네브래스카 SMR 부지 선정, 미네소타 타당성 연구 등 주 차원 원전 도입 전국적 가속.",
+      "color": "orange",
+      "link": "https://www.energy.gov/ne/articles/one-year-after-executive-orders-us-nuclear-energy-renaissance-full-swing"
+    },
+    {
+      "category": "ETC",
+      "title": "트럼프, AI 혁신·보안 행정명령 서명: 30일 내 사이버 방어 체계 강화",
+      "desc": "6월 2일 \"AI 혁신 및 보안 촉진\" 행정명령으로 국가안보시스템·국방부·CISA에 30일 이내 AI 기반 사이버 방어 우선 조치 의무화.\n\n재무부 주도 AI 사이버보안 클리어링하우스 설립, 소프트웨어 취약점 탐지·패치 배포 체계 구축, 농촌 병원·지역 은행 등 핵심 인프라 보안 접근성 확대.\n\n\"커버드 프런티어 모델\" 지정 기밀 벤치마킹과 민간 기업 자발적 협력 프레임워크 60일 내 설계, 의무적 허가 제도는 명시적 배제.",
+      "color": "gray",
+      "link": "https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/"
+    },
+    {
+      "category": "Politics",
+      "title": "펜타곤 AI 조달 체계 전면 개편: 30일 배치·MOSA 의무화",
+      "desc": "모놀리식 대형 플랫폼에서 모듈형 클라우드 아키텍처로 전환, 30일 내 배치 요건과 MOSA(모듈형 오픈시스템) 의무화가 핵심.\n\n벤더 종속 탈피 위해 \"DoD Data Decrees\" 엄격 적용, 소규모 방산 스타트업 경쟁 참여 기회 확대.\n\n1월 발표 \"AI-First\" 국방전략 실행 단계, 기존 7개 빅테크 계약 기반 조달 속도 상업 수준 제고 목표.",
+      "color": "red",
+      "link": "https://federalnewsnetwork.com/commentary/2026/06/the-pentagon-is-rewriting-how-it-buys-ai-control-of-the-future-of-warfare/"
+    },
+    {
+      "category": "Politics",
+      "title": "One Big Beautiful Bill Act 주요 시행: 재생에너지 세제 혜택 축소 본격화",
+      "desc": "EV 충전 세액공제 6월 30일 종료, 녹색수소 인센티브 폐지, 풍력·태양광 ITC 유지 위한 7월 4일 착공 마감 등 청정에너지 관련 세제 대폭 축소.\n\n메디케이드 근로요건 임시 최종 규칙 6월 1일 발표, 확장 대상 성인 월 80시간 의무 부과 체계 구축.\n\n텍사스 재생에너지 업계 급박한 시공 마감 압박, 프로젝트 파이프라인 재편 불가피.",
+      "color": "red",
+      "link": "https://en.wikipedia.org/wiki/One_Big_Beautiful_Bill_Act"
+    },
+    {
+      "category": "Robotics",
+      "title": "중국 vs. 미국 휴머노이드 로봇 경쟁: 1만 대 배치 vs. 생산 고도화",
+      "desc": "중국 연말 1만 대 실전 배치 국가 행동계획 발동, 미국은 Figure AI(시간당 1대)·Tesla(Giga Texas 공장 착공)·Boston Dynamics(3만 대/년 예약) 등 생산 고도화 집중.\n\nJAL 하네다 공항 배치 등 일본 참전, 글로벌 휴머노이드 로봇 경쟁 \"프로토타입→산업 배치\" 단계 전환.\n\n국가 주도 대규모 배치(중국) vs. 민간 주도 고품질 양산(미국) vs. 노동력 부족 솔루션(일본) 3가지 경로 병행 진화.",
+      "color": "purple",
+      "link": "https://www.eweek.com/news/humanoid-robots-work-mode-2026-apac-china/"
+    },
+    {
+      "category": "Robotics",
+      "title": "Amazon, 100만 대 이상 산업용 로봇에 자체 AI 파운데이션 모델 탑재",
+      "desc": "Amazon 물류센터 배치 100만 대 이상 산업용 로봇에 자체 개발 AI 파운데이션 모델 적용, 작업 자율성·적응성 대폭 향상.\n\n조지아 신규 창고에서 로봇 피킹·패킹·운반 전 과정 AI 기반 수행 차세대 풀필먼트 모델 시연.\n\n별도 개발 Blue Jay 이족보행 로봇 프로젝트 비용 효율성 문제로 중단, 기존 로봇 고도화 집중 전환.",
+      "color": "purple",
+      "link": "https://www.aboutamazon.com/news/operations/amazon-million-robots-ai-foundation-model"
+    },
+    {
+      "category": "Tech",
+      "title": "Apple WWDC 2026: Siri AI 전면 개편, Google Gemini 기반 Apple Intelligence",
+      "desc": "6월 8일 WWDC에서 완전히 새로운 \"Siri AI\" 독립 앱 출시, 시각 인텔리전스·대화형·크로스앱 컨텍스트 인식 대폭 강화.\n\nGoogle Gemini 모델 패밀리 협력 차세대 Apple Foundation Models 개발, 사진 70% 빠른 로딩·AirDrop 80% 속도 향상 등 시스템 전반 성능 개선.\n\nTim Cook CEO 마지막 WWDC, 9월 1일 John Ternus CEO직 이양 예정, 접이식 iPhone 힌트 iOS 27 베타 코드에서 발견.",
+      "color": "indigo",
+      "link": "https://techcrunch.com/2026/06/09/wwdc-2026-everything-announced-on-siri-ai-os-27-apple-intelligence-and-more/"
+    },
+    {
+      "category": "Texas",
+      "title": "애벗 주지사, 데이터센터 비용 전가 차단 지시: 7월 말 규제 조치 시행 요구",
+      "desc": "6월 10일 서한으로 PUC·ERCOT에 데이터센터 인프라 비용의 일반 가정 전가 방지 조치 지시, 7월 17일까지 보고 요구.\n\n세제 혜택·세금 면제 폐지, 수냉식 기술 의무화, 전력·용수 사용량 공시 의무화 등 차기 입법 우선순위 제시.\n\n텍사스 내 데이터센터 규제 공화당 내 분열 이슈 부상, 농촌 지역 모라토리엄 시도와 주 검찰 개입 등 갈등 심화.",
+      "color": "yellow",
+      "link": "https://www.houstonpublicmedia.org/articles/news/energy-environment/2026/06/10/554138/data-center-texas-energy-grid-electricity-regulation-greg-abbott/"
+    }
+  ]
+}
