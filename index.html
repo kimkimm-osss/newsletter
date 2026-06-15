@@ -107,9 +107,27 @@
 
         let currentUser = null;
         let bookmarks = [];
-        let currentMode = 'latest'; 
-        let selectedCategories = new Set(); 
+        let currentMode = 'latest';
+        let selectedCategories = new Set();
         let allCategories = [];
+        let appInitialized = false;
+
+        function initApp() {
+            if (appInitialized) return;
+            appInitialized = true;
+            const select = document.getElementById('weekSelect');
+            select.innerHTML = '<option value="all">전체 기사 보기 (All Weeks)</option>';
+            if (window.newsData) {
+                window.newsData.forEach((data, i) => {
+                    const opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerText = data.week;
+                    select.appendChild(opt);
+                });
+                initCategories();
+                renderCurrentView();
+            }
+        }
 
         onAuthStateChanged(auth, (user) => {
             document.getElementById('loadingScreen').style.display = 'none';
@@ -129,20 +147,21 @@
         });
 
         async function syncBookmarksWithData() {
-            if (!currentUser || typeof newsData === 'undefined') return;
-            const allValidTitles = new Set(newsData.flatMap(d => d.items.map(i => i.title)));
+            if (!currentUser || !window.newsData) return;
+            const allValidTitles = new Set(window.newsData.flatMap(d => d.items.map(i => i.title)));
             const filteredBookmarks = bookmarks.filter(b => allValidTitles.has(b.title));
             if (filteredBookmarks.length !== bookmarks.length) {
                 bookmarks = filteredBookmarks;
                 await setDoc(doc(db, "users", currentUser.uid), { bookmarks: filteredBookmarks });
             }
             document.getElementById('bookmarkCount').innerText = bookmarks.length;
-            renderCurrentView(); 
+            initApp();
+            renderCurrentView();
         }
 
         function initCategories() {
             const categories = new Set();
-            newsData.forEach(week => { week.items.forEach(item => categories.add(item.category)); });
+            window.newsData.forEach(week => { week.items.forEach(item => categories.add(item.category)); });
             allCategories = Array.from(categories).sort((a, b) => {
                 if (a.toLowerCase() === 'case study') return -1;
                 if (b.toLowerCase() === 'case study') return 1;
@@ -189,19 +208,28 @@
         };
 
         window.renderCurrentView = () => {
+            if (!window.newsData) return;
             let itemsToRender = [];
             const header = document.getElementById('contentHeader');
             const weekVal = document.getElementById('weekSelect').value;
             if (currentMode === 'latest') {
-                if (weekVal === 'all') { itemsToRender = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week}))); header.innerHTML = `<h2 class="text-3xl font-bold">All News</h2><span class="text-sm text-gray-500">전체 발행된 뉴스레터입니다.</span>`; }
-                else { const selectedData = newsData[weekVal]; if (selectedData) { itemsToRender = selectedData.items.map(item => ({...item, weekName: selectedData.week})); header.innerHTML = `<h2 class="text-3xl font-bold mt-1">${selectedData.week}</h2><span class="text-sm text-gray-500">${selectedData.date}</span>`; } }
-           } else {
-    const allWithWeeks = newsData.flatMap((d, idx) => d.items.map(item => ({...item, weekName: d.week, weekIdx: idx})));
-    itemsToRender = bookmarks.map(b => allWithWeeks.find(i => i.title === b.title)).filter(Boolean);
-    if (weekVal !== 'all') itemsToRender = itemsToRender.filter(item => item.weekIdx == weekVal);
-    itemsToRender.sort((a, b) => a.weekIdx - b.weekIdx);
-    header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${itemsToRender.length})</span>`;
-}
+                if (weekVal === 'all') {
+                    itemsToRender = window.newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week})));
+                    header.innerHTML = `<h2 class="text-3xl font-bold">All News</h2><span class="text-sm text-gray-500">전체 발행된 뉴스레터입니다.</span>`;
+                } else {
+                    const selectedData = window.newsData[weekVal];
+                    if (selectedData) {
+                        itemsToRender = selectedData.items.map(item => ({...item, weekName: selectedData.week}));
+                        header.innerHTML = `<h2 class="text-3xl font-bold mt-1">${selectedData.week}</h2><span class="text-sm text-gray-500">${selectedData.date}</span>`;
+                    }
+                }
+            } else {
+                const allWithWeeks = window.newsData.flatMap((d, idx) => d.items.map(item => ({...item, weekName: d.week, weekIdx: idx})));
+                itemsToRender = bookmarks.map(b => allWithWeeks.find(i => i.title === b.title)).filter(Boolean);
+                if (weekVal !== 'all') itemsToRender = itemsToRender.filter(item => item.weekIdx == weekVal);
+                itemsToRender.sort((a, b) => a.weekIdx - b.weekIdx);
+                header.innerHTML = `<h2 class="text-3xl font-bold">My Archive</h2><span class="text-sm text-gray-500">저장한 뉴스 (${itemsToRender.length})</span>`;
+            }
             if (selectedCategories.size > 0) itemsToRender = itemsToRender.filter(item => selectedCategories.has(item.category));
             renderGrid(itemsToRender);
         };
@@ -230,7 +258,7 @@
         window.toggleBookmark = async (e, title) => {
             if (e) { e.preventDefault(); e.stopPropagation(); }
             if (!currentUser) return;
-            const allItems = newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week})));
+            const allItems = window.newsData.flatMap(d => d.items.map(item => ({...item, weekName: d.week})));
             const item = allItems.find(i => i.title === title);
             const idx = bookmarks.findIndex(b => b.title === title);
             let newBookmarks = [...bookmarks];
@@ -239,29 +267,27 @@
             bookmarks = newBookmarks;
             document.getElementById('bookmarkCount').innerText = bookmarks.length;
             renderCurrentView();
-            try { await setDoc(doc(db, "users", currentUser.uid), { bookmarks: newBookmarks }); } 
+            try { await setDoc(doc(db, "users", currentUser.uid), { bookmarks: newBookmarks }); }
             catch (err) { console.error("북마크 저장 실패:", err); }
         };
 
         window.logout = () => signOut(auth).then(() => location.reload());
-        window.onload = () => {
-            const select = document.getElementById('weekSelect');
-            if (typeof newsData !== 'undefined') {
-                newsData.forEach((data, i) => { const opt = document.createElement('option'); opt.value = i; opt.innerText = data.week; select.appendChild(opt); });
-                initCategories();
-                renderCurrentView();
-            }
-        };
+
+        if (window.newsData) {
+            initApp();
+        } else {
+            window.addEventListener('newsDataReady', () => initApp());
+        }
 
         document.getElementById('loginForm').onsubmit = async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
-            try { await signInWithEmailAndPassword(auth, email, password); } 
-            catch (error) { 
+            try { await signInWithEmailAndPassword(auth, email, password); }
+            catch (error) {
                 const errorMsg = document.getElementById('loginError');
                 errorMsg.innerText = "이메일 또는 비밀번호가 올바르지 않습니다.";
-                errorMsg.classList.remove('hidden'); 
+                errorMsg.classList.remove('hidden');
             }
         };
     </script>
