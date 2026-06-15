@@ -1,0 +1,42 @@
+{
+  "sortKey": 20260410,
+  "week": "2026년 4월 1~2주차",
+  "date": "April 10, 2026",
+  "items": [
+    {
+      "category": "빅테크",
+      "title": "마이크로소프트, Copilot 전면 무료화",
+      "desc": "마이크로소프트 Microsoft 365 Copilot 전면 무료화 발표.\n\n기존 월 $30 유료 플랜 폐지, 모든 Microsoft 365 구독자 대상 AI 어시스턴트 기본 제공.",
+      "color": "#4ECDC4",
+      "link": "https://microsoft.com"
+    },
+    {
+      "category": "AI",
+      "title": "메타, Llama 4 오픈소스 공개",
+      "desc": "메타 최신 오픈소스 LLM Llama 4 공개.\n\n4050억 파라미터 규모, 코딩·수학·다국어에서 GPT-4o 상회 성능, 오픈소스 AI 생태계 전반에 큰 영향 전망.",
+      "color": "#FF6B6B",
+      "link": "https://ai.meta.com"
+    },
+    {
+      "category": "스타트업",
+      "title": "국내 AI 스타트업 '리턴제로' 나스닥 상장",
+      "desc": "음성 AI 스타트업 리턴제로 나스닥 상장 성공.\n\n기업가치 $2B 평가, 한국 AI 스타트업 최초 미국 증시 직상장 사례.",
+      "color": "#45B7D1",
+      "link": "https://returnzero.com"
+    },
+    {
+      "category": "정책/규제",
+      "title": "한국 정부, AI 기본법 시행령 확정",
+      "desc": "과학기술정보통신부 AI 기본법 시행령 최종 확정.\n\n고위험 AI 사전 영향평가 의무화, AI 개발 윤리 가이드라인 및 데이터 활용 기준 포함.",
+      "color": "#96CEB4",
+      "link": "https://msit.go.kr"
+    },
+    {
+      "category": "빅테크",
+      "title": "테슬라 로보택시, 오스틴서 상용 서비스 개시",
+      "desc": "테슬라 텍사스 오스틴에서 완전자율주행 로보택시 상용 서비스 개시.\n\n초기 제한 구역 운영, 연내 10개 도시 확대 계획.",
+      "color": "#4ECDC4",
+      "link": "https://tesla.com"
+    }
+  ]
+}
