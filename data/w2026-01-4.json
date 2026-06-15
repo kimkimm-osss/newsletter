@@ -1,0 +1,42 @@
+{
+  "sortKey": 20260123,
+  "week": "2026년 1월 3~4주차",
+  "date": "January 23, 2026",
+  "items": [
+    {
+      "category": "AI",
+      "title": "CES 2026, AI가 모든 제품 카테고리 지배",
+      "desc": "CES 2026 발표 신제품 80% 이상 AI 기능 탑재.\n\nAI 냉장고·AI 자동차·AI 안경 등 생활 전 분야 AI 통합, 'AI 에브리웨어' 트렌드 확인.",
+      "color": "#FF6B6B",
+      "link": "https://ces.tech"
+    },
+    {
+      "category": "빅테크",
+      "title": "엔비디아 시가총액 $4T 돌파, 세계 1위",
+      "desc": "엔비디아 시가총액 4조 달러 돌파, 세계 최고 기업가치 기록.\n\nAI 칩 수요 폭증과 데이터센터 투자 확대가 주가 상승 견인.",
+      "color": "#4ECDC4",
+      "link": "https://nvidia.com"
+    },
+    {
+      "category": "스타트업",
+      "title": "한국 AI 스타트업 투자 2025년 대비 45% 증가",
+      "desc": "2026년 1월 기준 한국 AI 스타트업 투자액 전년 동기 대비 45% 증가.\n\nAI 에이전트·로보틱스·헬스케어 분야 집중 투자.",
+      "color": "#45B7D1",
+      "link": "https://platum.kr"
+    },
+    {
+      "category": "정책/규제",
+      "title": "한국 AI 기본법 국회 본회의 통과",
+      "desc": "AI 산업 육성·규제 기본 틀 담은 'AI 기본법' 국회 본회의 통과.\n\nAI 윤리위원회 설치, 고위험 AI 사전 평가 의무화, AI 피해 구제 체계 마련.",
+      "color": "#96CEB4",
+      "link": "https://assembly.go.kr"
+    },
+    {
+      "category": "AI",
+      "title": "AI 번역, 전문 통·번역사 수준 도달",
+      "desc": "최신 AI 번역 벤치마크에서 GPT-5·제미나이 2.0 전문 통·번역사 수준 품질 달성.\n\n문학 번역·전문 기술 번역 모두 인간 평가단 과반 AI 번역 선호.",
+      "color": "#FF6B6B",
+      "link": "https://arxiv.org"
+    }
+  ]
+}
