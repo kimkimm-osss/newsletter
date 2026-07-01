@@ -1,0 +1,98 @@
+{
+  "sortKey": 20260627,
+  "week": "2026년 6월 3~4주차",
+  "date": "June 27, 2026",
+  "items": [
+    {
+      "category": "California",
+      "title": "7/1 시행 신법 다수: 자율주행차 딱지·스마트폰 학교 금지·스트리밍 음량 제한",
+      "desc": "자율주행차(Waymo 등)에 교통위반 딱지 발급 및 원격 운전자 연결 긴급전화 의무화하는 AB 1777 시행.\n\n모든 공립학교 학생 스마트폰 사용 원칙 금지, 비상시·교사 지시 시에만 허용하는 AB 3216 발효.\n\n넷플릭스 등 스트리밍 광고 음량 본편 이하 제한 SB 576, 대중교통역 인근 고밀도 주거 건설 지자체 거부 불가 SB 79 등 총 10여 개 법안 동시 시행.",
+      "color": "blue",
+      "link": "https://www.pressdemocrat.com/2026/06/11/new-california-laws-taking-effect-july-1-2026/"
+    },
+    {
+      "category": "California",
+      "title": "GitLab 14% 감원(350명): AI 에이전트 워크로드 폭증 대응 플랫폼 재설계",
+      "desc": "AI 에이전트 워크로드 폭증으로 기존 Git 인프라 한계 도달, 100배 확장 위한 플랫폼 재설계 착수.\n\n22개국 사업 철수·관리직 축소 통해 $30-35M 구조조정 비용 발생 전망.\n\nQ1 매출 $264M(+23% YoY)·영업이익률 88% 등 실적 호조에도 AI 전환 명분 대규모 감원이라는 업계 공통 패턴.",
+      "color": "blue",
+      "link": "https://techcrunch.com/2026/06/03/gitlab-cuts-14-of-staff-as-it-scales-its-platform-to-serve-ai-workloads/"
+    },
+    {
+      "category": "Economy",
+      "title": "세계은행 6월 전망: 글로벌 성장률 2.7%, 개도국 팬데믹 이후 최저",
+      "desc": "2025년 2.8%에서 하향 조정, 개발도상국 3.6%는 팬데믹 이후 최저 성장 예측.\n\n관세 인상·지정학 갈등·에너지 변동성을 3대 하방 리스크로 지목.\n\n저소득국 성장률 5.4%로 이전 전망 대비 0.3%p 하향, 분디부교 에볼라·기후재해 등 추가 충격 경고.",
+      "color": "green",
+      "link": "https://www.worldbank.org/en/publication/global-economic-prospects"
+    },
+    {
+      "category": "Energy",
+      "title": "미-이란 MOU 6/19 제네바 서명: 호르무즈 해협 30일 내 기뢰 제거 합의",
+      "desc": "Trump·Pezeshkian 대통령 14개 조항 양해각서 서명, 호르무즈 해협 30일 내 기뢰 제거 및 통행 재개 합의.\n\n60일간 핵 협상 기간 설정, 이란 고농축 우라늄 처리·제재 단계 해제·동결자산 반환을 핵심 의제로 규정.\n\nBrent유 서명 직후 4% 이상 급락, 2개월래 최저치 기록.",
+      "color": "orange",
+      "link": "https://www.bbc.com/news/articles/c4gy700j0eko"
+    },
+    {
+      "category": "Energy",
+      "title": "캐나다 원자력 전략 발표: 최대 10기 신규 대형 원자로 건설 목표",
+      "desc": "연방 에너지부 장관 Hodgson 장기 원자력 전략 공식 발표, 최대 10기 신규 대형 원자로 건설 목표 제시.\n\n2035년까지 2기 착공, SMR 병행 배치 및 국내 우라늄 농축 역량 2배 확대 통한 공급망 자립화 추진.\n\n온타리오 전력사 대형 원전 증설 계획과 연계, 2026년을 캐나다 원자력 전환 원년으로 규정.",
+      "color": "orange",
+      "link": "https://natural-resources.canada.ca/energy-sources/nuclear-energy-uranium/nuclear-energy-strategy-canada"
+    },
+    {
+      "category": "Energy",
+      "title": "ERCOT, 2026 여름 전력수요 사상 최대 92GW 전망",
+      "desc": "2023년 기록(85GW) 7GW 초과하는 사상 최대 피크 수요 예측.\n\n데이터센터 급증과 엘니뇨발 폭염 동시 그리드 압박하는 이중 부하 구조.\n\n순환정전 확률 6월 0.04%·7월 0.11%로 낮게 평가하나, 돌발 상황 시 취약성 우려 지속.",
+      "color": "orange",
+      "link": "https://www.keranews.org/energy-environment/2026-06-04/ercot-predicts-record-summer-energy-demand"
+    },
+    {
+      "category": "ETC",
+      "title": "OpenAI, GPT-5.6 Sol·Terra·Luna 공개: 미 정부 요청으로 제한 배포",
+      "desc": "Sol(플래그십)·Terra(범용)·Luna(경량) 3종 모델 패밀리 공개, 미 정부 요청으로 약 20개 승인 파트너에만 접근 허용.\n\n트럼프 행정부 6/2 AI 행정명령(프론티어 모델 출시 전 30일 검토) 첫 실질적 집행 사례.\n\n코딩·과학·사이버보안 벤치마크 역대 최고 성능 주장, 일반 공개 시점 미정.",
+      "color": "gray",
+      "link": "https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/"
+    },
+    {
+      "category": "M&A",
+      "title": "Amazon 커스텀 실리콘 사업 ARR $20B 돌파: Nvidia GPU 독점 대안 부상",
+      "desc": "Trainium(AI 학습)·Graviton(범용 컴퓨팅)·Nitro(보안) 칩 연간 매출 런레이트 $20B 초과, 전년 대비 100% 이상 성장.\n\nOpenAI·Anthropic·Meta·Uber 등 대형 고객 다년 장기 계약이 수익 기반.\n\n시장가 환산 시 $50B 규모 상당, Nvidia GPU 독점에 대한 가장 구체적 대안으로 부상.",
+      "color": "teal",
+      "link": "https://www.buildfastwithai.com/blogs/ai-news-today-june-30-2026"
+    },
+    {
+      "category": "Politics",
+      "title": "미 정부 AI 모델 수출통제 첫 적용: Anthropic Claude 배포 중단 지시",
+      "desc": "6/12 상무부 Anthropic에 Claude Fable 5·Mythos 5 전 세계 즉시 중단 지시, AI 모델 최초 국가안보 기반 차단 조치.\n\n특정 탈옥(jailbreak) 취약점이 국가안전보장 위협으로 분류된 것이 직접적 발동 근거.\n\nAnthropic 캘리포니아 연방법원 예비적 금지명령 확보로 블랙리스트 일부 저지, Mythos 5는 6/27 핵심 인프라 방어자에 한해 복원.",
+      "color": "red",
+      "link": "https://www.gtlaw-techventureviews.com/2026/06/ai-company-anthropic-suspends-access-to-claude-fable-5-claude-mythos-5-following-us-export-control-directive/"
+    },
+    {
+      "category": "Robotics",
+      "title": "NEURA Robotics $1.4B Series C: 사상 최대 휴머노이드 로봇 펀딩",
+      "desc": "Nvidia·Amazon·Bosch·Qualcomm 참여 사상 최대 규모 휴머노이드 로봇 펀딩 라운드.\n\n독일 기반 인지형 로봇(Cognitive Robot) 대량생산 체제 구축 및 글로벌 배치 확대에 자금 투입 계획.\n\n2026년 로봇 산업 전체 VC 투자 $60.9B 가운데 단일 라운드 최대 기록 경신.",
+      "color": "purple",
+      "link": "https://neura-robotics.com/record-series-c/"
+    },
+    {
+      "category": "Robotics",
+      "title": "로봇 VC 투자 2026년 $60.9B: 전년 대비 4배 폭증",
+      "desc": "전년 $15B 대비 약 4배 폭증, 상반기에만 $55.8B 돌파한 역대 최고 투자 속도.\n\nFigure·Apptronik·NEURA 등 $50M 이상 초대형 라운드가 투자 총액 견인.\n\n물리적 AI(Physical AI)와 에이전틱 AI 결합이 VC 시장 새로운 핵심 투자 테마로 부상.",
+      "color": "purple",
+      "link": "https://app.dealroom.co/sector/industries/robotics/overview"
+    },
+    {
+      "category": "Robotics",
+      "title": "ICRA 2026 비엔나 개최: 200개 전시사 참여 세계 최대 로봇 컨퍼런스",
+      "desc": "약 200개 전시사 참여 세계 최대 로봇 학술·산업 컨퍼런스, 비엔나에서 43회 개최.\n\n중국 AGIBOT·한국 Tesollo 등 아시아 휴머노이드와 Nvidia Isaac GR00T 2.0 플랫폼 주목.\n\n휴머노이드·의료 로봇·체화 AI(Embodied AI)·인간-로봇 협업 4대 핵심 기술 트렌드 부각.",
+      "color": "purple",
+      "link": "https://humanoid.guide/icra-2026-vienna/"
+    },
+    {
+      "category": "Tech",
+      "title": "Pentagon AI 드론 $500M 계약: Perennial Autonomy 대드론 시스템",
+      "desc": "우크라이나 전장에서 러시아 Shahed 드론 4,000기 이상 요격한 실전 검증 대드론 시스템 3년 IDIQ 계약.\n\nBumblebee·Hornet·Merops 등 AI 기반 컴퓨터비전·재밍 저항 통신·자율 정밀교전 기능 드론 포트폴리오.\n\n건당 ~$15,000 저비용 요격체로 미사일 기반 방어 비용 비대칭 문제 해결하는 새로운 대드론 패러다임.",
+      "color": "indigo",
+      "link": "https://defensescoop.com/2026/05/19/pentagon-awards-500-million-contract-to-perennial-autonomy-for-counter-drone-systems/"
+    }
+  ]
+}
