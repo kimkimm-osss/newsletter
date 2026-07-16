@@ -1,0 +1,98 @@
+{
+  "sortKey": 20260711,
+  "week": "2026년 7월 1~2주차",
+  "date": "July 11, 2026",
+  "items": [
+    {
+      "category": "California",
+      "title": "EV 첫 구매자 $3,500 리베이트법 서명(7/13): 연방 세액공제 폐지 후 독자 인센티브",
+      "desc": "SB 168 서명으로 $50,000 이하 신차 EV 첫 구매자에 $3,500, 중고 EV($25,000 이하)에 $1,750 즉시 환급.\n\n연방 EV 세액공제 폐지(OBBBA Act) 이후 캘리포니아가 독자적 전기차 인센티브 체계 구축한 첫 주(州).\n\n\"MyFirstEV\" 프로그램으로 브랜드화, 딜러 시점 즉시 할인 적용 구조.",
+      "color": "blue",
+      "link": "https://www.reuters.com/world/california-offering-3500-ev-rebates-first-time-buyers-2026-07-13/"
+    },
+    {
+      "category": "California",
+      "title": "AI Transparency Act(SB 1000) 8/2 시행 임박: AI 콘텐츠 출처 공개 의무화",
+      "desc": "AI 생성 콘텐츠에 출처 메타데이터(provenance data) 공개 의무화, 챗봇 AI 신분 고지 등 규정.\n\nSaaS·클라우드 AI 서비스 제공업체 전원 적용 대상, 위반 시 $50,000/건 과태료.\n\n캘리포니아가 연방 AI 법제 공백 속 사실상 미국 AI 규제 표준 역할 자처하는 흐름.",
+      "color": "blue",
+      "link": "https://calmatters.digitaldemocracy.org/bills/ca_202520260sb1000"
+    },
+    {
+      "category": "Economy",
+      "title": "IMF 7월 전망: 글로벌 성장률 3.0%, 이란전쟁·관세·AI 투자 3대 교차 흐름",
+      "desc": "부제 \"Global Economy in Crosscurrents of War and Technology\", 이란전쟁·관세·AI 투자를 3대 교차 흐름으로 규정.\n\n인플레이션 4.7%(상향), 에너지 가격 변동성과 무역 불확실성이 주요 원인.\n\n인도 6.5%(상향 +0.4%p), 중국 4.6%(상향 +0.4%p) vs 유로존 0.9%(하향 -0.2%p).",
+      "color": "green",
+      "link": "https://www.imf.org/en/publications/weo/issues/2026/07/08/world-economic-outlook-update-july-2026"
+    },
+    {
+      "category": "Economy",
+      "title": "USMCA 갱신 불발, 10년 풍다운 돌입(7/1): 매년 재검토 체제 전환",
+      "desc": "트럼프 행정부, 미·캐나다·멕시코 무역협정(USMCA) 현행 유지 연장 거부.\n\n즉시 폐기는 아니나 매년 재검토(annual review) 체제로 전환, 불확실성 고착화.\n\n미·멕시코 양자협상 7/20 주간 예정, 미·캐나다 협상은 미개시 상태.",
+      "color": "green",
+      "link": "https://www.cnbc.com/2026/07/01/trump-usmca-canada-mexico-trade-treaty.html"
+    },
+    {
+      "category": "ETC",
+      "title": "Apple, 중국 AI 서비스 규제 승인 획득: Apple Intelligence 중국 출시 핵심 돌파",
+      "desc": "Apple Intelligence 중국 출시 위한 핵심 규제 장벽 돌파.\n\n중국 내 데이터 현지화·검열 요건 충족 조건부 허가.\n\n세계 2위 스마트폰 시장에서의 AI 경쟁력 유지 위한 전략적 돌파구.",
+      "color": "gray",
+      "link": "https://finance.yahoo.com/video/apple-clears-key-hurdle-for-iphone-ai-launch-in-china-201839774.html"
+    },
+    {
+      "category": "M&A",
+      "title": "Qualcomm, Modular $3.9B 인수 완료: Nvidia CUDA 대항 소프트웨어 스택 구축",
+      "desc": "Mojo 언어·MAX 플랫폼 확보, Nvidia CUDA 생태계 대항 소프트웨어 스택 구축 목적.\n\nAI 추론 최적화 기술을 Snapdragon·Cloud AI 프로세서에 통합 계획.\n\n인수가 기준 PS(매출배수) 약 78배, AI 소프트웨어 프리미엄의 극단적 사례.",
+      "color": "teal",
+      "link": "https://www.buildfastwithai.com/blogs/ai-news-today-june-30-2026"
+    },
+    {
+      "category": "M&A",
+      "title": "Mega-deal 급증: 2026 H1 $10B+ 딜 기록 경신",
+      "desc": "AI·에너지·물류 3대 섹터 중심으로 $10B 이상 초대형 거래 집중.\n\n이사회들의 \"dream big\" 심리와 저금리 레버리지 활용 동시 작용.\n\n다만, 반독점 심사 강화(특히 EU)와 지정학 리스크가 주요 딜 브레이커.",
+      "color": "teal",
+      "link": "https://www.reuters.com/legal/transactional/mega-deals-fuel-record-ma-boards-dream-big-takeovers-2026-07-01/"
+    },
+    {
+      "category": "Robotics",
+      "title": "Figure AI, Catalyst Brands(JCPenney 모회사)와 상업 계약 체결: 소매 물류 최초 대규모 배치",
+      "desc": "Figure 03 휴머노이드를 JCPenney·Aéropostale·Brooks Brothers 물류센터에 배치.\n\nReno(네바다) 배송센터 시범 배치 후 계절적 확장 옵션 포함, 계약 규모 ~$39M 추산.\n\n소매 물류 분야 최초의 대규모 휴머노이드 상용 배치 사례.",
+      "color": "purple",
+      "link": "https://www.figure.ai/news/figure-signs-agreement-with-catalyst-brands"
+    },
+    {
+      "category": "Robotics",
+      "title": "Tesla Optimus V3 7월 말 공개·양산 개시 예고: 목표 단가 $20,000 이하",
+      "desc": "Fremont 공장 Model S/X 라인 전환, Optimus V3 양산 준비 완료 단계.\n\n목표 단가 $20,000 이하, 초기 공장 내 자사 배치 후 외부 판매 전환 계획.\n\n기존 V2 대비 손가락 자유도 2배, 배터리 런타임 40% 향상 예상.",
+      "color": "purple",
+      "link": "https://electrek.co/2026/04/22/tesla-optimus-production-fremont-model-sx-line/"
+    },
+    {
+      "category": "Robotics",
+      "title": "로봇 스타트업 2026년 투자 $55.8B: 전년 전체 수준 상반기 이미 초과",
+      "desc": "Nvidia·OpenAI·Meta·Amazon 등 빅테크가 전략적 투자자로 직접 참여하는 구조 전환.\n\n$100M 이상 메가 라운드 비중 급증, NEURA $1.4B·Figure $675M 등.\n\n\"로봇 + AI + 에너지\" 교차점이 2026년 VC 최대 투자 테마.",
+      "color": "purple",
+      "link": "https://www.hannovermesse.de/en/news/news-articles/robotics-is-rolling-in-money-but-users-are-still-left-high-and-dry"
+    },
+    {
+      "category": "Robotics",
+      "title": "ICRA 2026 이후 중국 로봇 실전 배치 가속: 연말 10,000대 목표",
+      "desc": "MIIT 6/9 발표 행동계획 실행, 7월 현재 제조·병원·물류 등 50+ 시나리오 배치 진행.\n\nAGIBOT World Challenge 수상팀 상용화 지원 프로그램 개시.\n\n2026년 말까지 10,000대 배치 목표 대비 Q2 기준 달성률 약 35%.",
+      "color": "purple",
+      "link": "https://www.eweek.com/news/humanoid-robots-work-mode-2026-apac-china/"
+    },
+    {
+      "category": "Texas",
+      "title": "ERCOT 여름 수요 92GW 전망, 7월 폭염 본격 시작: 순환정전 리스크 상시",
+      "desc": "데이터센터 신규 부하 + 엘니뇨 폭염 이중 압박, 순환정전 리스크 상시 존재.\n\nSB 6 시행으로 75MW 이상 대규모 부하 연결 시 비용분담·공시 의무 부과 중.\n\nAbbott 주지사 7/17까지 PUCT/ERCOT 보고서 제출 시한 임박.",
+      "color": "yellow",
+      "link": "https://www.keranews.org/energy-environment/2026-06-04/ercot-predicts-record-summer-energy-demand"
+    },
+    {
+      "category": "Texas",
+      "title": "89대 주의회 입법 정리: 데이터센터·에너지·규제효율 법안 다수 통과",
+      "desc": "SB 14로 텍사스 규제효율국(Texas Regulatory Efficiency Office) 신설.\n\nSB 6으로 대규모 전력부하 연결 비용분담·공시 의무화(75MW+).\n\n데이터센터 세금 인센티브 축소·환경 보고 의무 확대 방향, 2027 정기의회 본격 법제화 예상.",
+      "color": "yellow",
+      "link": "https://businessintexas.com/blog/89th-regular-legislative-session-recap-new-texas-laws-every-executive-should-know/"
+    }
+  ]
+}
